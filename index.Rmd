@@ -1,0 +1,38 @@
+---
+title: "Miller Creek and Vogel Lake Water Quality"
+author: "Benjamin Meyer"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+---
+
+```{r}
+library(bookdown)
+library(tinytex)
+```
+
+
+![](images/KWF_logo.png)
+
+# Introduction
+
+This draft document contains preliminary data explorations of 2021-2023 water quality data from the Vogel Lakes complex and Miller Creek in the Northern Kenai peninsula. These data are being collected as part of potential plans to eradicate invasive pike from the area, which were identified in 2018-2019 by the Alaska Dept. of Fish and Game.
+
+The draft environmental assessment for potential eradication of invasive Northern Pike from this system is available from the [US Fish and Wildlife Service](https://www.fws.gov/uploadedFiles/Region_7/NWRS/Zone_2/Kenai/PDF/Draft%20EA%20Northern%20Pike%20KNWR.pdf).
+
+Water quality and watershed characterization fieldwork for this project is conducted by [Kenai Watershed Forum](https://www.kenaiwatershed.org/).
+
+An ArcGIS Online map of sites included in water quality monitoring efforts is found here: <https://arcg.is/0fqvb0>.
+
+A GitHub repository with the code generating this website is available here.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

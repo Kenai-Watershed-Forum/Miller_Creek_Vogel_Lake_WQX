@@ -1,0 +1,5 @@
+book_filename: "Miller_Creek_Vogel_Lake_Water_Quality"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: ""

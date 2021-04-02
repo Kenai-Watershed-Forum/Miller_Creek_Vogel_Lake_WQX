@@ -1,0 +1,201 @@
+# Lake Water Quality Profiles
+
+---
+output:
+  html_document: 
+    df_print: paged
+    fig_width: 10
+    fig_height: 6
+    fig_caption: yes
+    code_folding: hide
+    toc: true
+    toc_depth: 4
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+
+# clear environment
+rm(list=ls())
+
+# load packages
+library(tidyverse)
+library(googlesheets4)
+library(lubridate)
+library(readr)
+library(readxl)
+library(writexl)
+library(hms)
+library(plotly)
+library(DT)
+library(xlsx)
+library(leaflet)
+library(DT)
+library(ggpubr)
+library(plotrix)
+library(packrat)
+
+# set plotting themes
+
+## geom_col plots theme
+col_theme <- theme(axis.title = element_text(size = 14, face = "bold"),
+                   strip.text = element_text(size = 14, face = "bold"),
+                   legend.title = element_text(size = 14, face = "bold"),
+                   legend.text = element_text(size = 14),
+                   axis.text = element_text(size = 14))
+
+## geom_points plots theme
+points_theme <- theme(axis.title = element_text(size = 14, face = "bold"),
+                   strip.text = element_text(size = 14, face = "bold"),
+                   legend.title = element_text(size = 14, face = "bold"),
+                   legend.text = element_text(size = 14),
+                   axis.text = element_text(size = 9),
+                   title = element_text(size = 18))
+
+# function to exclude multiple items per column
+'%ni%' <- Negate('%in%')
+
+# clarify select function
+select <- dplyr::select
+```
+
+Lake water quality profiles were collected at 1-2 month intervals at five sites at 1 meter depth intervals. Raw water quality field data is stored in a Google Sheet that can be viewed at <https://tinyurl.com/kwf-vogel-wqx-data>.
+
+Data summaries and visualizations are provided for each site visit here.
+
+```{r, include = FALSE}
+# Import data from google sheet
+
+# Note to self: once project is complete and no more data updates are needed, migrate data source from Google Sheet to csvs in the local project "data" folder
+
+# recognize sheet title
+lake_wqx_dat <- read_sheet("https://docs.google.com/spreadsheets/d/1lS9eJ7kX91IlYwSgiEQm-BQqif_7o5E4MzcBmqpwSoI/edit#gid=0", 
+                           sheet = "Profile_Measurements") %>%
+  # rename columns
+  rename(site = `Site Name`,
+         sample_date = `Sample Date`,
+         sample_depth_m = `Depth (m)`,
+         sample_time = `Sample Time`,
+         DO_mgl = `DO (mg/L)`,
+         turbidity_ntu = `Turbidity (NTU)`,
+         temp_c = `Temp (C)`,
+         spcond_uscm = `SpCond (uS/cm)`) %>%
+  select(-Notes,-QC1,-`Data Entry`,-`QC2`) %>%
+  
+  # transform column formats
+  transform(sample_time = hms::as_hms(sample_time)) %>%
+  
+  # convert data fromat from wide to long
+  pivot_longer(cols = c("pH","DO_mgl","turbidity_ntu","temp_c","spcond_uscm"),
+               names_to = "parameter",
+               values_to = "val") %>%
+  
+  # remove missing values
+  filter(!is.na(val))
+
+```
+
+```{r include = F}
+# prep dataframe for plotting
+
+# create parameter name replacements
+param_names <- c("pH" = "pH",
+                 "DO_mgl" = "DO\n(mg/L)",
+                 "turbidity_ntu" = "Turbidity\n(NTU)",
+                 "temp_c" = "Temperature\n(C)",
+                 "spcond_uscm" = "Specific\nConductivity\n(uS/cm)")
+
+# create site name replacements
+site_names <- c("Vogel_Lake_Outlet" = "Vogel Lake Outlet", 
+                "Vogel_Lake" = "Vogel Lake",        
+                "North_Vogel_Lake" = "North Vogel Lake",
+                "Bird_Pond" = "Bird Pond",
+                "Vogel_Pond" = "Vogel Pond")
+
+```
+
+## January 2021
+
+```{r ,include = FALSE}
+
+# filter to january 2021 data data
+jan21_lake_wqx_dat <- lake_wqx_dat %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date)) %>%
+  filter(month == "1",
+         year == "2021")
+
+# create plot
+p <- jan21_lake_wqx_dat %>%
+  ggplot() +
+    geom_point(aes(sample_depth_m,val), size = 2) +
+    geom_line(aes(sample_depth_m,val)) +
+
+    coord_flip() +
+    facet_grid(site ~ parameter, scales = "free_x", shrink = T, 
+               labeller = labeller(parameter = param_names,
+                                   site = site_names)) +
+    ylab("") +
+    xlab("Depth (m)") +
+    theme_bw() +
+    points_theme +
+    scale_x_reverse() +
+    scale_y_continuous(n.breaks = 5) +
+    theme(panel.spacing = unit(1.2, "lines"),
+          strip.text.y = element_text(angle = 360)) +
+    ggtitle("January 2021 Water Quality All Sites")
+```
+
+```{r fig.width=10, fig.height=11}
+p
+```
+
+
+
+## March 2021
+
+```{r ,include = FALSE}
+
+# filter to march 2021 data data
+mar21_lake_wqx_dat <- lake_wqx_dat %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date)) %>%
+  filter(month == "3",
+         year == "2021")
+
+# create plot
+p <- mar21_lake_wqx_dat %>%
+  ggplot() +
+    geom_point(aes(sample_depth_m,val), size = 2) +
+    geom_line(aes(sample_depth_m,val)) +
+
+    coord_flip() +
+    facet_grid(site ~ parameter, scales = "free_x", shrink = T, 
+               labeller = labeller(parameter = param_names,
+                                   site = site_names)) +
+    ylab("") +
+    xlab("Depth (m)") +
+    theme_bw() +
+    points_theme +
+    scale_x_reverse() +
+    scale_y_continuous(n.breaks = 5) +
+    theme(panel.spacing = unit(1.2, "lines"),
+          strip.text.y = element_text(angle = 360)) +
+    ggtitle("March 2021 Water Quality All Sites")
+```
+
+```{r fig.width=10, fig.height=11}
+p
+```
+
+***
+
+## Site Summaries
+
+TBD
