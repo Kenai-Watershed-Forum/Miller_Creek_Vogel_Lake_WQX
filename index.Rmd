@@ -15,7 +15,6 @@ library(bookdown)
 library(tinytex)
 ```
 
-
 ![](images/KWF_logo.png)
 
 # Introduction
@@ -28,7 +27,7 @@ Water quality and watershed characterization fieldwork for this project is condu
 
 An ArcGIS Online map of sites included in water quality monitoring efforts is found here: <https://arcg.is/0fqvb0>.
 
-A GitHub repository with the code generating this website is available here.
+A [GitHub repository](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX "KWF GitHub") with the code generating this report is also available.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
