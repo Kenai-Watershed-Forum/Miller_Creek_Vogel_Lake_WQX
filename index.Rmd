@@ -1,6 +1,6 @@
 ---
 title: "Miller Creek and Vogel Lake Water Quality"
-author: "Benjamin Meyer"
+author: "Benjamin Meyer (ben@kenaiwatershed.org)"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book

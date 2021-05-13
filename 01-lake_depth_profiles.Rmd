@@ -67,7 +67,7 @@ select <- dplyr::select
 
 Lake water quality profiles were collected at 1-2 month intervals at five sites at 1 meter depth intervals. Raw water quality field data is stored in a Google Sheet that can be viewed at <https://tinyurl.com/kwf-vogel-wqx-data>.
 
-Data summaries and visualizations are provided for each site visit here.
+Data visualizations are provided for each site visit here.
 
 ```{r, include = FALSE}
 # Import data from google sheet
@@ -76,7 +76,7 @@ Data summaries and visualizations are provided for each site visit here.
 
 # recognize sheet title
 lake_wqx_dat <- read_sheet("https://docs.google.com/spreadsheets/d/1lS9eJ7kX91IlYwSgiEQm-BQqif_7o5E4MzcBmqpwSoI/edit#gid=0", 
-                           sheet = "Profile_Measurements") %>%
+                           sheet = "Lake_Profile_Measurements") %>%
   # rename columns
   rename(site = `Site Name`,
          sample_date = `Sample Date`,
@@ -122,6 +122,8 @@ site_names <- c("Vogel_Lake_Outlet" = "Vogel Lake Outlet",
 
 ## January 2021
 
+Jan 22, 2021
+
 ```{r ,include = FALSE}
 
 # filter to january 2021 data data
@@ -159,6 +161,8 @@ p
 
 
 ## March 2021
+
+March 23, 2021
 
 ```{r ,include = FALSE}
 
@@ -198,4 +202,4 @@ p
 
 ## Site Summaries
 
-TBD
+A table of summary statistics for water quality parameters at each site will be provided here.

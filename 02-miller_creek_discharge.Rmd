@@ -1,3 +1,7 @@
 # Miller Creek Discharge
 
-TBD
+Field data to create a ratings curve of discharge at the mouth of Miller Creek is being collected from Fall 2020 - Spring 2021.  These methods and results will be presented here.
+
+Raw water quality field data is stored in a Google Sheet that can be viewed at <https://tinyurl.com/kwf-vogel-wqx-data> under the "Discharge Measurements" tab.
+
+Site photos are available through a point-and-click pop-up map at <https://arcg.is/0fqvb0>.
