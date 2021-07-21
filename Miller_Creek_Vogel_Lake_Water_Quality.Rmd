@@ -1,3 +1,45 @@
+---
+title: "Miller Creek and Vogel Lake Water Quality"
+author: "Benjamin Meyer (ben@kenaiwatershed.org)"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+---
+
+```{r}
+library(bookdown)
+library(tinytex)
+library(packrat)
+
+```
+
+![](images/KWF_logo.png)
+
+# Introduction
+
+This draft document contains preliminary data explorations of 2021-2023 water quality data from the Vogel Lakes complex and Miller Creek in the Northern Kenai peninsula. These data are being collected as part of potential plans to eradicate invasive pike from the area, which were identified in 2018-2019 by the Alaska Dept. of Fish and Game.
+
+The draft environmental assessment for potential eradication of invasive Northern Pike from this system is available from the [US Fish and Wildlife Service](https://www.fws.gov/uploadedFiles/Region_7/NWRS/Zone_2/Kenai/PDF/Draft%20EA%20Northern%20Pike%20KNWR.pdf).
+
+Water quality and watershed characterization fieldwork for this project is conducted by [Kenai Watershed Forum](https://www.kenaiwatershed.org/).
+
+An ArcGIS Online map of sites included in water quality monitoring efforts is found here: <https://arcg.is/0fqvb0>.
+
+A [GitHub repository](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX "KWF GitHub") with the code generating this report is also available.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+<!--chapter:end:index.Rmd-->
+
 # Lake Water Quality Profiles
 
 ---
@@ -222,3 +264,42 @@ for each parameter, create tile plot of dpeth vs value: https://ggplot2.tidyvers
 ## Site Summaries
 
 A table of summary statistics for water quality parameters at each site will be provided here.
+
+<!--chapter:end:01-lake_depth_profiles.Rmd-->
+
+# Miller Creek Discharge
+
+Field data to create a ratings curve of discharge at the mouth of Miller Creek is being collected from Fall 2020 - Spring 2021.  These methods and results will be presented here.
+
+Raw water quality field data is stored in a Google Sheet that can be viewed at <https://tinyurl.com/kwf-vogel-wqx-data> under the "Discharge Measurements" tab.
+
+Site photos are available through a point-and-click pop-up map at <https://arcg.is/0fqvb0>.
+
+<!--chapter:end:02-miller_creek_discharge.Rmd-->
+
+# Watershed Mapping
+
+-   Watershed mapping efforts for this project include a combination of on the ground fieldwork and GIS based approaches.
+
+-   An ArcGIS Online interactive map outlining fieldwork sites and associated results is found at the following link: <https://arcg.is/0Djmay>
+
+[![](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/1GeLTX)
+
+<!--chapter:end:03-watershed_mapping.Rmd-->
+
+# Rotenone monitoring
+
+If rotenone application is included in the final plan after the Environmental Assessment process, Kenai Watershed Forum will monitor rotenone concentrations in the lake/creek system through Fall 2021 - Summer 2022.  Methods and results will be described here.
+
+A proposed rotenone sampling schedule is described in a Google Sheet linked here: <https://tinyurl.com/8ba94nrn>
+
+Actual sampling schedule will be dictated by observed decomposition rates.
+
+<!--chapter:end:04-other.Rmd-->
+
+# Summary
+
+Overall results described and interpreted here.
+
+<!--chapter:end:05-summary.Rmd-->
+

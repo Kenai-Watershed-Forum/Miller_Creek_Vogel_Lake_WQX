@@ -1,3 +1,7 @@
 # Watershed Mapping
 
-Watershed mapping efforts will be described and interpreted here. 
+-   Watershed mapping efforts for this project include a combination of on the ground fieldwork and GIS based approaches.
+
+-   An ArcGIS Online interactive map outlining fieldwork sites and associated results is found at the following link: <https://arcg.is/0Djmay>
+
+[![](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/1GeLTX)
