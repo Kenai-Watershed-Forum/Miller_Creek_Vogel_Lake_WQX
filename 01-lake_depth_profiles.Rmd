@@ -106,7 +106,10 @@ lake_wqx_dat <- read_sheet("https://docs.google.com/spreadsheets/d/1lS9eJ7kX91Il
   
   # remove values flagged with an asterisk
   # note that the asterisk is a special character, requires // escape for spring match
-  filter(!str_detect(val, "\\*"))
+  filter(!str_detect(val, "\\*")) %>%
+  
+  # convert values back to numeric type after filtering out flagged data
+  transform(val = as.numeric(val))
 
 ```
 
@@ -129,7 +132,10 @@ site_names <- c("Vogel_Lake_Outlet" = "Vogel Lake Outlet",
 
 ```
 
-## January 2021
+
+## Data by Month
+
+### January 2021
 
 Jan 22, 2021
 
@@ -169,7 +175,7 @@ p
 
 
 
-## March 2021
+### March 2021
 
 March 23, 2021
 
@@ -207,14 +213,139 @@ p <- mar21_lake_wqx_dat %>%
 p
 ```
 
+### May 2021
+May 25, 2021
+
+```{r ,include = FALSE}
+
+# filter to may 2021 data data
+may21_lake_wqx_dat <- lake_wqx_dat %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date)) %>%
+  filter(month == "5",
+         year == "2021")
+
+# create plot
+p <- may21_lake_wqx_dat %>%
+  ggplot() +
+    geom_point(aes(sample_depth_m,val), size = 2) +
+    geom_line(aes(sample_depth_m,val)) +
+
+    coord_flip() +
+    facet_grid(site ~ parameter, scales = "free_x", shrink = T, 
+               labeller = labeller(parameter = param_names,
+                                   site = site_names)) +
+    ylab("") +
+    xlab("Depth (m)") +
+    theme_bw() +
+    points_theme +
+    scale_x_reverse() +
+    scale_y_continuous(n.breaks = 5) +
+    theme(panel.spacing = unit(1.2, "lines"),
+          strip.text.y = element_text(angle = 360)) +
+    ggtitle("May 2021 Water Quality All Sites")
+```
+
+```{r fig.width=10, fig.height=11}
+p
+```
+
+
+### June 2021
+June 29, 2021
+
+```{r ,include = FALSE}
+
+# filter to june 2021 data data
+jun21_lake_wqx_dat <- lake_wqx_dat %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date)) %>%
+  filter(month == "6",
+         year == "2021")
+
+# create plot
+p <- jun21_lake_wqx_dat %>%
+  ggplot() +
+    geom_point(aes(sample_depth_m,val), size = 2) +
+    geom_line(aes(sample_depth_m,val)) +
+
+    coord_flip() +
+    facet_grid(site ~ parameter, scales = "free_x", shrink = T, 
+               labeller = labeller(parameter = param_names,
+                                   site = site_names)) +
+    ylab("") +
+    xlab("Depth (m)") +
+    theme_bw() +
+    points_theme +
+    scale_x_reverse() +
+    scale_y_continuous(n.breaks = 5) +
+    theme(panel.spacing = unit(1.2, "lines"),
+          strip.text.y = element_text(angle = 360)) +
+    ggtitle("June 2021 Water Quality All Sites")
+```
+
+```{r fig.width=10, fig.height=11}
+p
+```
+
+***
+
+## Overall Data
+
+```{r}
+#
+z <- lake_wqx_dat %>%
+  ungroup() %>%
+  mutate(month = month(sample_date)) %>%
+  group_by(site,month, parameter) %>%
+  summarise(mean_val = mean(val),
+            stdev = sd(val))
+```
+
+<br>
+
+Tile Plots (time vs lake depth) by Site and Parameter
+```{r}
+lake_wqx_dat %>%
+  mutate(month = month(sample_date)) %>%
+  ggplot(aes(month,sample_depth_m)) +
+  geom_tile(aes(fill = val)) +
+  scale_y_reverse() +
+  scale_fill_viridis_c() +
+  
+  facet_grid(site ~ parameter)
+
+
+### working in progress to adadpt plot here
+
+
+library(gridExtra)
+library(ggplot2)
+# split data for each "facet"
+df <- split(lake_wqx_dat,f = lake_wqx_dat$parameter)
+
+# plot for the first "facet"
+p1 <- ggplot(df$DO_mgl,aes(month,sample_depth_m)) + 
+  geom_tile(aes(fill = val)) +
+  scale_y_reverse() +
+  scale_fill_viridis_c()
+
+# do it for each "facet"
+p2 <- p1 %+% df$B
+
+# here the plot
+grid.arrange(p1,p2)
+
+
+```
+
 
 
 Plan:
 
-add column for "data QC flag"; allow for exclusions
-modify/copy code in order to be able to plot april/may/june data
 create summary table of values
-for each parameter, create tile plot of dpeth vs value: https://ggplot2.tidyverse.org/reference/geom_tile.html
+present hydro measurements in table
+for each parameter, create tile plot of depth vs value: https://ggplot2.tidyverse.org/reference/geom_tile.html
 
 
 ***
