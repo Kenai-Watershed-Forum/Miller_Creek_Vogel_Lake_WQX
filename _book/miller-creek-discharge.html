@@ -24,7 +24,7 @@
 <meta name="author" content="Benjamin Meyer (ben@kenaiwatershed.org)" />
 
 
-<meta name="date" content="2021-07-21" />
+<meta name="date" content="2021-08-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,8 @@
   
 <link rel="prev" href="lake-water-quality-profiles.html"/>
 <link rel="next" href="watershed-mapping.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -53,6 +53,13 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -139,13 +146,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html"><i class="fa fa-check"></i><b>2</b> Lake Water Quality Profiles</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#january-2021"><i class="fa fa-check"></i><b>2.1</b> January 2021</a></li>
-<li class="chapter" data-level="2.2" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#march-2021"><i class="fa fa-check"></i><b>2.2</b> March 2021</a></li>
-<li class="chapter" data-level="2.3" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#may-2021"><i class="fa fa-check"></i><b>2.3</b> May 2021</a></li>
-<li class="chapter" data-level="2.4" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#june-2021"><i class="fa fa-check"></i><b>2.4</b> June 2021</a></li>
-<li class="chapter" data-level="2.5" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#site-summaries"><i class="fa fa-check"></i><b>2.5</b> Site Summaries</a></li>
+<li class="chapter" data-level="2.1" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#data-by-month"><i class="fa fa-check"></i><b>2.1</b> Data by Month</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#january-2021"><i class="fa fa-check"></i><b>2.1.1</b> January 2021</a></li>
+<li class="chapter" data-level="2.1.2" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#march-2021"><i class="fa fa-check"></i><b>2.1.2</b> March 2021</a></li>
+<li class="chapter" data-level="2.1.3" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#may-2021"><i class="fa fa-check"></i><b>2.1.3</b> May 2021</a></li>
+<li class="chapter" data-level="2.1.4" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#june-2021"><i class="fa fa-check"></i><b>2.1.4</b> June 2021</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html"><i class="fa fa-check"></i><b>3</b> Miller Creek Discharge</a></li>
+<li class="chapter" data-level="2.2" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#overall-data"><i class="fa fa-check"></i><b>2.2</b> Overall Data</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#time-vs.-lake-depth-by-site-and-parameter"><i class="fa fa-check"></i><b>2.2.1</b> Time vs. Lake Depth by Site and Parameter</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#site-summaries"><i class="fa fa-check"></i><b>2.3</b> Site Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html"><i class="fa fa-check"></i><b>3</b> Miller Creek Discharge</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html#introduction-1"><i class="fa fa-check"></i><b>3.0.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.0.2" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html#miller-creek-discharge-rating-curve"><i class="fa fa-check"></i><b>3.0.2</b> Miller Creek Discharge Rating Curve</a></li>
+<li class="chapter" data-level="3.0.3" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html#pressure-transducer-data"><i class="fa fa-check"></i><b>3.0.3</b> Pressure Transducer Data</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="watershed-mapping.html"><a href="watershed-mapping.html"><i class="fa fa-check"></i><b>4</b> Watershed Mapping</a></li>
 <li class="chapter" data-level="5" data-path="rotenone-monitoring.html"><a href="rotenone-monitoring.html"><i class="fa fa-check"></i><b>5</b> Rotenone monitoring</a></li>
 <li class="chapter" data-level="6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6</b> Summary</a></li>
@@ -171,10 +190,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="miller-creek-discharge" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Miller Creek Discharge</h1>
+<div id="introduction-1" class="section level3" number="3.0.1">
+<h3><span class="header-section-number">3.0.1</span> Introduction</h3>
 <p>Field data to create a ratings curve of discharge at the mouth of Miller Creek is being collected from Fall 2020 - Spring 2021. These methods and results will be presented here.</p>
 <p>Raw water quality field data is stored in a Google Sheet that can be viewed at <a href="https://tinyurl.com/kwf-vogel-wqx-data" class="uri">https://tinyurl.com/kwf-vogel-wqx-data</a> under the “Discharge Measurements” tab.</p>
 <p>Site photos are available through a point-and-click pop-up map at <a href="https://arcg.is/0fqvb0" class="uri">https://arcg.is/0fqvb0</a>.</p>
+<p><br></p>
+<p><br></p>
+</div>
+<div id="miller-creek-discharge-rating-curve" class="section level3" number="3.0.2">
+<h3><span class="header-section-number">3.0.2</span> Miller Creek Discharge Rating Curve</h3>
+<p>A discharge station was established in October 2020 near the mouth of Miller Creek, including a staff plate and pressure transducer.</p>
+<p>Site visits will be made opportunistically depending on precipitation throughout Summer/Fall 2021. At each site visit, the pressure transducer is downloaded and a discharge measurement is collected using a SondeTek Flowtracker.</p>
+<p>Once a minimum of eight discharge measurements are available in Fall 2021, a curve will be fit to the scatter plot of stage height vs. discharge. This relationship will be used in conjunction with pressure transducer data to create a graph of flow.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="miller-creek-discharge.html#cb1-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> discharge_dat <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="miller-creek-discharge.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Staff_Plate_Height, Q_Discharge_cfs)) <span class="sc">+</span></span>
+<span id="cb1-3"><a href="miller-creek-discharge.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb1-4"><a href="miller-creek-discharge.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="miller-creek-discharge.html#cb1-5" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">ggplotly</span>(p)</span>
+<span id="cb1-6"><a href="miller-creek-discharge.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="miller-creek-discharge.html#cb1-7" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div>
+<div id="htmlwidget-bfd351688d9fc441faf1" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bfd351688d9fc441faf1">{"x":{"data":[{"x":[0.52,3,0.4,0.41],"y":[9.919,35.494,3.384,4.9],"text":["Staff_Plate_Height: 0.52<br />Q_Discharge_cfs:  9.919","Staff_Plate_Height: 3.00<br />Q_Discharge_cfs: 35.494","Staff_Plate_Height: 0.40<br />Q_Discharge_cfs:  3.384","Staff_Plate_Height: 0.41<br />Q_Discharge_cfs:  4.900"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.27,3.13],"tickmode":"array","ticktext":["1","2","3"],"tickvals":[1,2,3],"categoryorder":"array","categoryarray":["1","2","3"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Staff_Plate_Height","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1.7785,37.0995],"tickmode":"array","ticktext":["10","20","30"],"tickvals":[10,20,30],"categoryorder":"array","categoryarray":["10","20","30"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Q_Discharge_cfs","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"3a4837f27983":{"x":{},"y":{},"type":"scatter"}},"cur_data":"3a4837f27983","visdat":{"3a4837f27983":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+</div>
+<div id="pressure-transducer-data" class="section level3" number="3.0.3">
+<h3><span class="header-section-number">3.0.3</span> Pressure Transducer Data</h3>
+<p><br></p>
+<p>Plot pressure transducer data (work in progress here 8/6/2021)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="miller-creek-discharge.html#cb2-1" aria-hidden="true" tabindex="-1"></a>pt <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="miller-creek-discharge.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(datetime,val)) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="miller-creek-discharge.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a href="miller-creek-discharge.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(param <span class="sc">~</span> .)</span></code></pre></div>
+<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="miller-creek-discharge.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to do : use anti_join methodology to excise non-instream data</span></span>
+<span id="cb3-2"><a href="miller-creek-discharge.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to plotly line chart?</span></span></code></pre></div>
 
+</div>
 </div>
             </section>
 

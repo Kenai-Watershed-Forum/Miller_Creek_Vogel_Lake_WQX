@@ -15,6 +15,7 @@ library(bookdown)
 library(tinytex)
 library(packrat)
 
+options(knitr.duplicate.label = "allow")
 ```
 
 ![](images/KWF_logo.png)
