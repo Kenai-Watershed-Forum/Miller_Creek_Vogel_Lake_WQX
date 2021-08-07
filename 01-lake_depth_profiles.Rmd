@@ -313,7 +313,7 @@ lake_wqx_dat <- lake_wqx_dat %>%
   
 ```{r}
 # plot
-p <- DO_mgl %>%
+p <- lake_wqx_dat %>%
   filter(parameter == "DO_mgl") %>%
   ggplot(aes(month,sample_depth_m)) +
   geom_tile(aes(fill = val)) +
@@ -334,6 +334,8 @@ p <- DO_mgl %>%
 <br>
 
 #### Dissolved Oxygen
+
+Work in progress here 8/6/2021
 ```{r }
 p
 

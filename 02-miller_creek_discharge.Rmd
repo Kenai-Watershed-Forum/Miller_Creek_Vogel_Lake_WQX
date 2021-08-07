@@ -8,7 +8,7 @@ Raw water quality field data is stored in a Google Sheet that can be viewed at <
 
 Site photos are available through a point-and-click pop-up map at <https://arcg.is/0fqvb0>.
 
-```{r setup, include=FALSE}
+```{r setup_02, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 
 # clear environment
@@ -97,6 +97,8 @@ p <- discharge_dat %>%
 fig <- ggplotly(p)
 
 fig
+
+# to do: include date in ggplotly pop-up windows
 ```
 
 <br>
