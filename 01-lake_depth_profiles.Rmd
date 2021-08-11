@@ -294,63 +294,182 @@ p
 ```
 Note: turbidity data is absent from June 2021 sampling due to an equipment issue.
 
-***
+<br>
 
-## Overall Data
+### August 2021
+August 3, 2021
 
-### Time vs. Lake Depth by Site and Parameter
-```{r,include = FALSE}
-# Plot by parameter and site
+```{r ,include = FALSE}
 
-# DO
-lake_wqx_dat <- lake_wqx_dat %>%
-  # create event sequence column
-  group_by(site,parameter,sample_depth_m) %>%
-  mutate(event_sequence = row_number()) 
-  
-  
-```  
-  
-```{r}
-# plot
-p <- lake_wqx_dat %>%
-  filter(parameter == "DO_mgl") %>%
-  ggplot(aes(month,sample_depth_m)) +
-  geom_tile(aes(fill = val)) +
-  scale_y_reverse() +
-  facet_grid(. ~ site,  
-               labeller = labeller(site = site_names), scales = "free_x") +
-    ylab("Depth (m)") +
-    xlab("") +
-    scale_x_continuous(breaks = lake_wqx_dat$event_sequence, 
-                       label = lake_wqx_dat$sample_date) +
+# filter to june 2021 data data
+aug21_lake_wqx_dat <- lake_wqx_dat %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date)) %>%
+  filter(month == "8",
+         year == "2021")
+
+# create plot
+p <- aug21_lake_wqx_dat %>%
+  ggplot() +
+    geom_point(aes(sample_depth_m,val), size = 2) +
+    geom_line(aes(sample_depth_m,val)) +
+
+    coord_flip() +
+    facet_grid(site ~ parameter, scales = "free_x", shrink = T, 
+               labeller = labeller(parameter = param_names,
+                                   site = site_names)) +
+    ylab("") +
+    xlab("Depth (m)") +
     theme_bw() +
-   points_theme +
-   theme(axis.text.x=element_text(angle=90, vjust=.5)) +
-   scale_fill_viridis_c(name="mg/L")
-
+    points_theme +
+    scale_x_reverse() +
+    scale_y_continuous(n.breaks = 5) +
+    theme(panel.spacing = unit(1.2, "lines"),
+          strip.text.y = element_text(angle = 360)) +
+    ggtitle("August 2021 Water Quality All Sites")
 ```
 
 <br>
 
+```{r fig.width=10, fig.height=11}
+p
+```
+***
+
+## Overall Data
+
 #### Dissolved Oxygen
 
-Work in progress here 8/6/2021
-```{r }
-p
-
-# ISSUE - x axis labels and bars do not line up
+```{r, include = F}
+# plot
+p <- lake_wqx_dat %>%
+  filter(parameter == "DO_mgl") %>%
+  ggplot(aes(as.factor(sample_date),sample_depth_m)) +
+  geom_tile(aes(fill = val)) +
+  scale_y_reverse() +
+  facet_grid(. ~ site, labeller = labeller(site = site_names)) +
+    ylab("Depth (m)") +
+    xlab("") +
+    theme_bw() +
+   points_theme +
+   theme(axis.text.x=element_text(angle=90, vjust=.5)) +
+   scale_fill_viridis_c(name="mg/L") +
+  ggtitle ("Dissolved Oxygen")
 
 ```
 
+```{r fig.width=10, fig.height=8}
+p
+```
 
+<br>
 
+#### pH
 
-Plan:
+#### Dissolved Oxygen
 
-create summary table of values
-present hydro measurements in table
-for each parameter, create tile plot of depth vs value:
+```{r, include = F}
+# plot
+p <- lake_wqx_dat %>%
+  filter(parameter == "pH") %>%
+  ggplot(aes(as.factor(sample_date),sample_depth_m)) +
+  geom_tile(aes(fill = val)) +
+  scale_y_reverse() +
+  facet_grid(. ~ site, labeller = labeller(site = site_names)) +
+    ylab("Depth (m)") +
+    xlab("") +
+    theme_bw() +
+   points_theme +
+   theme(axis.text.x=element_text(angle=90, vjust=.5)) +
+   scale_fill_viridis_c(name="value") +
+  ggtitle ("pH")
+
+```
+
+```{r fig.width=10, fig.height=8}
+p
+```
+Note: pH values are excluded from the May and June 2021 site visits due to an instrument error.
+
+<br>
+
+#### Turbidity
+
+```{r, include = F}
+
+# plot
+p <- lake_wqx_dat %>%
+  filter(parameter == "turbidity_ntu") %>%
+  ggplot(aes(as.factor(sample_date),sample_depth_m)) +
+  geom_tile(aes(fill = val)) +
+  scale_y_reverse() +
+  facet_grid(. ~ site, labeller = labeller(site = site_names)) +
+    ylab("Depth (m)") +
+    xlab("") +
+    theme_bw() +
+   points_theme +
+   theme(axis.text.x=element_text(angle=90, vjust=.5)) +
+   scale_fill_viridis_c(name="NTU") +
+  ggtitle ("Turbidity")
+
+```
+
+```{r fig.width=10, fig.height=8}
+p
+```
+Note: some turbidity values near the benthic surface of each site visit are not displayed in the above plot in order to improve visualization.
+
+<br>
+
+#### Conductivity
+
+```{r, include = F}
+# plot
+p <- lake_wqx_dat %>%
+  filter(parameter == "spcond_uscm") %>%
+  ggplot(aes(as.factor(sample_date),sample_depth_m)) +
+  geom_tile(aes(fill = val)) +
+  scale_y_reverse() +
+  facet_grid(. ~ site, labeller = labeller(site = site_names)) +
+    ylab("Depth (m)") +
+    xlab("") +
+    theme_bw() +
+   points_theme +
+   theme(axis.text.x=element_text(angle=90, vjust=.5)) +
+   scale_fill_viridis_c(name="uS/cm") +
+  ggtitle ("Conductivity")
+
+```
+
+```{r fig.width=10, fig.height=8}
+p
+```
+
+<br>
+
+#### Water Temperature
+
+```{r, include = F}
+# plot
+p <- lake_wqx_dat %>%
+  filter(parameter == "temp_c") %>%
+  ggplot(aes(as.factor(sample_date),sample_depth_m)) +
+  geom_tile(aes(fill = val)) +
+  scale_y_reverse() +
+  facet_grid(. ~ site, labeller = labeller(site = site_names)) +
+    ylab("Depth (m)") +
+    xlab("") +
+    theme_bw() +
+   points_theme +
+   theme(axis.text.x=element_text(angle=90, vjust=.5)) +
+   scale_fill_viridis_c(name="°C") +
+  ggtitle ("Temperature")
+
+```
+
+```{r fig.width=10, fig.height=8}
+p
+```
 
 
 ***

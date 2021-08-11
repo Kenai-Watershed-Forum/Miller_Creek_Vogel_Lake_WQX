@@ -5,9 +5,14 @@ january-2021
 march-2021
 may-2021
 june-2021
+august-2021
 overall-data
-time-vs.-lake-depth-by-site-and-parameter
 dissolved-oxygen
+ph
+dissolved-oxygen-1
+turbidity
+conductivity
+water-temperature
 site-summaries
 miller-creek-discharge
 introduction-1

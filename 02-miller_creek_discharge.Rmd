@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Field data to create a ratings curve of discharge at the mouth of Miller Creek is being collected from Fall 2020 - Spring 2021. These methods and results will be presented here.
+Field data to create a rating curve of discharge at the mouth of Miller Creek is being collected from Fall 2020 - Spring 2021. These methods and results will be presented here.
 
 Raw water quality field data is stored in a Google Sheet that can be viewed at <https://tinyurl.com/kwf-vogel-wqx-data> under the "Discharge Measurements" tab.
 
@@ -89,21 +89,23 @@ Site visits will be made opportunistically depending on precipitation throughout
 
 Once a minimum of eight discharge measurements are available in Fall 2021, a curve will be fit to the scatter plot of stage height vs. discharge. This relationship will be used in conjunction with pressure transducer data to create a graph of flow.
 
-```{r}
+```{r, include = F}
 p <- discharge_dat %>%
   ggplot(aes(Staff_Plate_Height, Q_Discharge_cfs)) +
   geom_point()
 
 fig <- ggplotly(p)
+```
 
+```{r}
 fig
-
-# to do: include date in ggplotly pop-up windows
 ```
 
 <br>
 
 ### Pressure Transducer Data
+
+Work in progress here 8/10/2021
 
 ```{r, include = F}
 # directories by date
@@ -163,8 +165,8 @@ pt <- bind_rows(`20201014`,`20210624`) %>%
 
 <br>
 
-Plot pressure transducer data (work in progress here 8/6/2021)
-```{r}
+
+```{r, include = F}
 pt %>%
   ggplot(aes(datetime,val)) +
   geom_point() +
