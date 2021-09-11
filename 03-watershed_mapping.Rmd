@@ -4,4 +4,10 @@
 
 -   An ArcGIS Online interactive map outlining fieldwork sites and associated results is found at the following link: <https://arcg.is/0Djmay>
 
+-   Technicians walked the Miller Creek corridor on foot on May 27-28, 2021 to identify hydrologic features that may be difficult to identify from the air, such as seepages. The locations are visible in the ArcGIS Online map in the "Hydrologic Connectivity" layer, and may be downloaded here as .gpx files:
+
+    -   All hydrologic features (n = 67): miller_creek_features.gpx
+
+    -   Only seepage hydrologic features (n = 16): miller_creek_seepage_features.gpx
+
 [![](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/1GeLTX)
