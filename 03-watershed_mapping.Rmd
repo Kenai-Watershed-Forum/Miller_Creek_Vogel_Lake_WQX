@@ -10,4 +10,4 @@
 
     -   Only seepage hydrologic features (n = 16): [miller_creek_seepage_features.gpx](https://drive.google.com/file/d/1_c4FQDR0t2sW_yphFuuiSpRmydPzjR3i/view?usp=sharing "link")
 
-[![](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/1GeLTX)
+[![Click the image above to access the full ArcGIS Online map](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/1GeLTX)

@@ -145,7 +145,7 @@ site_names <- c("Vogel_Lake_Outlet" = "Vogel\nLake\nOutlet",
 
 Jan 22, 2021
 
-```{r ,include = FALSE}
+```{r jan21-wqx, echo = FALSE, fig.cap="January 2021", fig.width=10, fig.height=11}
 
 # filter to january 2021 data data
 jan21_lake_wqx_dat <- lake_wqx_dat %>%
@@ -155,7 +155,7 @@ jan21_lake_wqx_dat <- lake_wqx_dat %>%
          year == "2021")
 
 # create plot
-p <- jan21_lake_wqx_dat %>%
+jan21_lake_wqx_dat %>%
   ggplot() +
     geom_point(aes(sample_depth_m,val), size = 2) +
     geom_line(aes(sample_depth_m,val)) +
@@ -175,9 +175,6 @@ p <- jan21_lake_wqx_dat %>%
     ggtitle("January 2021 Water Quality All Sites")
 ```
 
-```{r fig.width=10, fig.height=11}
-p
-```
 
 
 
@@ -185,7 +182,7 @@ p
 
 March 23, 2021
 
-```{r ,include = FALSE}
+```{r , echo = FALSE, fig.cap = "March 2021", fig.width=10, fig.height=11}
 
 # filter to march 2021 data data
 mar21_lake_wqx_dat <- lake_wqx_dat %>%
@@ -195,7 +192,7 @@ mar21_lake_wqx_dat <- lake_wqx_dat %>%
          year == "2021")
 
 # create plot
-p <- mar21_lake_wqx_dat %>%
+mar21_lake_wqx_dat %>%
   ggplot() +
     geom_point(aes(sample_depth_m,val), size = 2) +
     geom_line(aes(sample_depth_m,val)) +
@@ -215,14 +212,11 @@ p <- mar21_lake_wqx_dat %>%
     ggtitle("March 2021 Water Quality All Sites")
 ```
 
-```{r fig.width=10, fig.height=11}
-p
-```
 
 ### May 2021
 May 25, 2021
 
-```{r ,include = FALSE}
+```{r ,echo = FALSE, fig.cap = "May 2021", fig.width=10, fig.height=11}
 
 # filter to may 2021 data data
 may21_lake_wqx_dat <- lake_wqx_dat %>%
@@ -232,7 +226,7 @@ may21_lake_wqx_dat <- lake_wqx_dat %>%
          year == "2021")
 
 # create plot
-p <- may21_lake_wqx_dat %>%
+may21_lake_wqx_dat %>%
   ggplot() +
     geom_point(aes(sample_depth_m,val), size = 2) +
     geom_line(aes(sample_depth_m,val)) +
@@ -251,15 +245,12 @@ p <- may21_lake_wqx_dat %>%
     ggtitle("May 2021 Water Quality All Sites")
 ```
 
-```{r fig.width=10, fig.height=11}
-p
-```
 
 
 ### June 2021
 June 29, 2021
 
-```{r ,include = FALSE}
+```{r ,echo = FALSE, fig.cap = "June 2021", fig.width=10, fig.height=11}
 
 # filter to june 2021 data data
 jun21_lake_wqx_dat <- lake_wqx_dat %>%
@@ -269,7 +260,7 @@ jun21_lake_wqx_dat <- lake_wqx_dat %>%
          year == "2021")
 
 # create plot
-p <- jun21_lake_wqx_dat %>%
+jun21_lake_wqx_dat %>%
   ggplot() +
     geom_point(aes(sample_depth_m,val), size = 2) +
     geom_line(aes(sample_depth_m,val)) +
@@ -289,9 +280,6 @@ p <- jun21_lake_wqx_dat %>%
     ggtitle("June 2021 Water Quality All Sites")
 ```
 
-```{r fig.width=10, fig.height=11}
-p
-```
 Note: turbidity data is absent from June 2021 sampling due to an equipment issue.
 
 <br>
@@ -299,7 +287,7 @@ Note: turbidity data is absent from June 2021 sampling due to an equipment issue
 ### August 2021
 August 3, 2021
 
-```{r ,include = FALSE}
+```{r ,echo = FALSE, fig.cap = "August 2021", fig.width=10, fig.height=11}
 
 # filter to june 2021 data data
 aug21_lake_wqx_dat <- lake_wqx_dat %>%
@@ -309,7 +297,7 @@ aug21_lake_wqx_dat <- lake_wqx_dat %>%
          year == "2021")
 
 # create plot
-p <- aug21_lake_wqx_dat %>%
+aug21_lake_wqx_dat %>%
   ggplot() +
     geom_point(aes(sample_depth_m,val), size = 2) +
     geom_line(aes(sample_depth_m,val)) +
@@ -331,18 +319,16 @@ p <- aug21_lake_wqx_dat %>%
 
 <br>
 
-```{r fig.width=10, fig.height=11}
-p
-```
+
 ***
 
 ## Overall Data
 
 #### Dissolved Oxygen
 
-```{r, include = F}
+```{r , echo = FALSE, fig.cap = "Dissolved Oxygen (mg/L)", fig.width=10, fig.height=8}
 # plot
-p <- lake_wqx_dat %>%
+lake_wqx_dat %>%
   filter(parameter == "DO_mgl") %>%
   ggplot(aes(as.factor(sample_date),sample_depth_m)) +
   geom_tile(aes(fill = val)) +
@@ -358,19 +344,15 @@ p <- lake_wqx_dat %>%
 
 ```
 
-```{r fig.width=10, fig.height=8}
-p
-```
+
 
 <br>
 
 #### pH
 
-#### Dissolved Oxygen
-
-```{r, include = F}
+```{r , echo = FALSE, fig.cap = "pH", fig.width=10, fig.height=8}
 # plot
-p <- lake_wqx_dat %>%
+lake_wqx_dat %>%
   filter(parameter == "pH") %>%
   ggplot(aes(as.factor(sample_date),sample_depth_m)) +
   geom_tile(aes(fill = val)) +
@@ -386,19 +368,16 @@ p <- lake_wqx_dat %>%
 
 ```
 
-```{r fig.width=10, fig.height=8}
-p
-```
 Note: pH values are excluded from the May and June 2021 site visits due to an instrument error.
 
 <br>
 
 #### Turbidity
 
-```{r, include = F}
+```{r , echo = FALSE, fig.cap = "Turbidity (NTU)", fig.width=10, fig.height=8}
 
 # plot
-p <- lake_wqx_dat %>%
+lake_wqx_dat %>%
   filter(parameter == "turbidity_ntu") %>%
   ggplot(aes(as.factor(sample_date),sample_depth_m)) +
   geom_tile(aes(fill = val)) +
@@ -414,18 +393,15 @@ p <- lake_wqx_dat %>%
 
 ```
 
-```{r fig.width=10, fig.height=8}
-p
-```
 Note: some turbidity values near the benthic surface of each site visit are not displayed in the above plot in order to improve visualization.
 
 <br>
 
 #### Conductivity
 
-```{r, include = F}
+```{r , echo = FALSE, fig.cap = "Conductivity (uS/cm)", fig.width=10, fig.height=8}
 # plot
-p <- lake_wqx_dat %>%
+lake_wqx_dat %>%
   filter(parameter == "spcond_uscm") %>%
   ggplot(aes(as.factor(sample_date),sample_depth_m)) +
   geom_tile(aes(fill = val)) +
@@ -441,17 +417,14 @@ p <- lake_wqx_dat %>%
 
 ```
 
-```{r fig.width=10, fig.height=8}
-p
-```
 
 <br>
 
 #### Water Temperature
 
-```{r, include = F}
+```{r , echo = FALSE, fig.cap = "Water Temperature (C)", fig.width=10, fig.height=8}
 # plot
-p <- lake_wqx_dat %>%
+lake_wqx_dat %>%
   filter(parameter == "temp_c") %>%
   ggplot(aes(as.factor(sample_date),sample_depth_m)) +
   geom_tile(aes(fill = val)) +
@@ -467,9 +440,6 @@ p <- lake_wqx_dat %>%
 
 ```
 
-```{r fig.width=10, fig.height=8}
-p
-```
 
 
 ***

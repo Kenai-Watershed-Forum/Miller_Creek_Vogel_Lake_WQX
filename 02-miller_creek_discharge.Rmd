@@ -1,8 +1,12 @@
-# Miller Creek Discharge
+# Miller Creek Discharge & Flow Rate
 
 ### Introduction
 
-Field data to create a rating curve of discharge at the mouth of Miller Creek is being collected from Fall 2020 - Spring 2021. These methods and results will be presented here.
+Hydrology fieldwork focusing on flow and discharge is being conducted throughout the Miller Creek drainage in Fall 2020 - Spring 2021.
+
+-   Near the mouth of Miller Creek, a discharge measurement station was installed in October 2020. At this site a pressure transducer measures water level, and discharge measurements are collected periodically using an Acoustic Doppler Velocimeter. These data, along with staff plate observations, are being used to create a rating discharge curve.
+
+-   An experiment to study stream flow rate in Miller Creek was conducted September 15-17, 2021. A plug of dissolved salt (NaCl) was discharged in to the creek, and the resultant spike in conductivity was observed downstream 0.64 km stream distance.
 
 Raw water quality field data is stored in a Google Sheet that can be viewed at <https://tinyurl.com/kwf-vogel-wqx-data> under the "Discharge Measurements" tab.
 
@@ -56,8 +60,6 @@ points_theme <- theme(axis.title = element_text(size = 14, face = "bold"),
 select <- dplyr::select
 ```
 
-<br>
-
 ```{r, include = F}
 
 # recognize sheet title and download
@@ -73,32 +75,55 @@ discharge_dat <- read_sheet("https://docs.google.com/spreadsheets/d/1lS9eJ7kX91I
          Q_Discharge_cfs) %>%
   # transform column formats
   transform(Staff_Plate_Height = as.numeric(Staff_Plate_Height),
-            Q_Discharge_cfs = as.numeric(Q_Discharge_cfs)) %>%
+            Q_Discharge_cfs = as.numeric(Q_Discharge_cfs)) 
+
   # select miller creek pressure transducer site 1
+miller_discharge_dat <- discharge_dat %>%
   filter(site == "Miller Creek Pressure Transducer 1")
 
 ```
 
 <br>
 
-### Miller Creek Discharge Rating Curve 
+### Miller Creek Discharge Rating Curve
 
 A discharge station was established in October 2020 near the mouth of Miller Creek, including a staff plate and pressure transducer.
 
-Site visits will be made opportunistically depending on precipitation throughout Summer/Fall 2021. At each site visit, the pressure transducer is downloaded and a discharge measurement is collected using a SondeTek Flowtracker.
+Site visits have been made opportunistically depending on precipitation throughout Summer/Fall 2021. At each site visit, the pressure transducer is downloaded and a discharge measurement is collected using a SondeTek Flowtracker. See Figure \@ref(fig:rating-curve) for the discharge rates and staff plate values observed to date.
 
-Once a minimum of eight discharge measurements are available in Fall 2021, a curve will be fit to the scatter plot of stage height vs. discharge. This relationship will be used in conjunction with pressure transducer data to create a graph of flow.
+Once a minimum of eight discharge measurements are available in Fall 2021, a curve will be fit to the scatter plot of stage height vs. discharge. This relationship will be used in conjunction with pressure transducer data to create a flow hydrograph.
 
-```{r, include = F}
-p <- discharge_dat %>%
-  ggplot(aes(Staff_Plate_Height, Q_Discharge_cfs)) +
-  geom_point()
+```{r rating-curve, echo=FALSE, fig.cap="Measurements for Miller Creek Discharge Rating Curve"}
+ggplotly(
+  p <- miller_discharge_dat %>%
+  ggplot(aes(Staff_Plate_Height, Q_Discharge_cfs, label = sample_date)) +
+  geom_point() +
+  ggtitle("Miller Creek\nMeasurements for Discharge Rating Curve")
+  )
 
-fig <- ggplotly(p)
 ```
 
-```{r}
-fig
+<br>
+
+### Discharge measurements at other sites
+
+Additional discharge measurements were taken throughout Summer 2021 at two additional sites near Vogel Lake, near the outlets of Kuguyuk Pond and Bird Pond. See Figure \@ref(fig:other-discharge) for discharge values observed to date.
+
+```{r other-discharge, echo=FALSE, fig.cap="Other discharge measurements"}
+#plot 
+ggplotly(
+  p <- discharge_dat %>%
+  filter(site %in% c("Bird Pond Discharge Site", 
+                     "Kuguyuk Pond Discharge Site")) %>%
+    ggplot(aes(as.factor(sample_date),Q_Discharge_cfs)) +
+    geom_point() +
+    facet_grid(. ~ site) +
+    xlab("") +
+    ylab("Stream Discharge Rate (cfs)") +
+    ggtitle("Additional Discharge Measurement Sites")
+)
+
+
 ```
 
 <br>
@@ -165,7 +190,6 @@ pt <- bind_rows(`20201014`,`20210624`) %>%
 
 <br>
 
-
 ```{r, include = F}
 pt %>%
   ggplot(aes(datetime,val)) +
@@ -176,3 +200,84 @@ pt %>%
 # convert to plotly line chart?
 ```
 
+<br>
+
+### Stream Flow Rate Experiment
+
+On September 15-17, 2021 we conducted an experiment to examine stream flow rate in Miller Creek. We measured downstream transport time of dissolved solutes by deploying a plug of dissolved salt and measuring a resultant change in conductivity at a site downstream.
+
+
+##### Methods
+
+We deployed a plug of dissolved salt into the Miller Creek stream channel and measured conductivity continuously at a downstream site. See Figure \@ref(fig:nacl-map) for salt deployment and conductivity monitoring sites.
+
+<br>
+
+```{r nacl-map, echo = FALSE, fig.cap="Stream Flow Rate Study Area. Stream distance between the NaCl release site and the downstream measurement site is 0.63 km (0.39 mi)."}
+knitr::include_graphics('images/stream_flow_rate_sites.png')
+```
+<br>
+
+The Vogel Lake / Miller Creek system is a low-gradient drainage with little observable flow within 0.5 miles downstream of the lake outlet. We deployed our salt plug downstream from the Vogel Lake outlet at the first site with visibly evident surface flow, which was over the top of the first downstream beaver dam.
+
+We released 140 lbs of dissolved NaCl by dissolving appx 15 lbs at a time in a 35 gallon trash can, then discharging it on the downstream side of the beaver dam into the stream channel. Our downstream site monitoring conductivity was 0.63 km (0.39 mi) downstream center-channel. 
+
+To record conductivity we used a pair of simultaneously deployed Hydrolab MS5 Sondes suspended from a floating buoy. We programmed the sondes to record at 0.25 hour intervals. We examined the resultant time series for exposure or errors and removed these data points. We averaged conductivity values between the two Hydrolab units in the final results.
+
+```{r echo = FALSE, message = FALSE}
+# read in raw csv files and bind together
+hl1 <- read.csv("input/hydrolab_data/nacl_buoy_site/46005_Miller_NaCl.csv",
+                skip = 14) %>%
+  select(-X.2,-X.4,-X.6,-X.7) %>%
+  mutate(id = 46005)
+
+
+hl2 <- read.csv("input/hydrolab_data/nacl_buoy_site/64821_Miller_NaCl.csv",
+                skip = 14) %>%
+  select(-X.2,-X.4) %>%
+  mutate(id = 64821)
+
+hl <- bind_rows(hl1,hl2) 
+colnames(hl) <- c("date","time","temp_C","cond_uScm","id")
+
+# prep for analysis
+hl <- hl %>%
+  mutate(datetime = mdy_hms(paste(date,time)))%>%
+  # round all times to nearest minute
+  mutate(datetime = round_date(datetime, unit = "minute")) %>%
+  # average values between two sondes
+  group_by(datetime) %>%
+  summarise(mean_cond_uScm = mean(cond_uScm))
+
+```
+
+<br>
+
+##### Results
+
+We measured a readily evident rise in conductivity values at the downstream monitoring site. See Figure \@ref(fig:nacl-fig) for the time series of conductivity data.
+
+```{r nacl-fig, echo=FALSE, fig.cap= "Conductivity values at the site downstream of the NaCl release site. The NaCl plug was released at 19:30 on 9/15/2021. The release and measurement site coordinates can be accessed at the ArcGIS Online Map at https://arcg.is/0LqOKH0."}
+ggplotly(
+  p <- hl %>%
+  ggplot(aes(datetime,mean_cond_uScm)) +
+  geom_point() +
+  ylim(70,140) +
+  xlab("Date/Time") +
+  ylab("Conductivity (uS/cm)") +
+  ggtitle("Conductivity vs. Time\nat site 0.39 mi Downstream From Salt Deployment")
+  )
+
+```
+
+In Figure \@ref(fig:nacl-fig) we can observe the following:
+
+-   [Initial NaCl Deployment:]{.ul} 9/15/2021 19:30
+
+-   [Start of the rising limb of the conductivity spike:]{.ul} 9/15/2021 22:00 (2.5 hrs after deployment)
+
+-   [Maximum conductivity peak (\~20% above baseline values):]{.ul} 01:30 9/16/2021 (6.0 hours after deployment)
+
+-   [Return to baseline conductivity levels:]{.ul} 9/16/2021 15:00 (19.5 hrs after deployment)
+
+Based on these results, peak concentration of the dissolved solute traveled though this section of Miller Creek at [**0.11 km/h (0.06 mph)**]{.ul}.

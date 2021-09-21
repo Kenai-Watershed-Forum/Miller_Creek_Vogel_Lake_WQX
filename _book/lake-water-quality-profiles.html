@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Lake Water Quality Profiles | Miller Creek and Vogel Lake Water Quality</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Lake Water Quality Profiles | Miller Creek and Vogel Lake Water Quality" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Benjamin Meyer (ben@kenaiwatershed.org)" />
 
 
-<meta name="date" content="2021-08-23" />
+<meta name="date" content="2021-09-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,9 +32,10 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="miller-creek-discharge.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<link rel="next" href="miller-creek-discharge-flow-rate.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,10 +51,9 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
@@ -158,11 +158,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#overall-data"><i class="fa fa-check"></i><b>2.2</b> Overall Data</a></li>
 <li class="chapter" data-level="2.3" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#site-summaries"><i class="fa fa-check"></i><b>2.3</b> Site Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html"><i class="fa fa-check"></i><b>3</b> Miller Creek Discharge</a>
+<li class="chapter" data-level="3" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html"><i class="fa fa-check"></i><b>3</b> Miller Creek Discharge &amp; Flow Rate</a>
 <ul>
-<li class="chapter" data-level="3.0.1" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html#introduction-1"><i class="fa fa-check"></i><b>3.0.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.0.2" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html#miller-creek-discharge-rating-curve"><i class="fa fa-check"></i><b>3.0.2</b> Miller Creek Discharge Rating Curve</a></li>
-<li class="chapter" data-level="3.0.3" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html#pressure-transducer-data"><i class="fa fa-check"></i><b>3.0.3</b> Pressure Transducer Data</a></li>
+<li class="chapter" data-level="3.0.1" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html#introduction-1"><i class="fa fa-check"></i><b>3.0.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.0.2" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html#miller-creek-discharge-rating-curve"><i class="fa fa-check"></i><b>3.0.2</b> Miller Creek Discharge Rating Curve</a></li>
+<li class="chapter" data-level="3.0.3" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html#discharge-measurements-at-other-sites"><i class="fa fa-check"></i><b>3.0.3</b> Discharge measurements at other sites</a></li>
+<li class="chapter" data-level="3.0.4" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html#pressure-transducer-data"><i class="fa fa-check"></i><b>3.0.4</b> Pressure Transducer Data</a></li>
+<li class="chapter" data-level="3.0.5" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html#stream-flow-rate-experiment"><i class="fa fa-check"></i><b>3.0.5</b> Stream Flow Rate Experiment</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="watershed-mapping.html"><a href="watershed-mapping.html"><i class="fa fa-check"></i><b>4</b> Watershed Mapping</a></li>
 <li class="chapter" data-level="5" data-path="rotenone-monitoring.html"><a href="rotenone-monitoring.html"><i class="fa fa-check"></i><b>5</b> Rotenone monitoring</a></li>
@@ -197,73 +199,110 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="january-2021" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> January 2021</h3>
 <p>Jan 22, 2021</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="lake-water-quality-profiles.html#cb4-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-6-1.png" width="960" /></p>
+<div class="figure"><span style="display:block;" id="fig:jan21-wqx"></span>
+<img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/jan21-wqx-1.png" alt="January 2021" width="960" />
+<p class="caption">
+Figure 2.1: January 2021
+</p>
+</div>
 </div>
 <div id="march-2021" class="section level3" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> March 2021</h3>
 <p>March 23, 2021</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="lake-water-quality-profiles.html#cb5-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-5-1.png" alt="March 2021" width="960" />
+<p class="caption">
+Figure 2.2: March 2021
+</p>
+</div>
 </div>
 <div id="may-2021" class="section level3" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> May 2021</h3>
 <p>May 25, 2021</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="lake-water-quality-profiles.html#cb6-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-10-1.png" width="960" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-6-1.png" alt="May 2021" width="960" />
+<p class="caption">
+Figure 2.3: May 2021
+</p>
+</div>
 </div>
 <div id="june-2021" class="section level3" number="2.1.4">
 <h3><span class="header-section-number">2.1.4</span> June 2021</h3>
 <p>June 29, 2021</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="lake-water-quality-profiles.html#cb7-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-12-1.png" width="960" />
-Note: turbidity data is absent from June 2021 sampling due to an equipment issue.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-7-1.png" alt="June 2021" width="960" />
+<p class="caption">
+Figure 2.4: June 2021
+</p>
+</div>
+<p>Note: turbidity data is absent from June 2021 sampling due to an equipment issue.</p>
 <p><br></p>
 </div>
 <div id="august-2021" class="section level3" number="2.1.5">
 <h3><span class="header-section-number">2.1.5</span> August 2021</h3>
 <p>August 3, 2021</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-8-1.png" alt="August 2021" width="960" />
+<p class="caption">
+Figure 2.5: August 2021
+</p>
+</div>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="lake-water-quality-profiles.html#cb8-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-14-1.png" width="960" />
-***</p>
+<hr />
 </div>
 </div>
 <div id="overall-data" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Overall Data</h2>
 <div id="dissolved-oxygen" class="section level4" number="2.2.0.1">
 <h4><span class="header-section-number">2.2.0.1</span> Dissolved Oxygen</h4>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="lake-water-quality-profiles.html#cb9-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-9-1.png" alt="Dissolved Oxygen (mg/L)" width="960" />
+<p class="caption">
+Figure 2.6: Dissolved Oxygen (mg/L)
+</p>
+</div>
 <p><br></p>
 </div>
 <div id="ph" class="section level4" number="2.2.0.2">
 <h4><span class="header-section-number">2.2.0.2</span> pH</h4>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-10-1.png" alt="pH" width="960" />
+<p class="caption">
+Figure 2.7: pH
+</p>
 </div>
-<div id="dissolved-oxygen-1" class="section level4" number="2.2.0.3">
-<h4><span class="header-section-number">2.2.0.3</span> Dissolved Oxygen</h4>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="lake-water-quality-profiles.html#cb10-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-18-1.png" width="960" />
-Note: pH values are excluded from the May and June 2021 site visits due to an instrument error.</p>
+<p>Note: pH values are excluded from the May and June 2021 site visits due to an instrument error.</p>
 <p><br></p>
 </div>
-<div id="turbidity" class="section level4" number="2.2.0.4">
-<h4><span class="header-section-number">2.2.0.4</span> Turbidity</h4>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="lake-water-quality-profiles.html#cb11-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-20-1.png" width="960" />
-Note: some turbidity values near the benthic surface of each site visit are not displayed in the above plot in order to improve visualization.</p>
+<div id="turbidity" class="section level4" number="2.2.0.3">
+<h4><span class="header-section-number">2.2.0.3</span> Turbidity</h4>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-11-1.png" alt="Turbidity (NTU)" width="960" />
+<p class="caption">
+Figure 2.8: Turbidity (NTU)
+</p>
+</div>
+<p>Note: some turbidity values near the benthic surface of each site visit are not displayed in the above plot in order to improve visualization.</p>
 <p><br></p>
 </div>
-<div id="conductivity" class="section level4" number="2.2.0.5">
-<h4><span class="header-section-number">2.2.0.5</span> Conductivity</h4>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="lake-water-quality-profiles.html#cb12-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-22-1.png" width="960" /></p>
+<div id="conductivity" class="section level4" number="2.2.0.4">
+<h4><span class="header-section-number">2.2.0.4</span> Conductivity</h4>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-12-1.png" alt="Conductivity (uS/cm)" width="960" />
+<p class="caption">
+Figure 2.9: Conductivity (uS/cm)
+</p>
+</div>
 <p><br></p>
 </div>
-<div id="water-temperature" class="section level4" number="2.2.0.6">
-<h4><span class="header-section-number">2.2.0.6</span> Water Temperature</h4>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="lake-water-quality-profiles.html#cb13-1" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
-<p><img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-24-1.png" width="960" /></p>
+<div id="water-temperature" class="section level4" number="2.2.0.5">
+<h4><span class="header-section-number">2.2.0.5</span> Water Temperature</h4>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-13"></span>
+<img src="Miller_Creek_Vogel_Lake_Water_Quality_files/figure-html/unnamed-chunk-13-1.png" alt="Water Temperature (C)" width="960" />
+<p class="caption">
+Figure 2.10: Water Temperature (C)
+</p>
+</div>
 <hr />
 </div>
 </div>
@@ -279,11 +318,10 @@ Note: some turbidity values near the benthic surface of each site visit are not 
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="miller-creek-discharge.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="miller-creek-discharge-flow-rate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -324,7 +362,7 @@ gitbook.start({
 },
 "download": ["Miller_Creek_Vogel_Lake_Water_Quality.pdf", "Miller_Creek_Vogel_Lake_Water_Quality.epub"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {

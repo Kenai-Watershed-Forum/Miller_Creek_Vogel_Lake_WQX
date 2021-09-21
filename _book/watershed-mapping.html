@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Watershed Mapping | Miller Creek and Vogel Lake Water Quality</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Watershed Mapping | Miller Creek and Vogel Lake Water Quality" />
   <meta property="og:type" content="book" />
@@ -24,17 +24,18 @@
 <meta name="author" content="Benjamin Meyer (ben@kenaiwatershed.org)" />
 
 
-<meta name="date" content="2021-08-23" />
+<meta name="date" content="2021-09-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="miller-creek-discharge.html"/>
+<link rel="prev" href="miller-creek-discharge-flow-rate.html"/>
 <link rel="next" href="rotenone-monitoring.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,10 +51,9 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
@@ -158,11 +158,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#overall-data"><i class="fa fa-check"></i><b>2.2</b> Overall Data</a></li>
 <li class="chapter" data-level="2.3" data-path="lake-water-quality-profiles.html"><a href="lake-water-quality-profiles.html#site-summaries"><i class="fa fa-check"></i><b>2.3</b> Site Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html"><i class="fa fa-check"></i><b>3</b> Miller Creek Discharge</a>
+<li class="chapter" data-level="3" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html"><i class="fa fa-check"></i><b>3</b> Miller Creek Discharge &amp; Flow Rate</a>
 <ul>
-<li class="chapter" data-level="3.0.1" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html#introduction-1"><i class="fa fa-check"></i><b>3.0.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.0.2" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html#miller-creek-discharge-rating-curve"><i class="fa fa-check"></i><b>3.0.2</b> Miller Creek Discharge Rating Curve</a></li>
-<li class="chapter" data-level="3.0.3" data-path="miller-creek-discharge.html"><a href="miller-creek-discharge.html#pressure-transducer-data"><i class="fa fa-check"></i><b>3.0.3</b> Pressure Transducer Data</a></li>
+<li class="chapter" data-level="3.0.1" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html#introduction-1"><i class="fa fa-check"></i><b>3.0.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.0.2" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html#miller-creek-discharge-rating-curve"><i class="fa fa-check"></i><b>3.0.2</b> Miller Creek Discharge Rating Curve</a></li>
+<li class="chapter" data-level="3.0.3" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html#discharge-measurements-at-other-sites"><i class="fa fa-check"></i><b>3.0.3</b> Discharge measurements at other sites</a></li>
+<li class="chapter" data-level="3.0.4" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html#pressure-transducer-data"><i class="fa fa-check"></i><b>3.0.4</b> Pressure Transducer Data</a></li>
+<li class="chapter" data-level="3.0.5" data-path="miller-creek-discharge-flow-rate.html"><a href="miller-creek-discharge-flow-rate.html#stream-flow-rate-experiment"><i class="fa fa-check"></i><b>3.0.5</b> Stream Flow Rate Experiment</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="watershed-mapping.html"><a href="watershed-mapping.html"><i class="fa fa-check"></i><b>4</b> Watershed Mapping</a></li>
 <li class="chapter" data-level="5" data-path="rotenone-monitoring.html"><a href="rotenone-monitoring.html"><i class="fa fa-check"></i><b>5</b> Rotenone monitoring</a></li>
@@ -192,8 +194,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><p>Watershed mapping efforts for this project include a combination of on the ground fieldwork and GIS based approaches.</p></li>
 <li><p>An ArcGIS Online interactive map outlining fieldwork sites and associated results is found at the following link: <a href="https://arcg.is/0Djmay" class="uri">https://arcg.is/0Djmay</a></p></li>
+<li><p>Technicians walked the Miller Creek corridor on foot on May 27-28, 2021 to identify hydrologic features that may be difficult to identify from the air, such as seepages. The locations are visible in the ArcGIS Online map in the “Hydrologic Connectivity” layer, and may be downloaded here as .gpx files:</p>
+<ul>
+<li><p>All hydrologic features (n = 67): <a href="https://drive.google.com/file/d/1PQu1v6nTD6MB3YStwBF3mgV0wydKziIa/view?usp=sharing" title="link">miller_creek_features.gpx</a></p></li>
+<li><p>Only seepage hydrologic features (n = 16): <a href="https://drive.google.com/file/d/1_c4FQDR0t2sW_yphFuuiSpRmydPzjR3i/view?usp=sharing" title="link">miller_creek_seepage_features.gpx</a></p></li>
+</ul></li>
 </ul>
-<p><a href="https://arcg.is/1GeLTX"><img src="images/miller_map.png" title="Miller Creek and Vogel Lake Watershed" width="500" /></a></p>
+<p><a href="https://arcg.is/1GeLTX"><img src="images/miller_map.png" title="Miller Creek and Vogel Lake Watershed" width="500" alt="Click the image above to access the full ArcGIS Online map" /></a></p>
 
 </div>
             </section>
@@ -201,12 +208,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="miller-creek-discharge.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="miller-creek-discharge-flow-rate.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="rotenone-monitoring.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -247,7 +253,7 @@ gitbook.start({
 },
 "download": ["Miller_Creek_Vogel_Lake_Water_Quality.pdf", "Miller_Creek_Vogel_Lake_Water_Quality.epub"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
