@@ -289,7 +289,7 @@ August 3, 2021
 
 ```{r ,echo = FALSE, fig.cap = "August 2021", fig.width=10, fig.height=11}
 
-# filter to june 2021 data data
+# filter to aug 2021 data data
 aug21_lake_wqx_dat <- lake_wqx_dat %>%
   mutate(month = month(sample_date),
          year = year(sample_date)) %>%
@@ -319,6 +319,40 @@ aug21_lake_wqx_dat %>%
 
 <br>
 
+### September 2021
+September 15, 2021
+
+```{r ,echo = FALSE, fig.cap = "September 2021", fig.width=10, fig.height=11}
+
+# filter to sept 2021 data data
+sep21_lake_wqx_dat <- lake_wqx_dat %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date)) %>%
+  filter(month == "9",
+         year == "2021")
+
+# create plot
+sep21_lake_wqx_dat %>%
+  ggplot() +
+    geom_point(aes(sample_depth_m,val), size = 2) +
+    geom_line(aes(sample_depth_m,val)) +
+
+    coord_flip() +
+    facet_grid(site ~ parameter, scales = "free_x", shrink = T, 
+               labeller = labeller(parameter = param_names,
+                                   site = site_names)) +
+    ylab("") +
+    xlab("Depth (m)") +
+    theme_bw() +
+    points_theme +
+    scale_x_reverse() +
+    scale_y_continuous(n.breaks = 5) +
+    theme(panel.spacing = unit(1.2, "lines"),
+          strip.text.y = element_text(angle = 360)) +
+    ggtitle("September 2021 Water Quality All Sites")
+```
+
+<br>
 
 ***
 
