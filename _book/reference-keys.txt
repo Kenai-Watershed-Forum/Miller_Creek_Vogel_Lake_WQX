@@ -8,6 +8,7 @@ fig:unnamed-chunk-10
 fig:unnamed-chunk-11
 fig:unnamed-chunk-12
 fig:unnamed-chunk-13
+fig:unnamed-chunk-14
 fig:rating-curve
 fig:other-discharge
 fig:nacl-map
@@ -20,6 +21,7 @@ march-2021
 may-2021
 june-2021
 august-2021
+september-2021
 overall-data
 dissolved-oxygen
 ph
