@@ -1,7 +1,9 @@
 # Rotenone monitoring
 
-If rotenone application is included in the final plan after the Environmental Assessment process, Kenai Watershed Forum will monitor rotenone concentrations in the lake/creek system through Fall 2021 - Summer 2022.  Methods and results will be described here.
+Rotenone application was performed in early October 2021 by ADF&G. ADF&G collected pre and post-treatment water samples as part of this event, and Kenai Watershed Forum will monitor degradation through until Summer 2022. Methods and results will be described here.
 
 A proposed rotenone sampling schedule is described in a Google Sheet linked here: <https://tinyurl.com/8ba94nrn>
 
-Actual sampling schedule will be dictated by observed decomposition rates.
+Laboratory analysis of water samples is performed by the ASET Laboratory at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska. Results to date are available for download at the following link:
+
+[Link: Rotenone Degratation Laboratory Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data)
