@@ -13,6 +13,7 @@ fig:rating-curve
 fig:other-discharge
 fig:nacl-map
 fig:nacl-fig
+tab:sample-schedule
 introduction
 lake-water-quality-profiles
 data-by-month
@@ -39,4 +40,6 @@ methods
 results
 watershed-mapping
 rotenone-monitoring
+sampling-schedule
+sample-results
 summary

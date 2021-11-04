@@ -1,9 +1,79 @@
 # Rotenone monitoring
 
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+
+# clear environment
+rm(list=ls())
+
+# load packages
+library(bookdown)
+library(tidyverse)
+library(googlesheets4)
+library(lubridate)
+library(readr)
+library(readxl)
+library(writexl)
+library(hms)
+library(plotly)
+library(DT)
+library(xlsx)
+library(leaflet)
+library(DT)
+library(ggpubr)
+library(plotrix)
+library(packrat)
+library(kableExtra)
+
+# set plotting themes
+
+## geom_col plots theme
+col_theme <- theme(axis.title = element_text(size = 14, face = "bold"),
+                   strip.text = element_text(size = 14, face = "bold"),
+                   legend.title = element_text(size = 14, face = "bold"),
+                   legend.text = element_text(size = 14),
+                   axis.text = element_text(size = 14))
+
+## geom_points plots theme
+points_theme <- theme(axis.title = element_text(size = 14, face = "bold"),
+                   strip.text = element_text(size = 14, face = "bold"),
+                   legend.title = element_text(size = 14, face = "bold"),
+                   legend.text = element_text(size = 14),
+                   axis.text = element_text(size = 11, face = "bold"),
+                   title = element_text(size = 18))
+
+# function to exclude multiple items per column
+'%ni%' <- Negate('%in%')
+
+# clarify select function
+select <- dplyr::select
+```
+
 Rotenone application was performed in early October 2021 by ADF&G. ADF&G collected pre and post-treatment water samples as part of this event, and Kenai Watershed Forum will monitor degradation through until Summer 2022. Methods and results will be described here.
 
-A proposed rotenone sampling schedule is described in a Google Sheet linked here: <https://tinyurl.com/8ba94nrn>
 
+## Sampling schedule
+A proposed rotenone sampling schedule is described in table \@ref(tab:sample-schedule) or may be accessed in a Google Sheet linked here: <https://tinyurl.com/8ba94nrn>. Schedule is current as of `r Sys.Date()`.
+
+
+```{r sample-schedule, echo = F, fig.cap = "cap"}
+options(knitr.kable.NA = '')
+# read in proposed schedule
+url <- "https://docs.google.com/spreadsheets/d/1_lv-I471tu8WI55nItGslKYe_X5qvwZ_MF22M2jrkZo/edit#gid=0"
+tab <- "rotenone_sample_schedule"
+dat <- read_sheet(url, sheet = tab) 
+
+# create table
+dat %>%
+  kbl(caption = "Vogel lake and Miller Creek rotenone sampling schedule") %>%
+  kable_paper(full_width = F, html_font = "Cambria") 
+
+#%>%
+ # bootstrap_options = c("striped", "hover", "condensed", "responsive")
+```
+
+
+## Sample results
 Laboratory analysis of water samples is performed by the ASET Laboratory at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska. Results to date are available for download at the following link:
 
-[Link: Rotenone Degratation Laboratory Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data)
+[Link: Rotenone Degradation Laboratory Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data). More detailed visualizations of these dta are forthcoming.
