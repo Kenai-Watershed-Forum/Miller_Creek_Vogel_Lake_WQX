@@ -13,6 +13,12 @@ fig:rating-curve
 fig:other-discharge
 fig:nacl-map
 fig:nacl-fig
+tab:rescue-tbl
+tab:spp-tbl
+fig:unnamed-chunk-19
+fig:unnamed-chunk-20
+fig:unnamed-chunk-21
+fig:unnamed-chunk-22
 tab:sample-schedule
 introduction
 lake-water-quality-profiles
@@ -39,7 +45,12 @@ stream-flow-rate-experiment
 methods
 results
 watershed-mapping
+fish-rescue
+summary
+methods-1
+results-1
+photos
 rotenone-monitoring
 sampling-schedule
 sample-results
-summary
+summary-1
