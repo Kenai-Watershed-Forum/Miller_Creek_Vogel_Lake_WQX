@@ -43,25 +43,25 @@ knitr::kable(tbl1, caption = "Fish capture data from Lower Miller Creek")
 ## Photos
 
 
-```{r , echo = F, fig.cap = "Mouth of Miller Creek", out.width=350, out.height=300}
+```{r , echo = F, fig.cap = "Mouth of Miller Creek"}
 
 knitr::include_graphics('images/fish_rescue/IMG-0063.jpg')
 
 ```
 
-```{r , echo = F, fig.cap = "Fish processing site", out.width=350, out.height=300}
+```{r , echo = F, fig.cap = "Fish processing site"}
 
 knitr::include_graphics('images/fish_rescue/IMG-6271.jpg')
 
 ```
 
-```{r , echo = F, fig.cap = "Juvenile Coho Salmon", out.width=390, out.height=300}
+```{r , echo = F, fig.cap = "Juvenile Coho Salmon"}
 
 knitr::include_graphics('images/fish_rescue/IMG-6272.jpg')
 
 ```
 
-```{r , echo = F, fig.cap = "Site for storage of perforated five-gallon bucket to store juvenile fish", out.width=300, out.height=350}
+```{r , echo = F, fig.cap = "Site for storage of perforated five-gallon bucket to store juvenile fish"}
 
 knitr::include_graphics('images/fish_rescue/IMG-6274.jpg')
 
