@@ -78,6 +78,8 @@ dat %>%
 
 ```{r, data prep, echo = F}
 
+# prepare data for summary and visualization
+
 # read in all rotenone concentration data from csv files (sourced from excel files emailed from UAA)
 data_dir <- "input/rotenone_data/rotenone_concentration_results/csv/"
 
@@ -109,28 +111,50 @@ rot_dat <- rot_dat %>%
   filter(field_sample_date != "---") %>%
   filter(sample_name %ni% c("Sample Name*",
                             "*a and b denote separate extraction duplicates",
-                            "**ND = Not Detected")) 
+                            "**ND = Not Detected"))  %>%
+  
+## separate sample names into columns to better organize them
+### distinguish a and b lab duplicates
+  separate(sample_name,into = c("sample_name","lab_dup"), sep = "_") %>%
+  
+### correct for use of "benthic" vs "deep" terminology in sample names
+  mutate(sample_name = str_replace(sample_name, pattern = "Vogel Deep", replacement = "Vogel Benthic")) %>%
+
+## assign "ND" (not detected) as zero
+  mutate_all(funs(str_replace(., "ND", "0"))) %>%
+  
+## make numbers columns numeric class
+  mutate_at('x1', as.numeric)
+  
+  
 
 
-# use these data to do something like what rob did in excel
+```
+```{r, lab-dups, echo = F}
 
-# say that more detailed accuracy resuts can be accessed in the repo folder in the excel files
-
-# see journal article for methods
-
-# need to average a and b lab dups, separate sample names into columns to distinguish depth
-   
+# what is the % difference among lab duplicates?
+z <- rot_dat %>%
+  group_by(sample_name,field_sample_date) %>%
+  summarise(rotenone_avg_ppb = mean(rotenone_ppb))
 
 ```
 
+
+
+
 ## Sample results
-Laboratory analysis of water samples is performed by the ASET Laboratory at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska. Results to date are available for download at the following link:
+Laboratory analysis of water samples is performed by the [ASET Laboratory](https://www.uaa.alaska.edu/academics/college-of-arts-and-sciences/departments/chemistry/aset_lab/) at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska. Results to date are available for download at the following link:
 
 [Link: Rotenone Degradation Laboratory Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data). More detailed visualizations of these data are forthcoming.
 
 ```{r}
 
 
+# use these data to do something like what rob did in excel
+
+# say that more detailed accuracy results can be accessed in the repo folder in the excel files
+
+# see journal article for methods
 
 ggplotly(
   rot_dat %>%
