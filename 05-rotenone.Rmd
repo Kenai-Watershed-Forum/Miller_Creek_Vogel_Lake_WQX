@@ -76,6 +76,8 @@ dat %>%
 
 <br>
 
+## Rotenone concentration results
+
 ```{r, data prep, echo = F}
 
 # prepare data for summary and visualization
@@ -102,6 +104,9 @@ column_names <- c("source",
                   "cft_6")
 colnames(rot_dat) <- column_names 
 
+## designate numeric columns
+num_vars <- c("rotenone_ppb", "rotenolone_ppb","deguelin_ppb")
+
 ## remove empty columns
 rot_dat <- remove_empty(rot_dat)
 
@@ -120,54 +125,163 @@ rot_dat <- rot_dat %>%
 ### correct for use of "benthic" vs "deep" terminology in sample names
   mutate(sample_name = str_replace(sample_name, pattern = "Vogel Deep", replacement = "Vogel Benthic")) %>%
 
-## assign "ND" (not detected) as zero
-  mutate_all(funs(str_replace(., "ND", "0"))) %>%
+## assign "ND" (not detected) as zero in numeric columns
+  mutate_at(num_vars,funs(str_replace(., "ND", "0"))) %>%
   
 ## make numbers columns numeric class
-  mutate_at('x1', as.numeric)
+  mutate_at(num_vars, as.numeric) %>%
   
+## transform other column types
+  transform(field_sample_date = mdy(field_sample_date),
+            lab_analysis_date = mdy(lab_analysis_date))
   
-
 
 ```
-```{r, lab-dups, echo = F}
+
+
+
+
+```{r, sample name correction , echo = F}
+# sample name correction
+
+# the samples collected 9/27/2021 and 9/28/2021 at Vogel and North Vogel were collected from the surface, but the sample names do not contain the word "Surface." Apply this correction to be consistent with other sample name conventions
+
+rot_dat <- rot_dat %>%
+  mutate(sample_name = case_when(
+    sample_name == "Vogel" | field_sample_date == "2021-09-27" ~ "Vogel Surface",
+    sample_name == "N. Vogel" | field_sample_date == "2021-09-28" ~ "N. Vogel Surface",
+    sample_name != "Vogel" | field_sample_date != "2021-09-27" ~ sample_name,
+    sample_name != "N. Vogel" | field_sample_date != "2021-09-28" ~ sample_name))  %>%
+   
+  # add column designation for benthic vs surface vs creek
+  mutate(strata = word(sample_name,-1)) %>%
+  mutate(strata = ifelse(strata == "Surface" | strata == "Benthic",strata,"Creek")) %>%
+  
+  # modify sample names to remove spaces
+  mutate(sample_name = case_when(
+    sample_name == "Vogel Surface" ~ "Vogel_Surface",
+    sample_name == "N. Vogel Surface" ~ "N_Vogel_Surface",
+    sample_name == "Vogel Benthic" ~ "Vogel_Benthic",
+    sample_name == "N. Vogel Benthic" ~ "N_Vogel_Benthic",
+    sample_name == "Miller Creek 1" ~ "Miller_Creek_1",
+    sample_name == "Miller Creek 2" ~ "Miller_Creek_2",
+    sample_name == "Miller Creek Weir" ~ "Miller Creek Weir")) %>%
+  
+  # add column to designate water body
+  mutate(waterbody = case_when(
+    sample_name ==  "Vogel_Surface" | sample_name == "Vogel_Benthic" ~ "Vogel_Lake",
+    sample_name =="N_Vogel_Surface" | sample_name == "N_Vogel_Benthic" ~ "N_Vogel_Lake")) %>%
+  mutate(waterbody = ifelse(!is.na(waterbody), waterbody, "Miller_Creek"))
+
+```
+
+
+```{r, lab-dups, echo = F, eval = F}
+
+# address lab duplicates. calculate percent difference among lab dups, then finalize into average values for plotting/summary tables
 
 # what is the % difference among lab duplicates?
-z <- rot_dat %>%
-  group_by(sample_name,field_sample_date) %>%
-  summarise(rotenone_avg_ppb = mean(rotenone_ppb))
+pct <- rot_dat %>%
+  
+  # reshape dataframe
+  select(sample_name,field_sample_date,lab_dup,rotenone_ppb) %>%
+  pivot_wider(names_from = lab_dup, values_from = rotenone_ppb) %>%
+    
+  # filter na vals
+  filter(!is.na(a),
+         !is.na(b)) %>%
+  select(-"NA") %>%
+  
+  # calculate percent diff
+  mutate(pct_diff = abs((a-b)/(a+b))) %>%
+  
+  # replace NaN with zeros in pct diff column
+  mutate_at(vars(pct_diff),~replace(., is.nan(.), 0)) 
+  
+# average pct diff
+avg_pct_diff <- pct %>% summarise(avg_pct_diff = mean(pct_diff)*100) %>% as.character()
+
+# stdev pct diff
+sd_pct_diff <- pct %>% summarise(avg_pct_diff = sd(pct_diff)*100) %>% as.character()
+
+#### insert avg and sd values inline text
+
 
 ```
 
 
 
 
-## Sample results
-Laboratory analysis of water samples is performed by the [ASET Laboratory](https://www.uaa.alaska.edu/academics/college-of-arts-and-sciences/departments/chemistry/aset_lab/) at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska. Results to date are available for download at the following link:
+### Sample results
+Laboratory analysis of water samples is performed by the [ASET Laboratory](https://www.uaa.alaska.edu/academics/college-of-arts-and-sciences/departments/chemistry/aset_lab/) at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska. Original results to date are available for download at the following link:
 
-[Link: Rotenone Degradation Laboratory Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data). More detailed visualizations of these data are forthcoming.
-
-```{r}
+[Link: Rotenone Degradation Laboratory Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data). 
 
 
-# use these data to do something like what rob did in excel
+Table X... ... show abbreviated table w rotenone only; include link to download csv with more complete table
+
+```{r, results table, echo = F}
+# create table
+rot_dat %>%
+  select(-source) %>%
+  kbl(caption = "Rotenone raw results") %>%
+  kable_paper(full_width = F, html_font = "Cambria") 
+
+```
+
+
+
+```{r, eval = F}
+
+## lakes plot
+
+ggplotly(rot_dat %>%
+    # remove miller creek
+      filter(waterbody != "Miller_Creek") %>%
+    group_by(sample_name,field_sample_date, waterbody,strata) %>%
+    summarise(avg_rotenone_ppb = mean(rotenone_ppb)) %>%
+  
+    ggplot(aes(field_sample_date,avg_rotenone_ppb, color = strata)) +
+    geom_point() +
+    geom_line() +
+    facet_grid(. ~ waterbody) +
+      xlab("") +
+      ylab("Rotenone Concentration (ppb)")
+  )
+  
 
 # say that more detailed accuracy results can be accessed in the repo folder in the excel files
 
 # see journal article for methods
 
-ggplotly(
-  rot_dat %>%
-    ggplot(aes(field_sample_date,rotenone_ppb)) +
+```
+
+
+```{r, eval = F}
+
+## creek plot
+
+## join data with location estimates (distance down creek)
+
+
+ggplotly(rot_dat %>%
+    # include miller creek
+      filter(waterbody == "Miller_Creek") %>%
+    group_by(sample_name,field_sample_date, waterbody,strata) %>%
+    summarise(avg_rotenone_ppb = mean(rotenone_ppb)) %>%
+  
+    ggplot(aes(field_sample_date,avg_rotenone_ppb, color = strata)) +
     geom_point() +
-    facet_grid()
-  
-  
-  
-)
-  
+    geom_line() +
+    facet_grid(. ~ waterbody) +
+      xlab("") +
+      ylab("Rotenone Concentration (ppb)")
+  )
+
 
 
 ```
+
+
 
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Benjamin Meyer (ben@kenaiwatershed.org)" />
 
 
-<meta name="date" content="2021-12-16" />
+<meta name="date" content="2022-01-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,8 +53,6 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
@@ -62,6 +60,8 @@
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -180,7 +180,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="rotenone-monitoring.html"><a href="rotenone-monitoring.html"><i class="fa fa-check"></i><b>6</b> Rotenone monitoring</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="rotenone-monitoring.html"><a href="rotenone-monitoring.html#sampling-schedule"><i class="fa fa-check"></i><b>6.1</b> Sampling schedule</a></li>
-<li class="chapter" data-level="6.2" data-path="rotenone-monitoring.html"><a href="rotenone-monitoring.html#sample-results"><i class="fa fa-check"></i><b>6.2</b> Sample results</a></li>
+<li class="chapter" data-level="6.2" data-path="rotenone-monitoring.html"><a href="rotenone-monitoring.html#rotenone-concentration-results"><i class="fa fa-check"></i><b>6.2</b> Rotenone concentration results</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="rotenone-monitoring.html"><a href="rotenone-monitoring.html#sample-results"><i class="fa fa-check"></i><b>6.2.1</b> Sample results</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="summary-1.html"><a href="summary-1.html"><i class="fa fa-check"></i><b>7</b> Summary</a></li>
 <li class="divider"></li>
@@ -208,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Rotenone application was performed in early October 2021 by ADF&amp;G. ADF&amp;G collected pre and post-treatment water samples as part of this event, and Kenai Watershed Forum will monitor degradation through until Summer 2022. Methods and results will be described here.</p>
 <div id="sampling-schedule" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Sampling schedule</h2>
-<p>A proposed rotenone sampling schedule is described in table <a href="rotenone-monitoring.html#tab:sample-schedule">6.1</a> or may be accessed in a Google Sheet linked here: <a href="https://tinyurl.com/8ba94nrn" class="uri">https://tinyurl.com/8ba94nrn</a>. Schedule is current as of 2021-12-16.</p>
+<p>A proposed rotenone sampling schedule is described in table <a href="rotenone-monitoring.html#tab:sample-schedule">6.1</a> or may be accessed in a Google Sheet linked here: <a href="https://tinyurl.com/8ba94nrn" class="uri">https://tinyurl.com/8ba94nrn</a>. Schedule is current as of 2022-01-14.</p>
 <table class=" lightable-paper" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:sample-schedule">Table 6.1: </span>Vogel lake and Miller Creek rotenone sampling schedule
@@ -606,6 +609,7 @@ Rotenone
 2022-01-05
 </td>
 <td style="text-align:left;">
+Complete
 </td>
 <td style="text-align:left;">
 Miller Creek
@@ -627,6 +631,7 @@ Rotenone
 2022-01-05
 </td>
 <td style="text-align:left;">
+Complete
 </td>
 <td style="text-align:left;">
 North Vogel Lake
@@ -648,6 +653,7 @@ Rotenone
 2022-01-05
 </td>
 <td style="text-align:left;">
+Complete
 </td>
 <td style="text-align:left;">
 Vogel Lake
@@ -1019,22 +1025,1201 @@ Date TBD
 </table>
 <p><br></p>
 </div>
-<div id="sample-results" class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> Sample results</h2>
-<p>Laboratory analysis of water samples is performed by the ASET Laboratory at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska. Results to date are available for download at the following link:</p>
-<p><a href="https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data">Link: Rotenone Degradation Laboratory Results</a>. More detailed visualizations of these data are forthcoming.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rotenone-monitoring.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(</span>
-<span id="cb1-2"><a href="rotenone-monitoring.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  rot_dat <span class="sc">%&gt;%</span></span>
-<span id="cb1-3"><a href="rotenone-monitoring.html#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(field_sample_date,rotenone_ppb)) <span class="sc">+</span></span>
-<span id="cb1-4"><a href="rotenone-monitoring.html#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb1-5"><a href="rotenone-monitoring.html#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>()</span>
-<span id="cb1-6"><a href="rotenone-monitoring.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-7"><a href="rotenone-monitoring.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-8"><a href="rotenone-monitoring.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-9"><a href="rotenone-monitoring.html#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div id="htmlwidget-840a46779c7a2af9daf3" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-840a46779c7a2af9daf3">{"x":{"data":[{"x":[6,6,7,7,1,1,1,1,1,1,1,1,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,5,5],"y":[26,26,26,26,21,17,15,14,20,19,10,8,18,5,7,12,13,16,1,24,25,3,2,11,9,4,6,22,23],"text":["field_sample_date: 9/27/2021<br />rotenone_ppb: ND","field_sample_date: 9/27/2021<br />rotenone_ppb: ND","field_sample_date: 9/28/2021<br />rotenone_ppb: ND","field_sample_date: 9/28/2021<br />rotenone_ppb: ND","field_sample_date: 10/7/2021<br />rotenone_ppb: 28.26","field_sample_date: 10/7/2021<br />rotenone_ppb: 22.45","field_sample_date: 10/7/2021<br />rotenone_ppb: 18.75","field_sample_date: 10/7/2021<br />rotenone_ppb: 18.36","field_sample_date: 10/7/2021<br />rotenone_ppb: 26.97","field_sample_date: 10/7/2021<br />rotenone_ppb: 26.83","field_sample_date: 10/7/2021<br />rotenone_ppb: 13.67","field_sample_date: 10/7/2021<br />rotenone_ppb: 13.54","field_sample_date: 10/8/2021<br />rotenone_ppb: 22.96","field_sample_date: 11/10/2021<br />rotenone_ppb: 12.39","field_sample_date: 11/10/2021<br />rotenone_ppb: 13.08","field_sample_date: 11/10/2021<br />rotenone_ppb: 15.05","field_sample_date: 11/10/2021<br />rotenone_ppb: 15.62","field_sample_date: 11/10/2021<br />rotenone_ppb: 2.03","field_sample_date: 11/10/2021<br />rotenone_ppb: 1.99","field_sample_date: 12/2/2021<br />rotenone_ppb: 8.79","field_sample_date: 12/2/2021<br />rotenone_ppb: 8.83","field_sample_date: 12/2/2021<br />rotenone_ppb: 10.79","field_sample_date: 12/2/2021<br />rotenone_ppb: 10.64","field_sample_date: 12/2/2021<br />rotenone_ppb: 13.81","field_sample_date: 12/2/2021<br />rotenone_ppb: 13.61","field_sample_date: 12/2/2021<br />rotenone_ppb: 11.78","field_sample_date: 12/2/2021<br />rotenone_ppb: 12.78","field_sample_date: 12/3/2021<br />rotenone_ppb: 6.32","field_sample_date: 12/3/2021<br />rotenone_ppb: 6.85"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":37.9178082191781,"r":18.9954337899543,"b":40.1826484018265,"l":54.7945205479452},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,7.6],"tickmode":"array","ticktext":["10/7/2021","10/8/2021","11/10/2021","12/2/2021","12/3/2021","9/27/2021","9/28/2021"],"tickvals":[1,2,3,4,5,6,7],"categoryorder":"array","categoryarray":["10/7/2021","10/8/2021","11/10/2021","12/2/2021","12/3/2021","9/27/2021","9/28/2021"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","hoverformat":".2f"},"annotations":[{"text":"field_sample_date","x":0.5,"y":0,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"top","annotationType":"axis","yshift":-21.9178082191781},{"text":"rotenone_ppb","x":0,"y":0.5,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-90,"xanchor":"right","yanchor":"center","annotationType":"axis","xshift":-39.4520547945205}],"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,26.6],"tickmode":"array","ticktext":["1.99","10.64","10.79","11.78","12.39","12.78","13.08","13.54","13.61","13.67","13.81","15.05","15.62","18.36","18.75","2.03","22.45","22.96","26.83","26.97","28.26","6.32","6.85","8.79","8.83","ND"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26],"categoryorder":"array","categoryarray":["1.99","10.64","10.79","11.78","12.39","12.78","13.08","13.54","13.61","13.67","13.81","15.05","15.62","18.36","18.75","2.03","22.45","22.96","26.83","26.97","28.26","6.32","6.85","8.79","8.83","ND"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"d346da78b0":{"x":{},"y":{},"type":"scatter"}},"cur_data":"d346da78b0","visdat":{"d346da78b0":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="rotenone-concentration-results" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Rotenone concentration results</h2>
+<div id="sample-results" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Sample results</h3>
+<p>Laboratory analysis of water samples is performed by the <a href="https://www.uaa.alaska.edu/academics/college-of-arts-and-sciences/departments/chemistry/aset_lab/">ASET Laboratory</a> at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska. Original results to date are available for download at the following link:</p>
+<p><a href="https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data">Link: Rotenone Degradation Laboratory Results</a>.</p>
+<p>Table X…</p>
+<table class=" lightable-paper" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+(#tab:results table)Vogel Lake, North Vogel Lake, and Miller Creek rotenone raw results
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+sample_name
+</th>
+<th style="text-align:left;">
+lab_dup
+</th>
+<th style="text-align:left;">
+field_sample_date
+</th>
+<th style="text-align:left;">
+lab_analysis_date
+</th>
+<th style="text-align:right;">
+rotenone_ppb
+</th>
+<th style="text-align:right;">
+rotenolone_ppb
+</th>
+<th style="text-align:right;">
+deguelin_ppb
+</th>
+<th style="text-align:left;">
+tephrosin_ppb
+</th>
+<th style="text-align:left;">
+cft_5
+</th>
+<th style="text-align:left;">
+cft_6
+</th>
+<th style="text-align:left;">
+strata
+</th>
+<th style="text-align:left;">
+waterbody
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Vogel_Surface
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-09-27
+</td>
+<td style="text-align:left;">
+2021-10-06
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Surface
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-09-27
+</td>
+<td style="text-align:left;">
+2021-10-06
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Surface
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-09-28
+</td>
+<td style="text-align:left;">
+2021-10-06
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Surface
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-09-28
+</td>
+<td style="text-align:left;">
+2021-10-06
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Surface
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-10-07
+</td>
+<td style="text-align:left;">
+2021-10-13
+</td>
+<td style="text-align:right;">
+28.26
+</td>
+<td style="text-align:right;">
+10.59
+</td>
+<td style="text-align:right;">
+19.94
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Surface
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-10-07
+</td>
+<td style="text-align:left;">
+2021-10-13
+</td>
+<td style="text-align:right;">
+22.45
+</td>
+<td style="text-align:right;">
+10.20
+</td>
+<td style="text-align:right;">
+19.91
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Benthic
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-10-07
+</td>
+<td style="text-align:left;">
+2021-10-13
+</td>
+<td style="text-align:right;">
+18.75
+</td>
+<td style="text-align:right;">
+9.05
+</td>
+<td style="text-align:right;">
+16.07
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Benthic
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-10-07
+</td>
+<td style="text-align:left;">
+2021-10-13
+</td>
+<td style="text-align:right;">
+18.36
+</td>
+<td style="text-align:right;">
+8.60
+</td>
+<td style="text-align:right;">
+16.02
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Surface
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-10-07
+</td>
+<td style="text-align:left;">
+2021-10-13
+</td>
+<td style="text-align:right;">
+26.97
+</td>
+<td style="text-align:right;">
+14.30
+</td>
+<td style="text-align:right;">
+21.57
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Surface
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-10-07
+</td>
+<td style="text-align:left;">
+2021-10-13
+</td>
+<td style="text-align:right;">
+26.83
+</td>
+<td style="text-align:right;">
+14.95
+</td>
+<td style="text-align:right;">
+21.70
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Benthic
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-10-07
+</td>
+<td style="text-align:left;">
+2021-10-13
+</td>
+<td style="text-align:right;">
+13.67
+</td>
+<td style="text-align:right;">
+7.33
+</td>
+<td style="text-align:right;">
+10.89
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Benthic
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-10-07
+</td>
+<td style="text-align:left;">
+2021-10-13
+</td>
+<td style="text-align:right;">
+13.54
+</td>
+<td style="text-align:right;">
+7.90
+</td>
+<td style="text-align:right;">
+11.22
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miller_Creek_1
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+2021-10-08
+</td>
+<td style="text-align:left;">
+2021-10-13
+</td>
+<td style="text-align:right;">
+22.96
+</td>
+<td style="text-align:right;">
+13.27
+</td>
+<td style="text-align:right;">
+19.78
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Creek
+</td>
+<td style="text-align:left;">
+Miller_Creek
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Surface
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-11-10
+</td>
+<td style="text-align:left;">
+2021-11-12
+</td>
+<td style="text-align:right;">
+12.39
+</td>
+<td style="text-align:right;">
+7.69
+</td>
+<td style="text-align:right;">
+9.24
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Surface
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-11-10
+</td>
+<td style="text-align:left;">
+2021-11-12
+</td>
+<td style="text-align:right;">
+13.08
+</td>
+<td style="text-align:right;">
+8.50
+</td>
+<td style="text-align:right;">
+9.59
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Surface
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-11-10
+</td>
+<td style="text-align:left;">
+2021-11-12
+</td>
+<td style="text-align:right;">
+15.05
+</td>
+<td style="text-align:right;">
+10.87
+</td>
+<td style="text-align:right;">
+10.27
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Surface
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-11-10
+</td>
+<td style="text-align:left;">
+2021-11-12
+</td>
+<td style="text-align:right;">
+15.62
+</td>
+<td style="text-align:right;">
+11.77
+</td>
+<td style="text-align:right;">
+10.28
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miller Creek Weir
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-11-10
+</td>
+<td style="text-align:left;">
+2021-11-12
+</td>
+<td style="text-align:right;">
+2.03
+</td>
+<td style="text-align:right;">
+5.52
+</td>
+<td style="text-align:right;">
+1.01
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+Creek
+</td>
+<td style="text-align:left;">
+Miller_Creek
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miller Creek Weir
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-11-10
+</td>
+<td style="text-align:left;">
+2021-11-12
+</td>
+<td style="text-align:right;">
+1.99
+</td>
+<td style="text-align:right;">
+4.99
+</td>
+<td style="text-align:right;">
+1.06
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+ND
+</td>
+<td style="text-align:left;">
+Creek
+</td>
+<td style="text-align:left;">
+Miller_Creek
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Surface
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-12-02
+</td>
+<td style="text-align:left;">
+2021-12-06
+</td>
+<td style="text-align:right;">
+8.79
+</td>
+<td style="text-align:right;">
+7.63
+</td>
+<td style="text-align:right;">
+6.25
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Surface
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-12-02
+</td>
+<td style="text-align:left;">
+2021-12-06
+</td>
+<td style="text-align:right;">
+8.83
+</td>
+<td style="text-align:right;">
+6.98
+</td>
+<td style="text-align:right;">
+6.26
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Benthic
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-12-02
+</td>
+<td style="text-align:left;">
+2021-12-06
+</td>
+<td style="text-align:right;">
+10.79
+</td>
+<td style="text-align:right;">
+8.54
+</td>
+<td style="text-align:right;">
+7.52
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Vogel_Benthic
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-12-02
+</td>
+<td style="text-align:left;">
+2021-12-06
+</td>
+<td style="text-align:right;">
+10.64
+</td>
+<td style="text-align:right;">
+8.54
+</td>
+<td style="text-align:right;">
+7.39
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
+<td style="text-align:left;">
+Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Surface
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-12-02
+</td>
+<td style="text-align:left;">
+2021-12-06
+</td>
+<td style="text-align:right;">
+13.81
+</td>
+<td style="text-align:right;">
+12.26
+</td>
+<td style="text-align:right;">
+8.57
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Surface
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-12-02
+</td>
+<td style="text-align:left;">
+2021-12-06
+</td>
+<td style="text-align:right;">
+13.61
+</td>
+<td style="text-align:right;">
+11.64
+</td>
+<td style="text-align:right;">
+8.56
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Surface
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Benthic
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-12-02
+</td>
+<td style="text-align:left;">
+2021-12-06
+</td>
+<td style="text-align:right;">
+11.78
+</td>
+<td style="text-align:right;">
+10.85
+</td>
+<td style="text-align:right;">
+7.59
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N_Vogel_Benthic
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-12-02
+</td>
+<td style="text-align:left;">
+2021-12-06
+</td>
+<td style="text-align:right;">
+12.78
+</td>
+<td style="text-align:right;">
+12.58
+</td>
+<td style="text-align:right;">
+7.96
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Benthic
+</td>
+<td style="text-align:left;">
+N_Vogel_Lake
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miller_Creek_2
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+2021-12-03
+</td>
+<td style="text-align:left;">
+2021-12-06
+</td>
+<td style="text-align:right;">
+6.32
+</td>
+<td style="text-align:right;">
+6.83
+</td>
+<td style="text-align:right;">
+4.59
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Creek
+</td>
+<td style="text-align:left;">
+Miller_Creek
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miller_Creek_2
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+2021-12-03
+</td>
+<td style="text-align:left;">
+2021-12-06
+</td>
+<td style="text-align:right;">
+6.85
+</td>
+<td style="text-align:right;">
+6.93
+</td>
+<td style="text-align:right;">
+4.77
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Detected
+</td>
+<td style="text-align:left;">
+Creek
+</td>
+<td style="text-align:left;">
+Miller_Creek
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="rotenone-monitoring.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## lakes plot</span></span>
+<span id="cb2-2"><a href="rotenone-monitoring.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="rotenone-monitoring.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(rot_dat <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="rotenone-monitoring.html#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove miller creek</span></span>
+<span id="cb2-5"><a href="rotenone-monitoring.html#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(waterbody <span class="sc">!=</span> <span class="st">&quot;Miller_Creek&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="rotenone-monitoring.html#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(sample_name,field_sample_date, waterbody,strata) <span class="sc">%&gt;%</span></span>
+<span id="cb2-7"><a href="rotenone-monitoring.html#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">avg_rotenone_ppb =</span> <span class="fu">mean</span>(rotenone_ppb)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="rotenone-monitoring.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="rotenone-monitoring.html#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(field_sample_date,avg_rotenone_ppb, <span class="at">color =</span> strata)) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="rotenone-monitoring.html#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-11"><a href="rotenone-monitoring.html#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb2-12"><a href="rotenone-monitoring.html#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(. <span class="sc">~</span> waterbody) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="rotenone-monitoring.html#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="rotenone-monitoring.html#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ylab</span>(<span class="st">&quot;Rotenone Concentration (ppb)&quot;</span>)</span>
+<span id="cb2-15"><a href="rotenone-monitoring.html#cb2-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-16"><a href="rotenone-monitoring.html#cb2-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-17"><a href="rotenone-monitoring.html#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="rotenone-monitoring.html#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># say that more detailed accuracy results can be accessed in the repo folder in the excel files</span></span>
+<span id="cb2-19"><a href="rotenone-monitoring.html#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="rotenone-monitoring.html#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># see journal article for methods</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="rotenone-monitoring.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## creek plot</span></span>
+<span id="cb3-2"><a href="rotenone-monitoring.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="rotenone-monitoring.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## join data with location estimates (distance down creek)</span></span>
+<span id="cb3-4"><a href="rotenone-monitoring.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="rotenone-monitoring.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="rotenone-monitoring.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(rot_dat <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="rotenone-monitoring.html#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># include miller creek</span></span>
+<span id="cb3-8"><a href="rotenone-monitoring.html#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(waterbody <span class="sc">==</span> <span class="st">&quot;Miller_Creek&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="rotenone-monitoring.html#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(sample_name,field_sample_date, waterbody,strata) <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="rotenone-monitoring.html#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">avg_rotenone_ppb =</span> <span class="fu">mean</span>(rotenone_ppb)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-11"><a href="rotenone-monitoring.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-12"><a href="rotenone-monitoring.html#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(field_sample_date,avg_rotenone_ppb, <span class="at">color =</span> strata)) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="rotenone-monitoring.html#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-14"><a href="rotenone-monitoring.html#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb3-15"><a href="rotenone-monitoring.html#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(. <span class="sc">~</span> waterbody) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="rotenone-monitoring.html#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-17"><a href="rotenone-monitoring.html#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ylab</span>(<span class="st">&quot;Rotenone Concentration (ppb)&quot;</span>)</span>
+<span id="cb3-18"><a href="rotenone-monitoring.html#cb3-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 
+</div>
 </div>
 </div>
             </section>

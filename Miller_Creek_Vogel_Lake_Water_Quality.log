@@ -1,38 +1,38 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2021.11.10)  10 NOV 2021 15:21
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2021.12.14)  14 JAN 2022 16:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Miller_Creek_Vogel_Lake_Water_Quality.tex
 (./Miller_Creek_Vogel_Lake_Water_Quality.tex
-LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-10-18> (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texm
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2021-11-22> (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texm
 f-dist/tex/latex/base/book.cls
-Document Class: book 2021/02/12 v1.4n Standard LaTeX document class
+Document Class: book 2021/10/04 v1.4n Standard LaTeX document class
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/bk10.clo
-File: bk10.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+File: bk10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count178
-\c@chapter=\count179
-\c@section=\count180
-\c@subsection=\count181
-\c@subsubsection=\count182
-\c@paragraph=\count183
-\c@subparagraph=\count184
-\c@figure=\count185
-\c@table=\count186
+\c@part=\count179
+\c@chapter=\count180
+\c@section=\count181
+\c@subsection=\count182
+\c@subsubsection=\count183
+\c@paragraph=\count184
+\c@subparagraph=\count185
+\c@figure=\count186
+\c@table=\count187
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.s
 ty
-Package: amsmath 2021/04/20 v2.17j AMS math features
+Package: amsmath 2021/10/15 v2.17l AMS math features
 \@mathmargin=\skip49
 For additional information on amsmath, use the `?' option.
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.s
 ty
-Package: amstext 2000/06/29 v2.01 AMS text
+Package: amstext 2021/08/26 v2.01 AMS text
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.st
 y
@@ -47,15 +47,15 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.st
 y
-Package: amsopn 2016/03/08 v2.02 operator names
+Package: amsopn 2021/08/26 v2.02 operator names
 )
-\inf@bad=\count187
+\inf@bad=\count188
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count188
-\leftroot@=\count189
+\uproot@=\count189
+\leftroot@=\count190
 LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count190
-\DOTSCASE@=\count191
+\classnum@=\count191
+\DOTSCASE@=\count192
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
@@ -64,15 +64,15 @@ LaTeX Info: Redefining \cdots on input line 620.
 \big@size=\dimen141
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count192
-\c@MaxMatrixCols=\count193
+\macc@depth=\count193
+\c@MaxMatrixCols=\count194
 \dotsspace@=\muskip16
-\c@parentequation=\count194
-\dspbrk@lvl=\count195
+\c@parentequation=\count195
+\dspbrk@lvl=\count196
 \tag@help=\toks17
-\row@=\count196
-\column@=\count197
-\maxfields@=\count198
+\row@=\count197
+\column@=\count198
+\maxfields@=\count199
 \andhelp@=\toks18
 \eqnshift@=\dimen142
 \alignsep@=\dimen143
@@ -84,8 +84,8 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \multlinegap=\skip50
 \multlinetaggap=\skip51
 \mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2923.
-LaTeX Info: Redefining \] on input line 2924.
+LaTeX Info: Redefining \[ on input line 2938.
+LaTeX Info: Redefining \] on input line 2939.
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.
 sty
@@ -141,20 +141,20 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 ode-math.sty
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.st
 y
-Package: expl3 2021-10-18 L3 programming layer (loader) 
+Package: expl3 2021-11-22 L3 programming layer (loader) 
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backe
 nd-xetex.def
 File: l3backend-xetex.def 2021-10-18 L3 backend support: XeTeX
 (|extractbb --version)
-\c__kernel_sys_dvipdfmx_version_int=\count199
-\l__color_backend_stack_int=\count266
-\g__color_backend_stack_int=\count267
-\g__graphics_track_int=\count268
+\c__kernel_sys_dvipdfmx_version_int=\count266
+\l__color_backend_stack_int=\count267
+\g__color_backend_stack_int=\count268
+\g__graphics_track_int=\count269
 \l__pdf_internal_box=\box52
-\g__pdf_backend_object_int=\count269
-\g__pdf_backend_annotation_int=\count270
-\g__pdf_backend_link_int=\count271
+\g__pdf_backend_object_int=\count270
+\g__pdf_backend_annotation_int=\count271
+\g__pdf_backend_link_int=\count272
 ))
 Package: unicode-math 2020/01/31 v0.8q Unicode maths in XeLaTeX and LuaLaTeX
 
@@ -165,11 +165,11 @@ TeX
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse
 /xparse.sty
-Package: xparse 2021-08-27 L3 Experimental document command parser
+Package: xparse 2021-11-12 L3 Experimental document command parser
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/l3keys
 2e/l3keys2e.sty
-Package: l3keys2e 2021-08-27 LaTeX2e option processing using LaTeX3 keys
+Package: l3keys2e 2021-11-12 LaTeX2e option processing using LaTeX3 keys
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec
 .sty
@@ -179,17 +179,17 @@ Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
 -xetex.sty
 Package: fontspec-xetex 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTe
 X
-\l__fontspec_script_int=\count272
-\l__fontspec_language_int=\count273
-\l__fontspec_strnum_int=\count274
-\l__fontspec_tmp_int=\count275
-\l__fontspec_tmpa_int=\count276
-\l__fontspec_tmpb_int=\count277
-\l__fontspec_tmpc_int=\count278
-\l__fontspec_em_int=\count279
-\l__fontspec_emdef_int=\count280
-\l__fontspec_strong_int=\count281
-\l__fontspec_strongdef_int=\count282
+\l__fontspec_script_int=\count273
+\l__fontspec_language_int=\count274
+\l__fontspec_strnum_int=\count275
+\l__fontspec_tmp_int=\count276
+\l__fontspec_tmpa_int=\count277
+\l__fontspec_tmpb_int=\count278
+\l__fontspec_tmpc_int=\count279
+\l__fontspec_em_int=\count280
+\l__fontspec_emdef_int=\count281
+\l__fontspec_strong_int=\count282
+\l__fontspec_strongdef_int=\count283
 \l__fontspec_tmpa_dim=\dimen148
 \l__fontspec_tmpb_dim=\dimen149
 \l__fontspec_tmpc_dim=\dimen150
@@ -204,9 +204,9 @@ Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
 ))
-\g__um_fam_int=\count283
-\g__um_fonts_used_int=\count284
-\l__um_primecount_int=\count285
+\g__um_fam_int=\count284
+\g__um_fonts_used_int=\count285
+\l__um_primecount_int=\count286
 \g__um_primekern_muskip=\muskip17
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unic
@@ -288,8 +288,8 @@ ns.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
 \@linkdim=\dimen151
-\Hy@linkcounter=\count286
-\Hy@pagecounter=\count287
+\Hy@linkcounter=\count287
+\Hy@pagecounter=\count288
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.d
 ef
@@ -308,7 +308,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count288
+\Hy@SavedSpaceFactor=\count289
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.de
 f
@@ -322,7 +322,7 @@ Package hyperref Info: Plain pages OFF on input line 4207.
 Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4445.
-\c@Hy@tempcnt=\count289
+\c@Hy@tempcnt=\count290
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -339,7 +339,7 @@ ntcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count290
+\Fld@menulength=\count291
 \Field@Width=\dimen153
 \Fld@charsize=\dimen154
 Package hyperref Info: Hyper figures OFF on input line 6076.
@@ -357,9 +357,9 @@ LaTeX Info: Redefining \pageref on input line 6150.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count291
-\c@Item=\count292
-\c@Hfootnote=\count293
+\Hy@abspage=\count292
+\c@Item=\count293
+\c@Hfootnote=\count294
 )
 Package hyperref Info: Driver (autodetected): hxetex.
 
@@ -373,10 +373,10 @@ Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
 \pdfm@box=\box53
-\c@Hy@AnnotLevel=\count294
-\HyField@AnnotCount=\count295
-\Fld@listcount=\count296
-\c@bookmark@seq@number=\count297
+\c@Hy@AnnotLevel=\count295
+\HyField@AnnotCount=\count296
+\Fld@listcount=\count297
+\c@bookmark@seq@number=\count298
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/re
 runfilecheck.sty
@@ -384,8 +384,8 @@ Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atveryend-lt
 x.sty
-Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
-e
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
 with kernel methods
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/u
@@ -399,12 +399,13 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb
 .sty
-Package: fancyvrb 2021/10/15 v3.9 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count298
+Package: fancyvrb 2021/11/24\nobreakspace {} 4.1a\nobreakspace {}verbatim text 
+(tvz,hv)
+\FV@CodeLineNo=\count299
 \FV@InFile=\read2
 \FV@TabBox=\box54
-\c@FancyVerbLine=\count299
-\FV@StepNumber=\count300
+\c@FancyVerbLine=\count300
+\FV@StepNumber=\count301
 \FV@OutFile=\write3
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
@@ -417,22 +418,22 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.s
 ty
-Package: longtable 2021-05-07 v4.16 Multi-page Table package (DPC)
+Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \LTleft=\skip54
 \LTright=\skip55
 \LTpre=\skip56
 \LTpost=\skip57
-\LTchunksize=\count301
+\LTchunksize=\count302
 \LTcapwidth=\dimen159
 \LT@head=\box55
 \LT@firsthead=\box56
 \LT@foot=\box57
 \LT@lastfoot=\box58
 \LT@gbox=\box59
-\LT@cols=\count302
-\LT@rows=\count303
-\c@LT@tables=\count304
-\c@LT@chunks=\count305
+\LT@cols=\count303
+\LT@rows=\count304
+\c@LT@tables=\count305
+\c@LT@chunks=\count306
 \LT@p@ftn=\toks22
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs
@@ -448,15 +449,15 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen167
 \cmidrulekern=\dimen168
 \defaultaddspace=\dimen169
-\@cmidla=\count306
-\@cmidlb=\count307
+\@cmidla=\count307
+\@cmidlb=\count308
 \@aboverulesep=\dimen170
 \@belowrulesep=\dimen171
-\@thisruleclass=\count308
-\@lastruleclass=\count309
+\@thisruleclass=\count309
+\@lastruleclass=\count310
 \@thisrulewidth=\dimen172
 ) (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \col@sep=\dimen173
 \ar@mcellbox=\box60
 \extrarowheight=\dimen174
@@ -466,21 +467,21 @@ Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
 \ar@cellbox=\box61
 ) (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count310
-\calc@Bcount=\count311
+\calc@Acount=\count311
+\calc@Bcount=\count312
 \calc@Adimen=\dimen175
 \calc@Bdimen=\dimen176
 \calc@Askip=\skip60
 \calc@Bskip=\skip61
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count312
+\calc@Ccount=\count313
 \calc@Cskip=\skip62
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox
 .sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count313
+\etb@tempcnta=\count314
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote
 .sty
@@ -490,14 +491,14 @@ Package: footnote 1997/01/28 1.13 Save footnotes around boxes
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx
 .sty
-Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics
 .sty
 Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
 
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/grap
 hics.cfg
@@ -512,7 +513,7 @@ Package graphics Info: Driver file: xetex.def on input line 107.
 .sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip63
-\multirow@cntb=\count314
+\multirow@cntb=\count315
 \multirow@dima=\skip64
 \bigstrutjot=\dimen180
 )
@@ -520,13 +521,13 @@ Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 ty
 \wrapoverhang=\dimen181
 \WF@size=\dimen182
-\c@WF@wrappedlines=\count315
+\c@WF@wrappedlines=\count316
 \WF@box=\box63
 \WF@everypar=\toks24
 Package: wrapfig 2003/01/31  v 3.6
 ) (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count316
+\c@float@type=\count317
 \float@exts=\toks25
 \float@box=\box64
 \@float@everytoks=\toks26
@@ -555,16 +556,16 @@ Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 .sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box66
-\sift@deathcycles=\count317
+\sift@deathcycles=\count318
 \@vwid@loff=\dimen183
 \@vwid@roff=\dimen184
 )
-\c@taburow=\count318
-\tabu@nbcols=\count319
-\tabu@cnt=\count320
-\tabu@Xcol=\count321
-\tabu@alloc=\count322
-\tabu@nested=\count323
+\c@taburow=\count319
+\tabu@nbcols=\count320
+\tabu@cnt=\count321
+\tabu@Xcol=\count322
+\tabu@alloc=\count323
+\tabu@nested=\count324
 \tabu@target=\dimen185
 \tabu@spreadtarget=\dimen186
 \tabu@naturalX=\dimen187
@@ -606,7 +607,7 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \UL@skip=\skip68
 \UL@hook=\toks30
 \UL@height=\dimen194
-\UL@pe=\count324
+\UL@pe=\count325
 \UL@pixel=\dimen195
 \ULC@box=\box74
 Package: ulem 2019/11/18
@@ -616,7 +617,7 @@ Package: ulem 2019/11/18
 .sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen197
-\c@nlinenum=\count325
+\c@nlinenum=\count326
 \TeXr@lab=\toks31
 )
 (c:/Users/Bmeyer/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
@@ -624,7 +625,7 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip69
 \bibsep=\skip70
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count326
+\c@NAT@ctr=\count327
 ) (./Miller_Creek_Vogel_Lake_Water_Quality.aux)
 \openout1 = `Miller_Creek_Vogel_Lake_Water_Quality.aux'.
 
@@ -929,7 +930,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count327
+\c@section@level=\count328
 )
 LaTeX Info: Redefining \ref on input line 136.
 LaTeX Info: Redefining \pageref on input line 136.
@@ -1071,30 +1072,43 @@ ipitation
 [19
 
 ]
+File: Miller_Creek_Vogel_Lake_Water_Quality_files/figure-latex/rating-curve-1.p
+df Graphic file (type pdf)
+<use Miller_Creek_Vogel_Lake_Water_Quality_files/figure-latex/rating-curve-1.pd
+f>
+File: Miller_Creek_Vogel_Lake_Water_Quality_files/figure-latex/other-discharge-
+1.pdf Graphic file (type pdf)
+<use Miller_Creek_Vogel_Lake_Water_Quality_files/figure-latex/other-discharge-1
+.pdf>
+[20]
 File: images/stream_flow_rate_sites.png Graphic file (type bmp)
 <images/stream_flow_rate_sites.png>
 
-Overfull \hbox (366.7869pt too wide) in paragraph at lines 362--362
+Overfull \hbox (366.7869pt too wide) in paragraph at lines 370--370
 [][]
  []
 
 
-LaTeX Warning: Float too large for page by 48.51707pt on input line 363.
+LaTeX Warning: Float too large for page by 48.51707pt on input line 371.
 
-[20] [21]
-Underfull \hbox (badness 1043) in paragraph at lines 384--386
+[21] [22]
+File: Miller_Creek_Vogel_Lake_Water_Quality_files/figure-latex/nacl-fig-1.pdf G
+raphic file (type pdf)
+<use Miller_Creek_Vogel_Lake_Water_Quality_files/figure-latex/nacl-fig-1.pdf>
+
+Underfull \hbox (badness 1043) in paragraph at lines 396--398
 []$[]$ \TU/lmr/m/n/10 9/15/2021 22:00 (2.5
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 386--388
+Underfull \hbox (badness 10000) in paragraph at lines 398--400
 []$[]$ \TU/lmr/m/n/10 01:30
  []
 
-[22]
+[23] [24]
 Chapter 4.
 
-Overfull \hbox (42.075pt too wide) in paragraph at lines 408--409
+Overfull \hbox (42.075pt too wide) in paragraph at lines 420--421
 []\TU/lmr/m/n/10 Only seepage hydrologic features (n = 16): []miller_creek_seep
 age_features.gpx[] 
  []
@@ -1102,26 +1116,26 @@ age_features.gpx[]
 File: images/miller_map.png Graphic file (type bmp)
 <images/miller_map.png>
 
-Overfull \hbox (31.41884pt too wide) in paragraph at lines 412--413
+Overfull \hbox (31.41884pt too wide) in paragraph at lines 424--425
 [][][][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[23
+[25
 
-] [24]
+] [26]
 Chapter 5.
 
-Overfull \hbox (30.59001pt too wide) in paragraph at lines 438--449
+Overfull \hbox (30.59001pt too wide) in paragraph at lines 450--461
  [][] 
  []
 
-[25
+[27
 
 ]
-Overfull \hbox (38.53pt too wide) in paragraph at lines 459--472
+Overfull \hbox (38.53pt too wide) in paragraph at lines 471--484
  [][] 
  []
 
@@ -1133,32 +1147,43 @@ File: images/fish_rescue/IMG-6272.jpg Graphic file (type bmp)
 <images/fish_rescue/IMG-6272.jpg>
 File: images/fish_rescue/IMG-6274.jpg Graphic file (type bmp)
 <images/fish_rescue/IMG-6274.jpg>
-[26] [27] [28] [29] [30]
+[28] [29] [30] [31] [32]
 Chapter 6.
 
-Overfull \hbox (170.19997pt too wide) in paragraph at lines 515--582
+Overfull \hbox (303.62997pt too wide) in paragraph at lines 527--604
  [][] 
  []
 
-[31
 
-] [32]
+Overfull \hbox (519.48997pt too wide) in paragraph at lines 622--685
+ [][] 
+ []
+
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 689.
+
+LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 689.
+
+[33
+
+] [34] [35] [36]
 Chapter 7.
 No file Miller_Creek_Vogel_Lake_Water_Quality.bbl.
-[33
+[37
 
 ] (./Miller_Creek_Vogel_Lake_Water_Quality.aux)
 Package rerunfilecheck Info: File `Miller_Creek_Vogel_Lake_Water_Quality.out' h
 as not changed.
-(rerunfilecheck)             Checksum: 75057C59FC915481AE936FBAF1EE4773;1968.
+(rerunfilecheck)             Checksum: 226CC70351F4CEDD182237DB38CB0556;2051.
  ) 
 Here is how much of TeX's memory you used:
- 18354 strings out of 478472
- 328385 string characters out of 5859708
- 801074 words of memory out of 5000000
- 38361 multiletter control sequences out of 15000+600000
- 409987 words of font info for 81 fonts, out of 8000000 for 9000
+ 19107 strings out of 478256
+ 356922 string characters out of 5854376
+ 830053 words of memory out of 5000000
+ 39321 multiletter control sequences out of 15000+600000
+ 410011 words of font info for 84 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 87i,9n,120p,657b,563s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 86i,9n,121p,657b,573s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Miller_Creek_Vogel_Lake_Water_Quality.pdf (33 pages).
+Output written on Miller_Creek_Vogel_Lake_Water_Quality.pdf (37 pages).
