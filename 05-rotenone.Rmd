@@ -53,13 +53,13 @@ select <- dplyr::select
 
 Rotenone application was performed in early October 2021 by ADF&G. ADF&G collected pre and post-treatment water samples as part of this event, and Kenai Watershed Forum will monitor degradation through until Summer 2022. Methods and results will be described here.
 
-
 ## Sampling schedule
-A proposed rotenone sampling schedule is described in table \@ref(tab:sample-schedule) or may be accessed in a Google Sheet linked here: <https://tinyurl.com/8ba94nrn>. Schedule is current as of `r Sys.Date()`.
 
+A proposed rotenone sampling schedule is described in table \@ref(tab:sample-schedule) or may be accessed in a Google Sheet linked here: <https://tinyurl.com/8ba94nrn>. Schedule is current as of `r Sys.Date()`.
 
 ```{r sample-schedule, echo = F, fig.cap = "cap"}
 options(knitr.kable.NA = '')
+
 # read in proposed schedule
 url <- "https://docs.google.com/spreadsheets/d/1_lv-I471tu8WI55nItGslKYe_X5qvwZ_MF22M2jrkZo/edit#gid=0"
 tab <- "rotenone_sample_schedule"
@@ -138,9 +138,6 @@ rot_dat <- rot_dat %>%
 
 ```
 
-
-
-
 ```{r, sample name correction , echo = F}
 # sample name correction
 
@@ -175,7 +172,6 @@ rot_dat <- rot_dat %>%
 
 ```
 
-
 ```{r, lab-dups, echo = F, eval = F}
 
 # address lab duplicates. calculate percent difference among lab dups, then finalize into average values for plotting/summary tables
@@ -209,27 +205,37 @@ sd_pct_diff <- pct %>% summarise(avg_pct_diff = sd(pct_diff)*100) %>% as.charact
 
 ```
 
-
-
-
 ### Sample results
-Laboratory analysis of water samples is performed by the [ASET Laboratory](https://www.uaa.alaska.edu/academics/college-of-arts-and-sciences/departments/chemistry/aset_lab/) at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska. Original results to date are available for download at the following link:
 
-[Link: Rotenone Degradation Laboratory Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data). 
+Laboratory analysis of water samples is performed by the [ASET Laboratory](https://www.uaa.alaska.edu/academics/college-of-arts-and-sciences/departments/chemistry/aset_lab/) at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska.
 
+Original results received from UAA are available for download at the following link:
+
+-   [Link: Rotenone Degradation Laboratory Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data).
+
+Final results that have been integrated into a single consistent format are available for download at the the following link:
+
+-   Link: Rotenone Degradation Final Results (add GH link)
+
+A summarised version of the above document is displayed in Table \@ref(tab:rotenone-table)
 
 Table X... ... show abbreviated table w rotenone only; include link to download csv with more complete table
 
 ```{r, results table, echo = F}
-# create table
-rot_dat %>%
-  select(-source) %>%
-  kbl(caption = "Rotenone raw results") %>%
-  kable_paper(full_width = F, html_font = "Cambria") 
-
+# save full table to github repo available for download
+write.csv(rot_dat,"output/rotenone_results/rotenone_results.csv", row.names = F)
 ```
 
+```{r, rotenone-table}
 
+# create table
+rot_dat %>%
+  arrange(waterbody,sample_name,field_sample_date) %>%
+  select(sample_name, lab_dup, field_sample_date, waterbody, strata, rotenone_ppb) %>%
+  kbl(caption = "Rotenone raw results") %>%
+  kable_paper(full_width = F, html_font = "Cambria")
+
+```
 
 ```{r, eval = F}
 
@@ -256,7 +262,6 @@ ggplotly(rot_dat %>%
 
 ```
 
-
 ```{r, eval = F}
 
 ## creek plot
@@ -281,7 +286,3 @@ ggplotly(rot_dat %>%
 
 
 ```
-
-
-
-

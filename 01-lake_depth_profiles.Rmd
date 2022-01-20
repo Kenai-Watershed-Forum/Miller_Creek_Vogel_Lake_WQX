@@ -354,6 +354,9 @@ sep21_lake_wqx_dat %>%
 
 <br>
 
+
+Results for Dec. 2021 and Jan 2022 forthcoming (noted 1/13/2022)
+
 ***
 
 ## Overall Data
