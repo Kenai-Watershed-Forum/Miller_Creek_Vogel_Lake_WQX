@@ -139,6 +139,18 @@ site_names <- c("Vogel_Lake_Outlet" = "Vogel\nLake\nOutlet",
 ```
 
 
+```{r, echo = F}
+
+# temporarily exclude 2022 results
+lake_wqx_dat <- lake_wqx_dat %>%
+  filter(sample_date < "2022-01-01")
+
+```
+
+
+
+
+
 ## Data by Month
 
 ### January 2021
@@ -354,8 +366,42 @@ sep21_lake_wqx_dat %>%
 
 <br>
 
+### December 2021
+December 2 and 3, 2021
 
-Results for Dec. 2021 and Jan 2022 forthcoming (noted 1/13/2022)
+```{r ,echo = FALSE, fig.cap = "December 2021", fig.width=10, fig.height=11}
+
+# filter to dec 2021 data 
+dec21_lake_wqx_dat <- lake_wqx_dat %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date)) %>%
+  filter(month == "12",
+         year == "2021")
+
+# create plot
+dec21_lake_wqx_dat %>%
+  ggplot() +
+    geom_point(aes(sample_depth_m,val), size = 2) +
+    geom_line(aes(sample_depth_m,val)) +
+
+    coord_flip() +
+    facet_grid(site ~ parameter, scales = "free_x", shrink = T, 
+               labeller = labeller(parameter = param_names,
+                                   site = site_names)) +
+    ylab("") +
+    xlab("Depth (m)") +
+    theme_bw() +
+    points_theme +
+    scale_x_reverse() +
+    scale_y_continuous(n.breaks = 5) +
+    theme(panel.spacing = unit(1.2, "lines"),
+          strip.text.y = element_text(angle = 360)) +
+    ggtitle("December 2021 Water Quality All Sites")
+```
+
+<br>
+
+**Note: Results for Jan 2022 forthcoming**
 
 ***
 

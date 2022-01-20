@@ -1,5 +1,4 @@
 fig:jan21-wqx
-fig:unnamed-chunk-5
 fig:unnamed-chunk-6
 fig:unnamed-chunk-7
 fig:unnamed-chunk-8
@@ -9,17 +8,21 @@ fig:unnamed-chunk-11
 fig:unnamed-chunk-12
 fig:unnamed-chunk-13
 fig:unnamed-chunk-14
+fig:unnamed-chunk-15
+fig:unnamed-chunk-16
 fig:rating-curve
 fig:other-discharge
 fig:nacl-map
 fig:nacl-fig
 tab:rescue-tbl
 tab:spp-tbl
-fig:unnamed-chunk-19
-fig:unnamed-chunk-20
 fig:unnamed-chunk-21
 fig:unnamed-chunk-22
+fig:unnamed-chunk-23
+fig:unnamed-chunk-24
 tab:sample-schedule
+tab:rotenone-table
+fig:unnamed-chunk-26
 introduction
 lake-water-quality-profiles
 data-by-month
@@ -29,6 +32,7 @@ may-2021
 june-2021
 august-2021
 september-2021
+december-2021
 overall-data
 dissolved-oxygen
 ph
@@ -52,6 +56,9 @@ results-1
 photos
 rotenone-monitoring
 sampling-schedule
+rotenone-sampling-map
 rotenone-concentration-results
 sample-results
+tables
+figures
 summary-1

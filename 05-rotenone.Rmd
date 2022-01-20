@@ -51,7 +51,9 @@ points_theme <- theme(axis.title = element_text(size = 14, face = "bold"),
 select <- dplyr::select
 ```
 
-Rotenone application was performed in early October 2021 by ADF&G. ADF&G collected pre and post-treatment water samples as part of this event, and Kenai Watershed Forum will monitor degradation through until Summer 2022. Methods and results will be described here.
+Rotenone application was performed in early October 2021 by ADF&G. ADF&G collected pre and post-treatment water samples as part of this event, and Kenai Watershed Forum will monitor degradation through until Summer 2022.
+
+A more detailed methods section is forthcoming here.
 
 ## Sampling schedule
 
@@ -73,6 +75,10 @@ dat %>%
 #%>%
  # bootstrap_options = c("striped", "hover", "condensed", "responsive")
 ```
+
+## Rotenone sampling map
+
+*Map of sampling sites and table of coordinates forthcoming here*
 
 <br>
 
@@ -104,9 +110,6 @@ column_names <- c("source",
                   "cft_6")
 colnames(rot_dat) <- column_names 
 
-## designate numeric columns
-num_vars <- c("rotenone_ppb", "rotenolone_ppb","deguelin_ppb")
-
 ## remove empty columns
 rot_dat <- remove_empty(rot_dat)
 
@@ -123,18 +126,42 @@ rot_dat <- rot_dat %>%
   separate(sample_name,into = c("sample_name","lab_dup"), sep = "_") %>%
   
 ### correct for use of "benthic" vs "deep" terminology in sample names
-  mutate(sample_name = str_replace(sample_name, pattern = "Vogel Deep", replacement = "Vogel Benthic")) %>%
+  mutate(sample_name = str_replace(sample_name, pattern = "Vogel Deep", replacement = "Vogel Benthic")) 
 
-## assign "ND" (not detected) as zero in numeric columns
-  mutate_at(num_vars,funs(str_replace(., "ND", "0"))) %>%
-  
-## make numbers columns numeric class
-  mutate_at(num_vars, as.numeric) %>%
+# convert dataframe to long format (pivot all parameter results)
+rot_dat <- rot_dat %>%
+  pivot_longer(cols = c("rotenone_ppb", "rotenolone_ppb", "deguelin_ppb", "tephrosin_ppb", "cft_5", "cft_6"),
+               names_to = "parameter",
+               values_to = "val_ppb")
+
+# add designation to values provided as "< 0.5" to allow for conversion to numeric column
+rot_dat <- rot_dat %>%
+  mutate(detection_note = 
+           case_when(
+             val_ppb == "<0.5" ~ "value <0.5 ppb",
+             val_ppb == "ND" ~ "Not_Detected",
+             val_ppb == "Detected" ~ "Detected")) %>%
+  # remove "<" symbols from value column
+  mutate(val_ppb = str_replace(val_ppb, "<", ""))
+
+# convert value column to numeric, leaving detection limit notes only in new val_ppb column
+rot_dat <- rot_dat %>%
+  mutate(val_ppb = as.numeric(val_ppb))
   
 ## transform other column types
+rot_dat <- rot_dat %>% 
   transform(field_sample_date = mdy(field_sample_date),
             lab_analysis_date = mdy(lab_analysis_date))
-  
+
+## clarify values in relation to detection lmit notes
+rot_dat <- rot_dat %>%
+  mutate(val_ppb = case_when(
+    detection_note == "Not_Detected" ~ "0",
+    detection_note == "value <0.5 ppb" ~ "0",
+    TRUE ~ as.character(val_ppb))) %>%
+  # convert value column to numeric now that we've removed all characters
+  mutate(val_ppb = as.numeric(val_ppb))
+
 
 ```
 
@@ -172,21 +199,18 @@ rot_dat <- rot_dat %>%
 
 ```
 
-```{r, lab-dups, echo = F, eval = F}
+```{r, lab-dups, echo = F}
 
 # address lab duplicates. calculate percent difference among lab dups, then finalize into average values for plotting/summary tables
 
-# what is the % difference among lab duplicates?
+# what is the % difference among rotenone lab duplicates?
 pct <- rot_dat %>%
+  filter(parameter == "rotenone_ppb") %>%
   
   # reshape dataframe
-  select(sample_name,field_sample_date,lab_dup,rotenone_ppb) %>%
-  pivot_wider(names_from = lab_dup, values_from = rotenone_ppb) %>%
-    
-  # filter na vals
-  filter(!is.na(a),
-         !is.na(b)) %>%
-  select(-"NA") %>%
+  select(parameter,sample_name,field_sample_date,lab_dup,val_ppb) %>%
+  filter(!is.na(lab_dup)) %>%
+  pivot_wider(names_from = lab_dup, values_from = val_ppb) %>%
   
   # calculate percent diff
   mutate(pct_diff = abs((a-b)/(a+b))) %>%
@@ -195,10 +219,18 @@ pct <- rot_dat %>%
   mutate_at(vars(pct_diff),~replace(., is.nan(.), 0)) 
   
 # average pct diff
-avg_pct_diff <- pct %>% summarise(avg_pct_diff = mean(pct_diff)*100) %>% as.character()
-
+avg_pct_diff <- pct %>% 
+  summarise(avg_pct_diff = mean(pct_diff)*100) %>% 
+  as.numeric() 
+avg_pct_diff <- format(round(avg_pct_diff,2), nsmall = 2) %>%
+  as.character()
+  
 # stdev pct diff
-sd_pct_diff <- pct %>% summarise(avg_pct_diff = sd(pct_diff)*100) %>% as.character()
+sd_pct_diff <- pct %>% 
+  summarise(sd_pct_diff = sd(pct_diff)*100) %>% 
+  as.numeric()
+sd_pct_diff <- format(round(sd_pct_diff, 2), nsmall = 2) %>%
+  as.character()
 
 #### insert avg and sd values inline text
 
@@ -207,82 +239,69 @@ sd_pct_diff <- pct %>% summarise(avg_pct_diff = sd(pct_diff)*100) %>% as.charact
 
 ### Sample results
 
-Laboratory analysis of water samples is performed by the [ASET Laboratory](https://www.uaa.alaska.edu/academics/college-of-arts-and-sciences/departments/chemistry/aset_lab/) at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska.
+#### Tables
+
+Laboratory analysis of water samples is performed by the [ASET Laboratory](https://www.uaa.alaska.edu/academics/college-of-arts-and-sciences/departments/chemistry/aset_lab/) at the University of Alaska Anchorage Department of Chemistry in Anchorage, Alaska. Detailed analytical methods can be found in [Couture et al. 2022](https://www.sciencedirect.com/science/article/pii/S0045653521029507?casa_token=ay4PaETNCSQAAAAA:_IZ-AVNjAqJ4cdwnVLYAoXmbG5KvzPbpQ8aTeu54QqIzDietLnk1Xe_uj5z93IzrNsoCRwsSOaM).
 
 Original results received from UAA are available for download at the following link:
 
 -   [Link: Rotenone Degradation Laboratory Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/input/rotenone_data).
 
-Final results that have been integrated into a single consistent format are available for download at the the following link:
+A table of final results that have been integrated into a single dataframe and reshaped to a "long" format are available for download at the the following link:
 
--   Link: Rotenone Degradation Final Results (add GH link)
+-   [Link: Rotenone Degradation Final Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/output/rotenone_results)
 
-A summarised version of the above document is displayed in Table \@ref(tab:rotenone-table)
-
-Table X... ... show abbreviated table w rotenone only; include link to download csv with more complete table
+A summarised version of the above downloadable table is displayed in Table \@ref(tab:rotenone-table). Values shown in Table \@ref(tab:rotenone-table) are averages of duplicate lab duplicate values (overall mean percent difference = `r avg_pct_diff` ± `r sd_pct_diff` %, mean ± SD).
 
 ```{r, results table, echo = F}
 # save full table to github repo available for download
 write.csv(rot_dat,"output/rotenone_results/rotenone_results.csv", row.names = F)
 ```
 
-```{r, rotenone-table}
+<br>
+
+```{r, rotenone-table, echo = F}
 
 # create table
 rot_dat %>%
-  arrange(waterbody,sample_name,field_sample_date) %>%
-  select(sample_name, lab_dup, field_sample_date, waterbody, strata, rotenone_ppb) %>%
-  kbl(caption = "Rotenone raw results") %>%
+  filter(parameter == "rotenone_ppb") %>%
+  arrange(waterbody,field_sample_date) %>%
+  group_by(sample_name, field_sample_date, waterbody, strata,detection_note) %>%
+  summarise(rotenone_ppb = mean(val_ppb)) %>%
+  select(sample_name, field_sample_date, waterbody, strata, rotenone_ppb,detection_note) %>%
+  kbl(caption = "Rotenone results. See above download link\nfor complete analysis results, including other parameters (rotenolone, deguelin, and others.)") %>%
   kable_paper(full_width = F, html_font = "Cambria")
 
 ```
 
-```{r, eval = F}
+<br>
 
-## lakes plot
-
-ggplotly(rot_dat %>%
-    # remove miller creek
-      filter(waterbody != "Miller_Creek") %>%
-    group_by(sample_name,field_sample_date, waterbody,strata) %>%
-    summarise(avg_rotenone_ppb = mean(rotenone_ppb)) %>%
-  
-    ggplot(aes(field_sample_date,avg_rotenone_ppb, color = strata)) +
-    geom_point() +
-    geom_line() +
-    facet_grid(. ~ waterbody) +
-      xlab("") +
-      ylab("Rotenone Concentration (ppb)")
-  )
-  
-
-# say that more detailed accuracy results can be accessed in the repo folder in the excel files
-
-# see journal article for methods
-
-```
-
-```{r, eval = F}
-
-## creek plot
-
-## join data with location estimates (distance down creek)
+#### Figures
 
 
-ggplotly(rot_dat %>%
-    # include miller creek
-      filter(waterbody == "Miller_Creek") %>%
-    group_by(sample_name,field_sample_date, waterbody,strata) %>%
-    summarise(avg_rotenone_ppb = mean(rotenone_ppb)) %>%
-  
-    ggplot(aes(field_sample_date,avg_rotenone_ppb, color = strata)) +
-    geom_point() +
-    geom_line() +
-    facet_grid(. ~ waterbody) +
-      xlab("") +
-      ylab("Rotenone Concentration (ppb)")
-  )
+```{r, echo = F, fig.cap = "Average rotenone concentrations in Vogel Lake and North Vogel Lake, Fall 2021 through Spring 2022. "}
 
+    ## lakes plot
 
+    ggplotly(rot_dat %>%
+        # remove miller creek
+        filter(waterbody != "Miller_Creek",
+               parameter == "rotenone_ppb") %>%
+        group_by(sample_name,field_sample_date, waterbody,strata) %>%
+        summarise(avg_rotenone_ppb = mean(val_ppb)) %>%
+        ggplot(aes(field_sample_date,avg_rotenone_ppb, color = strata)) +
+        geom_point() +
+        geom_line() +
+        facet_grid(. ~ waterbody) +
+          xlab("") +
+          ylab("Rotenone Concentration (ppb)") +
+        ggtitle("Rotenone Concentrations 2021 - 2022")
+      )
 
 ```
+
+<br>
+
+**Note on Miller Creek results:**
+
+-   Rotenone values for Miller Creek are not shown in a continuous time series figure due to more limited sample results from varying locations. See Table \@ref(tab:rotenone-table) for results from Miller Creek.
