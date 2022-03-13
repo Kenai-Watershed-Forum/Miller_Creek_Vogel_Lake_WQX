@@ -41,6 +41,7 @@ library(DT)
 library(ggpubr)
 library(plotrix)
 library(packrat)
+library(magrittr)
 
 # set plotting themes
 
@@ -137,17 +138,6 @@ site_names <- c("Vogel_Lake_Outlet" = "Vogel\nLake\nOutlet",
                 "Vogel_Pond" = "Vogel\nPond")
 
 ```
-
-
-```{r, echo = F}
-
-# temporarily exclude 2022 results
-lake_wqx_dat <- lake_wqx_dat %>%
-  filter(sample_date < "2022-01-01")
-
-```
-
-
 
 
 
@@ -401,7 +391,41 @@ dec21_lake_wqx_dat %>%
 
 <br>
 
-**Note: Results for Jan 2022 forthcoming**
+
+### December 2021
+December 2 and 3, 2021
+
+```{r ,echo = FALSE, fig.cap = "January 2022", fig.width=10, fig.height=11}
+
+# filter to jan 2022 data 
+jan22_lake_wqx_dat <- lake_wqx_dat %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date)) %>%
+  filter(month == "1",
+         year == "2022")
+
+# create plot
+jan22_lake_wqx_dat %>%
+  ggplot() +
+    geom_point(aes(sample_depth_m,val), size = 2) +
+    geom_line(aes(sample_depth_m,val)) +
+
+    coord_flip() +
+    facet_grid(site ~ parameter, scales = "free_x", shrink = T, 
+               labeller = labeller(parameter = param_names,
+                                   site = site_names)) +
+    ylab("") +
+    xlab("Depth (m)") +
+    theme_bw() +
+    points_theme +
+    scale_x_reverse() +
+    scale_y_continuous(n.breaks = 5) +
+    theme(panel.spacing = unit(1.2, "lines"),
+          strip.text.y = element_text(angle = 360)) +
+    ggtitle("January 2022 Water Quality All Sites")
+```
+
+
 
 ***
 

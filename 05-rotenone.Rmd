@@ -153,7 +153,7 @@ rot_dat <- rot_dat %>%
   transform(field_sample_date = mdy(field_sample_date),
             lab_analysis_date = mdy(lab_analysis_date))
 
-## clarify values in relation to detection lmit notes
+## clarify values in relation to detection limit notes
 rot_dat <- rot_dat %>%
   mutate(val_ppb = case_when(
     detection_note == "Not_Detected" ~ "0",
@@ -163,19 +163,27 @@ rot_dat <- rot_dat %>%
   mutate(val_ppb = as.numeric(val_ppb))
 
 
+
+
+
 ```
+
+
 
 ```{r, sample name correction , echo = F}
 # sample name correction
 
-# the samples collected 9/27/2021 and 9/28/2021 at Vogel and North Vogel were collected from the surface, but the sample names do not contain the word "Surface." Apply this correction to be consistent with other sample name conventions
+# the samples collected 9/27/2021 and 9/28/2021 at Vogel and North Vogel were collected from the surface, but the sample names do not contain the word "Surface." Apply this correction to be consistent with other sample name conventions.
+
+# also: clarify "Vogel A" and "Vogel B" from 2/22/2022. These are surface samples from two different littoral locations around Vogel Lake. For these purposes, we will still just call these "Vogel Lake Surface. Keep seperate for now (1 and 2) until plotting
 
 rot_dat <- rot_dat %>%
   mutate(sample_name = case_when(
     sample_name == "Vogel" | field_sample_date == "2021-09-27" ~ "Vogel Surface",
     sample_name == "N. Vogel" | field_sample_date == "2021-09-28" ~ "N. Vogel Surface",
-    sample_name != "Vogel" | field_sample_date != "2021-09-27" ~ sample_name,
-    sample_name != "N. Vogel" | field_sample_date != "2021-09-28" ~ sample_name))  %>%
+    sample_name == "Vogel A"  | field_sample_date == "2022-02-22" ~ "Vogel Surface 1",
+    sample_name == "Vogel B"  | field_sample_date == "2022-02-22" ~ "Vogel Surface 2",
+    TRUE ~ sample_name))  %>%
    
   # add column designation for benthic vs surface vs creek
   mutate(strata = word(sample_name,-1)) %>%
@@ -184,6 +192,8 @@ rot_dat <- rot_dat %>%
   # modify sample names to remove spaces
   mutate(sample_name = case_when(
     sample_name == "Vogel Surface" ~ "Vogel_Surface",
+    sample_name == "Vogel Surface 1" ~ "Vogel_Surface_1",
+    sample_name == "Vogel Surface 2" ~ "Vogel_Surface_2",
     sample_name == "N. Vogel Surface" ~ "N_Vogel_Surface",
     sample_name == "Vogel Benthic" ~ "Vogel_Benthic",
     sample_name == "N. Vogel Benthic" ~ "N_Vogel_Benthic",
@@ -197,11 +207,23 @@ rot_dat <- rot_dat %>%
     sample_name =="N_Vogel_Surface" | sample_name == "N_Vogel_Benthic" ~ "N_Vogel_Lake")) %>%
   mutate(waterbody = ifelse(!is.na(waterbody), waterbody, "Miller_Creek"))
 
+## 
+##
+## 3/11/2022 get new sample/site names incorporated -- Vogel Surface 1 and 2, change so iut's all just "Vogel Surface"
+
+##
+
+##
+
+##
+
 ```
 
 ```{r, lab-dups, echo = F}
 
 # address lab duplicates. calculate percent difference among lab dups, then finalize into average values for plotting/summary tables
+
+### ????
 
 # what is the % difference among rotenone lab duplicates?
 pct <- rot_dat %>%
