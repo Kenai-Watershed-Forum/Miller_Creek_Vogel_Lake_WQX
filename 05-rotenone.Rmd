@@ -25,6 +25,7 @@ library(DT)
 library(ggpubr)
 library(plotrix)
 library(packrat)
+library(magrittr)
 library(kableExtra)
 
 # set plotting themes
@@ -51,13 +52,15 @@ points_theme <- theme(axis.title = element_text(size = 14, face = "bold"),
 select <- dplyr::select
 ```
 
-Rotenone application was performed in early October 2021 by ADF&G. ADF&G collected pre and post-treatment water samples as part of this event, and Kenai Watershed Forum will monitor degradation through until Summer 2022.
+Rotenone application was performed in early October 2021 by ADF&G. The treated bodies of water included Vogel Lake, North Vogel Lake, and Miller Creek. ADF&G collected pre and post-treatment water samples as part of the treatment event, and Kenai Watershed Forum monitored degradation through Summer 2022.
 
-A more detailed methods section is forthcoming here.
+Field sampling and analytical methods generally followed those described in [@couture2021]. We collected a composite grab sample from two locations at a depth of 0.5 m near the center of each lake prior to rotenone treatment.
+
+Following treatment, we collcted lake water samples at a depth of 0.5 m from two locations around the center of the lake either as a grab sample or with a Kemmerer sampler. For each strata of each lake, a single composite sample was created from the two locations. For benthic samples, the Kemmerer sampler was lowered to a depth within 2 m from the bottom in the two locations around the center of the lake. The collected water from tow locations was then combined into a single 1 L composite sample. All samples were collected into sterilized 1 L amber glass bottles, immediately chilled on ice, stored out of the light and transported to the Applied Science, Engineering and Technology (ASET) Lab located at the University of Alaska Anchorage (UAA) within 72 h of collection. Upon arrival to the lab all samples were stored in the dark at 4°C and analyzed via high performance [liquid chromatography](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/liquid-chromatography "Learn more about liquid chromatography from ScienceDirect's AI-generated Topic Pages") tandem mass spectrometry (HPLC-MS/MS) within seven days of collection.
 
 ## Sampling schedule
 
-A proposed rotenone sampling schedule is described in table \@ref(tab:sample-schedule) or may be accessed in a Google Sheet linked here: <https://tinyurl.com/8ba94nrn>. Schedule is current as of `r Sys.Date()`.
+The rotenone sampling schedule is described in table \@ref(tab:sample-schedule) or may be accessed in a Google Sheet linked here: <https://tinyurl.com/8ba94nrn>. The schedule is current as of `r Sys.Date()`.
 
 ```{r sample-schedule, echo = F, fig.cap = "cap"}
 options(knitr.kable.NA = '')
@@ -163,12 +166,7 @@ rot_dat <- rot_dat %>%
   mutate(val_ppb = as.numeric(val_ppb))
 
 
-
-
-
 ```
-
-
 
 ```{r, sample name correction , echo = F}
 # sample name correction
@@ -207,23 +205,16 @@ rot_dat <- rot_dat %>%
     sample_name =="N_Vogel_Surface" | sample_name == "N_Vogel_Benthic" ~ "N_Vogel_Lake")) %>%
   mutate(waterbody = ifelse(!is.na(waterbody), waterbody, "Miller_Creek"))
 
-## 
-##
 ## 3/11/2022 get new sample/site names incorporated -- Vogel Surface 1 and 2, change so iut's all just "Vogel Surface"
 
-##
+## NOTE: samples from Vogel Lake 2022-02-22 are labeled as sites "1" and "2", as they are both from different surface locations. They will be designated as just "surface" without distinguishing sites at a later step.
 
-##
-
-##
 
 ```
 
 ```{r, lab-dups, echo = F}
 
 # address lab duplicates. calculate percent difference among lab dups, then finalize into average values for plotting/summary tables
-
-### ????
 
 # what is the % difference among rotenone lab duplicates?
 pct <- rot_dat %>%
@@ -256,6 +247,18 @@ sd_pct_diff <- format(round(sd_pct_diff, 2), nsmall = 2) %>%
 
 #### insert avg and sd values inline text
 
+```
+
+```{r}
+
+# modify sample names from Vogel Lake 2022-02-22 so that they are both just "surface" rather than "surface 1" and "surface 2"
+
+rot_dat %<>%
+  mutate(sample_name = case_when(
+    sample_name == "Vogel_Surface_1" ~ "Vogel_Surface",
+    sample_name == "Vogel_Surface_2" ~ "Vogel_Surface",
+    TRUE ~ sample_name
+  ))
 
 ```
 
@@ -299,7 +302,6 @@ rot_dat %>%
 <br>
 
 #### Figures
-
 
 ```{r, echo = F, fig.cap = "Average rotenone concentrations in Vogel Lake and North Vogel Lake, Fall 2021 through Spring 2022. "}
 
