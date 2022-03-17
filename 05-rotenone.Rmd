@@ -249,7 +249,7 @@ sd_pct_diff <- format(round(sd_pct_diff, 2), nsmall = 2) %>%
 
 ```
 
-```{r}
+```{r, echo = F}
 
 # modify sample names from Vogel Lake 2022-02-22 so that they are both just "surface" rather than "surface 1" and "surface 2"
 
