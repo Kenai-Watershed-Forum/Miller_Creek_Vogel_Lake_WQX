@@ -98,7 +98,7 @@ lake_wqx_dat <- read_sheet("https://docs.google.com/spreadsheets/d/1lS9eJ7kX91Il
             DO_mgl = as.character(DO_mgl),
             turbidity_ntu = as.character(turbidity_ntu),
             temp_c = as.character(temp_c),
-            spcond_uscm = as.character(temp_c)) %>%
+            spcond_uscm = as.character(spcond_uscm)) %>%
   
   # convert data format from wide to long
   pivot_longer(cols = c("pH","DO_mgl","turbidity_ntu","temp_c","spcond_uscm"),
@@ -392,8 +392,8 @@ dec21_lake_wqx_dat %>%
 <br>
 
 
-### December 2021
-December 2 and 3, 2021
+### January 2022
+January 4, 5, and 6, 2022
 
 ```{r ,echo = FALSE, fig.cap = "January 2022", fig.width=10, fig.height=11}
 
@@ -424,6 +424,42 @@ jan22_lake_wqx_dat %>%
           strip.text.y = element_text(angle = 360)) +
     ggtitle("January 2022 Water Quality All Sites")
 ```
+
+<br>
+
+### March 2022
+March 11, 12, and 13, 2022
+
+```{r ,echo = FALSE, fig.cap = "March 2022", fig.width=10, fig.height=11}
+
+# filter to mar 2022 data 
+mar22_lake_wqx_dat <- lake_wqx_dat %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date)) %>%
+  filter(month == "3",
+         year == "2022")
+
+# create plot
+mar22_lake_wqx_dat %>%
+  ggplot() +
+    geom_point(aes(sample_depth_m,val), size = 2) +
+    geom_line(aes(sample_depth_m,val)) +
+
+    coord_flip() +
+    facet_grid(site ~ parameter, scales = "free_x", shrink = T, 
+               labeller = labeller(parameter = param_names,
+                                   site = site_names)) +
+    ylab("") +
+    xlab("Depth (m)") +
+    theme_bw() +
+    points_theme +
+    scale_x_reverse() +
+    scale_y_continuous(n.breaks = 5) +
+    theme(panel.spacing = unit(1.2, "lines"),
+          strip.text.y = element_text(angle = 360)) +
+    ggtitle("March 2022 Water Quality All Sites")
+```
+
 
 
 
@@ -509,7 +545,8 @@ Note: some turbidity values near the benthic surface of each site visit are not 
 ```{r , echo = FALSE, fig.cap = "Conductivity (uS/cm)", fig.width=10, fig.height=8}
 # plot
 lake_wqx_dat %>%
-  filter(parameter == "spcond_uscm") %>%
+  filter(parameter == "spcond_uscm",
+         val < 200) %>%
   ggplot(aes(as.factor(sample_date),sample_depth_m)) +
   geom_tile(aes(fill = val)) +
   scale_y_reverse() +
@@ -523,7 +560,7 @@ lake_wqx_dat %>%
   ggtitle ("Conductivity")
 
 ```
-
+Note: Conductivity values > 200 uS/cm are not shown in order to improve visualization. These values were found at the benthos of some water bodies.
 
 <br>
 
