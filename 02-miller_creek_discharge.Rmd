@@ -4,7 +4,7 @@
 
 Hydrology fieldwork focusing on flow and discharge is being conducted throughout the Miller Creek drainage in Fall 2020 - Spring 2021.
 
--   Near the mouth of Miller Creek, a discharge measurement station was installed in October 2020. At this site a pressure transducer measures water level, and discharge measurements are collected periodically using an Acoustic Doppler Velocimeter. These data, along with staff plate observations, are being used to create a rating discharge curve.
+-   Near the mouth of Miller Creek, a discharge measurement station was installed in October 2020. At this site a pressure transducer measures water level, and discharge measurements are collected periodically using a SondeTek FlowTracker Acoustic Doppler Velocimeter. These data, along with staff plate observations, are being used to create a rating discharge curve.
 
 -   An experiment to study stream flow rate in Miller Creek was conducted September 15-17, 2021. A plug of dissolved salt (NaCl) was discharged in to the creek, and the resultant spike in conductivity was observed downstream 0.64 km stream distance.
 
@@ -81,15 +81,20 @@ discharge_dat <- read_sheet("https://docs.google.com/spreadsheets/d/1lS9eJ7kX91I
 miller_discharge_dat <- discharge_dat %>%
   filter(site == "Miller Creek Pressure Transducer 1")
 
+# save
+write.csv(miller_discharge_dat,"output/discharge_results/csv_miller_creek_discharge.csv", row.names = F)
+
 ```
 
 <br>
 
 ### Miller Creek Discharge Rating Curve
 
-A discharge station was established in October 2020 near the mouth of Miller Creek, including a staff plate and pressure transducer.
+A discharge station was established in October 2020 near the mouth of Miller Creek, including a staff plate and Orpheus Mini pressure transducer.
 
-Site visits have been made opportunistically depending on precipitation throughout Summer/Fall 2021. At each site visit, the pressure transducer is downloaded and a discharge measurement is collected using a SondeTek Flowtracker. See Figure \@ref(fig:rating-curve) for the discharge rates and staff plate values observed to date.
+Site visits were made opportunistically depending on precipitation throughout Summer/Fall 2021, and once in sSpring 2022. At each site visit, the pressure transducer is downloaded and a discharge measurement is collected using a SondeTek Flowtracker. See Figure \@ref(fig:rating-curve) for the discharge rates and staff plate values observed to date.
+
+A total of seven discharge measurements at the Miller Creek mouth site were made between Fall 2020 and Spring 2022.
 
 Once a minimum of eight discharge measurements are available in Fall 2021, a curve will be fit to the scatter plot of stage height vs. discharge. This relationship will be used in conjunction with pressure transducer data to create a flow hydrograph.
 
@@ -98,12 +103,43 @@ ggplotly(
   p <- miller_discharge_dat %>%
   ggplot(aes(Staff_Plate_Height, Q_Discharge_cfs, label = sample_date)) +
   geom_point() +
+  geom_smooth(method = "nls", formula = y ~ a*log(x)+b, se = F) +
+  stat_poly_eq(aes(label = after_stat(eq.label))) + 
   ggtitle("Miller Creek\nMeasurements for Discharge Rating Curve")
   )
+
+
+# note: ggpmisc equation annotation functions do not appear to work for plotly visualizations. How to annotate plotly with equations?! ggplopt show regression equation
+
+# show in ggplot static
+miller_discharge_dat %>%
+  ggplot(aes(Staff_Plate_Height, Q_Discharge_cfs, label = sample_date)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = y ~ log(x), se = F) +
+  stat_poly_eq(aes(label=paste(..eq.label..,..adj.rr.label.., sep = "~~~")), label.x = 1, geom="label",parse=TRUE) +
+  ggtitle("Miller Creek\nMeasurements for Discharge Rating Curve")
+
 
 ```
 
 <br>
+
+```{r}
+
+miller_discharge_dat %>%
+
+  ggplot(aes(Staff_Plate_Height, Q_Discharge_cfs, label = sample_date)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = y ~ log(x), se = F) +
+  #stat_poly_eq(aes(label = after_stat(eq.label))) + 
+  ggtitle("Miller Creek\nMeasurements for Discharge Rating Curve")
+
+```
+
+<br>
+
+<br>
+
 
 ### Discharge measurements at other sites
 
@@ -130,14 +166,14 @@ ggplotly(
 
 ### Pressure Transducer Data
 
-Work in progress here 8/10/2021
+An Orpheus Mini pressure transducer was deployed at the mouth of Miller Creek from October 2020 through September 2022
 
 ```{r, include = F}
 # directories by date
 
 ## to do: tidy up the file read-in process, what a mess
 
-## 20210524
+## 20210524 site visit / download
 dir <- "input/pressure_transducer_data/20210524/"
   
 # parameter 1
@@ -151,7 +187,7 @@ dir <- "input/pressure_transducer_data/20210524/"
   transform(date = dmy(date))
 
 
-## 20210624
+## 20210624 site visit / download
 dir <- "input/pressure_transducer_data/20210624/"
 
 # parameter 1
@@ -168,8 +204,26 @@ dir <- "input/pressure_transducer_data/20210624/"
   left_join(`0003_20210624`) %>%
   transform(date = dmy(date))
 
+
+## 20220515 site visit / download
+dir <- "input/pressure_transducer_data/20220515/"
+
+# parameter 1
+`0001_20220515` <- read_csv(paste0(dir,"0001_20220515.csv"))
+
+# parameter 2
+`0002_20220515` <- read_csv(paste0(dir,"0002_20220515.csv"))
+
+# parameter 3
+`0003_20220515` <- read_csv(paste0(dir,"0003_20220515.csv"))
+
+# join parameters together
+`20220515` <- left_join(`0001_20220515`,`0002_20220515`) %>%
+  left_join(`0003_20220515`) %>%
+  transform(date = dmy(date))
+
 ### join all download dates to single dataframe
-pt <- bind_rows(`20201014`,`20210624`) %>%
+pt <- bind_rows(`20201014`,`20210624`,`20220515`) %>%
   # format time to hms
   mutate(foo = as_hms(paste0(time,":00"))) %>%
   select(-time) %>%
@@ -183,7 +237,12 @@ pt <- bind_rows(`20201014`,`20210624`) %>%
   # make long format
   pivot_longer(cols = contains("parameter"),
                names_to = "param",
-               values_to = "val")
+               values_to = "val") %>%
+  # eliminate duplicate observations
+  distinct() %>%
+  filter(!is.na(val)) %>%
+  # remove "parameter3", which is not applicable
+  filter(param != "parameter3")
   
 
 ```
@@ -194,11 +253,14 @@ pt <- bind_rows(`20201014`,`20210624`) %>%
 pt %>%
   ggplot(aes(datetime,val)) +
   geom_point() +
-  facet_grid(param ~ .)
+  facet_grid(param ~ ., scales = "free_y")
 
 # to do : use anti_join method to excise non-instream data from plot
 # convert to plotly line chart?
 ```
+
+
+
 
 <br>
 

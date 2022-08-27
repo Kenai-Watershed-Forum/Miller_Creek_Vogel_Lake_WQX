@@ -67,7 +67,7 @@ points_theme <- theme(axis.title = element_text(size = 14, face = "bold"),
 select <- dplyr::select
 ```
 
-Lake water quality profiles were collected at 1-2 month intervals at five sites at 1 meter depth intervals. Hydrolab MS5 sondes were descended from an anchored boat centered over the deepest point of each lake. 
+Lake water quality profiles were collected at 1-2 month intervals at five sites at 1 meter depth intervals. Hydrolab MS5 sondes were descended from an anchored boat centered over the deepest point of each lake, and parameter values were recorded from a handheld reader once stabilized after 30-60 seconds. 
 
 Raw water quality field data is stored in a Google Sheet that can be viewed at <https://tinyurl.com/kwf-vogel-wqx-data>.
 
@@ -458,6 +458,41 @@ mar22_lake_wqx_dat %>%
     theme(panel.spacing = unit(1.2, "lines"),
           strip.text.y = element_text(angle = 360)) +
     ggtitle("March 2022 Water Quality All Sites")
+```
+
+<br>
+
+### June 2022
+June 16 and 17, 2022
+
+```{r ,echo = FALSE, fig.cap = "June 2022", fig.width=10, fig.height=11}
+
+# filter to jun 2022 data 
+jun22_lake_wqx_dat <- lake_wqx_dat %>%
+  mutate(month = month(sample_date),
+         year = year(sample_date)) %>%
+  filter(month == "6",
+         year == "2022")
+
+# create plot
+jun22_lake_wqx_dat %>%
+  ggplot() +
+    geom_point(aes(sample_depth_m,val), size = 2) +
+    geom_line(aes(sample_depth_m,val)) +
+
+    coord_flip() +
+    facet_grid(site ~ parameter, scales = "free_x", shrink = T, 
+               labeller = labeller(parameter = param_names,
+                                   site = site_names)) +
+    ylab("") +
+    xlab("Depth (m)") +
+    theme_bw() +
+    points_theme +
+    scale_x_reverse() +
+    scale_y_continuous(n.breaks = 5) +
+    theme(panel.spacing = unit(1.2, "lines"),
+          strip.text.y = element_text(angle = 360)) +
+    ggtitle("June 2022 Water Quality All Sites")
 ```
 
 
