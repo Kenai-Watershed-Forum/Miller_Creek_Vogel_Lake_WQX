@@ -1,3 +1,51 @@
+---
+title: "Miller Creek and Vogel Lake Water Quality"
+author: "Benjamin Meyer (ben@kenaiwatershed.org)"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+always_allow_html: true
+---
+
+# Introduction
+
+Placeholder
+
+
+
+<!--chapter:end:index.Rmd-->
+
+
+# Lake Water Quality Profiles
+
+Placeholder
+
+
+## Data by Month
+### January 2021
+### March 2021
+### May 2021
+### June 2021
+### August 2021
+### September 2021
+### December 2021
+### January 2022
+### March 2022
+### June 2022
+## Overall Data
+#### Dissolved Oxygen
+#### pH
+#### Turbidity
+#### Conductivity
+#### Water Temperature
+## Site Summaries
+
+<!--chapter:end:01-lake_depth_profiles.Rmd-->
+
 # Miller Creek Discharge & Flow Rate
 
 ### Introduction
@@ -95,7 +143,7 @@ A discharge station was established in October 2020 near the mouth of Miller Cre
 
 Site visits were made opportunistically depending on precipitation throughout Summer/Fall 2021, and once in Spring 2022. At each site visit, the pressure transducer is downloaded and a discharge measurement is collected using a SondeTek Flowtracker. See Figure \@ref(fig:rating-curve1) for the discharge rates and staff plate values observed to date.
 
-A total of seven discharge measurements at the Miller Creek mouth site were made between Fall 2020 and Spring 2022. A curve was fit to the scatter plot of stage height vs. discharge. This relationship may be used in conjunction with pressure transducer data (\@ref(fig:rating-curve2) to create a flow hydrograph.
+A total of seven discharge measurements at the Miller Creek mouth site were made between Fall 2020 and Spring 2022. A curve was fit to the scatter plot of stage height vs. discharge. This relationship may be used in conjunction with pressure transducer data to create a flow hydrograph.
 
 ```{r rating-curve, eval = F, echo=FALSE, fig.cap="Measurements for Miller Creek Discharge Rating Curve"}
 
@@ -135,22 +183,17 @@ xfun::embed_file("output/discharge_results/miller_creek_discharge.xlsx", name = 
 ```
 
 ```{r rating-curve1, echo = F}
-knitr::include_graphics("output/discharge_results/discharge_rating_curve_20220912/Slide1.jpg")
+knitr::include_graphics("output/discharge_results/discharge_rating_curve_20220912.jpg")
 ```
 
 
 
-```{r rating-curve2, echo = F}
-# next: get relationship between PT data and discharge, then apply this relationship to get continuous discharge data
-knitr::include_graphics("output/discharge_results/discharge_rating_curve_20220912/Slide2.jpg")
-
-```
 
 <br>
 
 ### Pressure Transducer Data
 
-An Orpheus Mini pressure transducer was deployed at the mouth of Miller Creek from October 2020 through current day (as of `r Sys.Date()`). By matching staff plate observations with simultaneous pressure transducer records, we may then display a record of discharge.
+An Orpheus Mini pressure transducer was deployed at the mouth of Miller Creek from October 2020 through September 2022
 
 ```{r, include = F}
 # directories by date
@@ -233,15 +276,14 @@ pt <- bind_rows(`20201014`,`20210624`,`20220515`) %>%
 
 <br>
 
-```{r, echo = F}
+```{r, include = F}
 pt %>%
   ggplot(aes(datetime,val)) +
   geom_point() +
   facet_grid(param ~ ., scales = "free_y")
 
 # to do : use anti_join method to excise non-instream data from plot
-# convert to plotly line chart? 
-# make y axis for param 1 exponential
+# convert to plotly line chart?
 ```
 
 
@@ -350,3 +392,56 @@ In Figure \@ref(fig:nacl-fig) we can observe the following:
 -   [Return to baseline conductivity levels:]{.ul} 9/16/2021 15:00 (19.5 hrs after deployment)
 
 Based on these results, peak concentration of the dissolved solute traveled though this section of Miller Creek at [**0.11 km/h (0.06 mph)**]{.ul}.
+
+<!--chapter:end:02-miller_creek_discharge.Rmd-->
+
+# Watershed Mapping
+
+-   Watershed mapping efforts for this project include a combination of on the ground fieldwork and GIS based approaches.
+
+-   An ArcGIS Online interactive map outlining fieldwork sites and associated results is found at the following link: <https://arcg.is/0Djmay>
+
+-   Technicians walked the Miller Creek corridor on foot on May 27-28, 2021 to identify hydrologic features that may be difficult to identify from the air, such as seepages. The locations are visible in the ArcGIS Online map in the "Hydrologic Connectivity" layer, and may be downloaded here as .gpx files:
+
+    -   All hydrologic features (n = 67): [miller_creek_features.gpx](https://drive.google.com/file/d/1PQu1v6nTD6MB3YStwBF3mgV0wydKziIa/view?usp=sharing "link")
+
+    -   Only seepage hydrologic features (n = 16): [miller_creek_seepage_features.gpx](https://drive.google.com/file/d/1_c4FQDR0t2sW_yphFuuiSpRmydPzjR3i/view?usp=sharing "link")
+
+[![Click the image above to access the full ArcGIS Online map](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/1GeLTX)
+
+<!--chapter:end:03-watershed_mapping.Rmd-->
+
+
+# Fish Rescue
+
+Placeholder
+
+
+## Summary
+## Methods
+## Results
+## Photos
+
+<!--chapter:end:04-fish_rescue.Rmd-->
+
+
+# Rotenone monitoring
+
+Placeholder
+
+
+## Sampling schedule
+## Rotenone sampling map
+## Rotenone concentration results
+### Sample results
+#### Tables
+#### Figures
+
+<!--chapter:end:05-rotenone.Rmd-->
+
+# Summary
+
+Overall results described and interpreted here.
+
+<!--chapter:end:06-summary.Rmd-->
+
