@@ -93,9 +93,9 @@ write.csv(miller_discharge_dat,"output/discharge_results/csv_miller_creek_discha
 
 A discharge station was established in October 2020 near the mouth of Miller Creek, including a staff plate and Orpheus Mini pressure transducer.
 
-Site visits were made opportunistically depending on precipitation throughout Summer/Fall 2021, and once in Spring 2022. At each site visit, the pressure transducer is downloaded and a discharge measurement is collected using a SondeTek Flowtracker. See Figure \@ref(fig:rating-curve1) for the discharge rates and staff plate values observed to date.
+Site visits were made opportunistically depending on precipitation throughout Summer/Fall 2021, and once in Spring 2022. At each site visit, the pressure transducer is downloaded and a discharge measurement is collected using a SondeTek Flowtracker Acoustic Doppler Velocimeter. See Figure \@ref(fig:rating-curve1) for the discharge rates and staff plate values observed to date.
 
-A total of seven discharge measurements at the Miller Creek mouth site were made between Fall 2020 and Spring 2022. A curve was fit to the scatter plot of stage height vs. discharge. This relationship may be used in conjunction with pressure transducer data (\@ref(fig:rating-curve2) to create a flow hydrograph.
+A total of seven discharge measurements at the Miller Creek mouth site were made between Fall 2020 and Spring 2022. A curve was fit to the scatter plot of stage height vs. discharge.
 
 ```{r rating-curve, eval = F, echo=FALSE, fig.cap="Measurements for Miller Creek Discharge Rating Curve"}
 
@@ -126,9 +126,7 @@ miller_discharge_dat %>%
 
 ```
 
-
 The rating curve for the outlet of Miller Creek and it's source data may be accessed from the downloadable Excel file below:
-
 
 ```{r, echo = F}
 xfun::embed_file("output/discharge_results/miller_creek_discharge.xlsx", name = "Miller Creek Outlet Rating Curve Data")
@@ -137,8 +135,6 @@ xfun::embed_file("output/discharge_results/miller_creek_discharge.xlsx", name = 
 ```{r rating-curve1, echo = F}
 knitr::include_graphics("output/discharge_results/discharge_rating_curve_20220912/Slide1.jpg")
 ```
-
-
 
 ```{r rating-curve2, echo = F}
 # next: get relationship between PT data and discharge, then apply this relationship to get continuous discharge data
@@ -150,7 +146,21 @@ knitr::include_graphics("output/discharge_results/discharge_rating_curve_2022091
 
 ### Pressure Transducer Data
 
-An Orpheus Mini pressure transducer was deployed at the mouth of Miller Creek from October 2020 through current day (as of `r Sys.Date()`). By matching staff plate observations with simultaneous pressure transducer records, we may then display a record of discharge.
+An Orpheus Mini pressure transducer (PT) was deployed at the mouth of Miller Creek from October 2020 through current day (as of `r Sys.Date()`). Values were logged at 0.25 hr intervals.
+
+We plotted staff plate observations with their simultaneous pressure transducer records and fit a linear regression. The resulting relationship (XXXXX, where y is PT value and x is stream discharge) can be used to translate the pressure transducer time series into a stream discharge time series, also known as a flow hydrograph (\@ref(fig:rating-curve2) following the basic approach outlined in [Covino et al. 2020.](https://openecodatalab.github.io/Hydrology-Online/hydrology/7_rating_curve/7_rating_curve.html)
+
+Notes on data inputs to the flow hydrograph for Miller Creek:
+
+1.  The quantity of paired discharge measurements and staff plate observations (7) is less than the minimum quantity desired (8) to record a robust relationship.
+
+2.  The linear relationship does not meet assumptions of statistical normality typically applied for such circumstances. Both of these conditions are a result of the remote location of the project site and the challenging logistics required to visit. While additional field observations would create more precise discharge values, the general shape of the flow hydrography would remain unchanged.
+
+3.  Pressure transducer time series data is missing or excised for the following time periods:
+
+    -   5/24/2021 and 6/24/2022 (logger was not deployed due to site stability concerns)
+
+    -   11/28/21 and 12/1/2022 (logger values \< 0.05, equipment likely affected by ice)
 
 ```{r, include = F}
 # directories by date
@@ -224,7 +234,7 @@ pt <- bind_rows(`20201014`,`20210624`,`20220515`) %>%
                values_to = "val") %>%
   # eliminate duplicate observations
   distinct() %>%
-  filter(!is.na(val)) %>%
+  #filter(!is.na(val)) %>%
   # remove "parameter3", which is not applicable
   filter(param != "parameter3")
   
@@ -234,16 +244,71 @@ pt <- bind_rows(`20201014`,`20210624`,`20220515`) %>%
 <br>
 
 ```{r, echo = F}
-pt %>%
-  ggplot(aes(datetime,val)) +
-  geom_point() +
-  facet_grid(param ~ ., scales = "free_y")
+# plot raw pt time series
 
-# to do : use anti_join method to excise non-instream data from plot
-# convert to plotly line chart? 
-# make y axis for param 1 exponential
+# remove erroneous data late november 2021
+pt_remove <- pt %>%
+  filter(param == "parameter1") %>%
+  filter(between(date,as.Date("2021-11-28"),as.Date("2021-12-01"))) %>%
+  select(date)
+pt <- anti_join(pt,pt_remove)
+
+# need to make this an anti_join table
+
+  
+# plot
+#pt %>%
+#  ggplot(aes(datetime,val)) +
+#  geom_line(na.rm = F)
+
+
+
+
+p <- pt %>%
+#   create hourly average values to smooth visualization
+    group_by(datetime_round = floor_date(datetime,"day")) %>%
+    summarise(mean_val = mean(val), na.rm = T) %>%
+  # plot
+  ggplot(aes(datetime_round,mean_val)) +
+  geom_path(na.rm = F)
+p
+ggplotly(p)
 ```
 
+
+```{r}
+
+ 
+p <- pt %>%
+  filter(param == "parameter1") %>%
+    # remove negative values
+  #filter(val >= -0.5 ) %>%
+    # rescale PT observations between zero and 1
+#  mutate(val_sc = rescale(val, to = c(0,1))) %>%
+
+    # apply conversion from PT values to discharge values
+    mutate(Q = 53.437*val^.5179) %>%
+  
+      # create hourly average values to smooth visualization
+    group_by(datetime_round = floor_date(datetime,"day")) %>%
+    summarise(mean_Q = mean(Q)) %>%
+  
+  ggplot(aes(datetime_round,mean_Q)) +
+  geom_path() 
+ 
+ggplotly(p)
+
+
+# to do : use anti_join method to excise non-instream data from plot
+
+
+# y = 0.0122x - 0.0592
+# x = (y + 0.0592)/0.0122
+# resultant discharge values are an order of magnitude past realistic.
+
+# new
+# Q = 53.457pt^0.5179
+```
 
 <br>
 
@@ -268,13 +333,11 @@ ggplotly(
 
 ```
 
-
 <br>
 
 ### Stream Flow Rate Experiment
 
 On September 15-17, 2021 we conducted an experiment to examine stream flow rate in Miller Creek. We measured downstream transport time of dissolved solutes by deploying a plug of dissolved salt and measuring a resultant change in conductivity at a site downstream.
-
 
 ##### Methods
 
@@ -285,11 +348,12 @@ We deployed a plug of dissolved salt into the Miller Creek stream channel and me
 ```{r nacl-map, echo = FALSE, fig.cap="Stream Flow Rate Study Area. Stream distance between the NaCl release site and the downstream measurement site is 0.63 km (0.39 mi)."}
 knitr::include_graphics('images/stream_flow_rate_sites.png')
 ```
+
 <br>
 
 The Vogel Lake / Miller Creek system is a low-gradient drainage with little observable flow within 0.5 miles downstream of the lake outlet. We deployed our salt plug downstream from the Vogel Lake outlet at the first site with visibly evident surface flow, which was over the top of the first downstream beaver dam.
 
-We released 140 lbs of dissolved NaCl by dissolving appx 15 lbs at a time in a 35 gallon trash can, then discharging it on the downstream side of the beaver dam into the stream channel. Our downstream site monitoring conductivity was 0.63 km (0.39 mi) downstream center-channel. 
+We released 140 lbs of dissolved NaCl by dissolving appx 15 lbs at a time in a 35 gallon trash can, then discharging it on the downstream side of the beaver dam into the stream channel. Our downstream site monitoring conductivity was 0.63 km (0.39 mi) downstream center-channel.
 
 To record conductivity we used a pair of simultaneously deployed Hydrolab MS5 Sondes suspended from a floating buoy. We programmed the sondes to record at 0.25 hour intervals. We examined the resultant time series for exposure or errors and removed these data points. We averaged conductivity values between the two Hydrolab units in the final results.
 
@@ -341,12 +405,12 @@ ggplotly(
 
 In Figure \@ref(fig:nacl-fig) we can observe the following:
 
--   [Initial NaCl Deployment:]{.ul} 9/15/2021 19:30
+-   [Initial NaCl Deployment:]{.underline} 9/15/2021 19:30
 
--   [Start of the rising limb of the conductivity spike:]{.ul} 9/15/2021 22:00 (2.5 hrs after deployment)
+-   [Start of the rising limb of the conductivity spike:]{.underline} 9/15/2021 22:00 (2.5 hrs after deployment)
 
--   [Maximum conductivity peak (\~20% above baseline values):]{.ul} 01:30 9/16/2021 (6.0 hours after deployment)
+-   [Maximum conductivity peak (\~20% above baseline values):]{.underline} 01:30 9/16/2021 (6.0 hours after deployment)
 
--   [Return to baseline conductivity levels:]{.ul} 9/16/2021 15:00 (19.5 hrs after deployment)
+-   [Return to baseline conductivity levels:]{.underline} 9/16/2021 15:00 (19.5 hrs after deployment)
 
-Based on these results, peak concentration of the dissolved solute traveled though this section of Miller Creek at [**0.11 km/h (0.06 mph)**]{.ul}.
+Based on these results, peak concentration of the dissolved solute traveled though this section of Miller Creek at [**0.11 km/h (0.06 mph)**]{.underline}.
