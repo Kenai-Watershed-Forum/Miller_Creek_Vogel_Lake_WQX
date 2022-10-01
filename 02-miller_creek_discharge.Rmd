@@ -158,9 +158,10 @@ Notes on data inputs to the flow hydrograph for Miller Creek:
 
 3.  Pressure transducer time series data is missing or excised for the following time periods:
 
-    -   5/24/2021 and 6/24/2022 (logger was not deployed due to site stability concerns)
+```{r echo = F}
+xfun::embed_file("output/discharge_results/miller_creek_discharge_excise.csv", name = "Download Miller Creek Pressure Transducer Data Missing / Excised Time Periods")
+```
 
-    -   11/28/21 and 12/1/2022 (logger values \< 0.05, equipment likely affected by ice)
 
 ```{r, include = F}
 # directories by date
@@ -236,17 +237,60 @@ pt <- bind_rows(`20201014`,`20210624`,`20220515`) %>%
   distinct() %>%
   #filter(!is.na(val)) %>%
   # remove "parameter3", which is not applicable
-  filter(param != "parameter3")
+  filter(param != "parameter3") %>%
+  # add site name, year, and yday
+  mutate(site = "miller_creek_streamflow",
+         year = year(date),
+         day = yday(date)) 
   
-
 ```
 
 <br>
 
 ```{r, echo = F}
-# plot raw pt time series
+library(anytime)
 
-# remove erroneous data late november 2021
+# plot raw pt time series with bad data excised
+
+# read in and prep excise table
+pt_excise <- read.csv("output/discharge_results/miller_creek_discharge_excise.csv") %>%
+  transform(start_date = yday(anydate(start_date)),
+            end_date = anydate(end_date)) %>%
+  select(-notes,-period)
+
+# use anti_join approach as outlined in thermal imagery example
+flagged_data <- inner_join(pt,pt_excise)
+
+
+
+
+############## 9/30/22 working here to adapt time series flag function. ############
+
+
+
+
+# apply useData = 0 flags to flagged data
+#flagged_data <- inner_join(dat,flagged_data) %>%
+#  filter(day >= day_start & day <= day_stop) %>%
+#  mutate(useData = 0) %>%
+#  select(-day_start,-day_stop)
+
+# apply useData = 1 to non-flagged data
+# nonflagged_data <- anti_join(dat,flagged_data) %>%
+#  mutate(useData = 1)
+
+# rejoin flagged and non-flagged data in same dataframe
+# dat <- bind_rows(flagged_data,nonflagged_data)
+
+
+
+
+
+
+# apply excise table to pt time series
+z <- anti
+
+# remove erroneous data with excise table
 pt_remove <- pt %>%
   filter(param == "parameter1") %>%
   filter(between(date,as.Date("2021-11-28"),as.Date("2021-12-01"))) %>%
@@ -256,12 +300,6 @@ pt <- anti_join(pt,pt_remove)
 # need to make this an anti_join table
 
   
-# plot
-#pt %>%
-#  ggplot(aes(datetime,val)) +
-#  geom_line(na.rm = F)
-
-
 
 
 p <- pt %>%
