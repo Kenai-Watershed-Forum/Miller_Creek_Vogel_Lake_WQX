@@ -1,5 +1,10 @@
-period,start_date,end_date,notes
-1,11/28/2021,12/1/2021,"logger values are < -0.05, equipment likely affected by ice"
-2,4/24/2021,4/29/2021,"unrealistic shape of rising limb of hydrograph, possible equipment error"
-3,5/24/2021,6/24/2021,logger was not deployed due to site stability concerns
-4,10/15/2021,10/18/2021,logger was not yet deployed
+site,year,start_day,end_day,notes
+miller_creek_streamflow,2021,332,335,"logger values are < -0.05, equipment likely affected by ice"
+miller_creek_streamflow,2021,114,119,"unrealistic shape of rising limb of hydrograph, possible equipment error"
+miller_creek_streamflow,2021,144,175,logger was not deployed due to site stability concerns
+miller_creek_streamflow,2020,289,292,logger was not yet deployed
+,,,,
+,,,,
+,,,,
+,,,,
+,,,, 
