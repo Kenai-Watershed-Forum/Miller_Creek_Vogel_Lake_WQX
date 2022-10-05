@@ -217,6 +217,27 @@ dir <- "input/pressure_transducer_data/20220515/"
   left_join(`0003_20220515`) %>%
   transform(date = dmy(date))
 
+
+## 20221002 site visit/download
+dir <- "input/pressure_transducer_data/20221002/"
+
+# parameter 1
+`0001_20221002` <- read_csv(paste0(dir,"0001_20221002.csv"))
+
+# parameter 2
+`0002_20221002` <- read_csv(paste0(dir,"0002_20221002.csv"))
+
+# parameter 3
+`0003_20221002` <- read_csv(paste0(dir,"0003_20221002.csv"))
+
+# join parameters together
+`20221002` <- left_join(`0001_20221002`,`0002_20221002`) %>%
+  left_join(`0003_20221002`) %>%
+  transform(date = dmy(date))
+
+
+
+
 ### join all download dates to single dataframe
 pt <- bind_rows(`20201014`,`20210624`,`20220515`) %>%
   # format time to hms
