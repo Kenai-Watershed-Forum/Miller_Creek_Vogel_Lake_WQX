@@ -89,11 +89,14 @@ write.csv(miller_discharge_dat,"output/discharge_results/csv_miller_creek_discha
 
 <br>
 
-### Miller Creek Discharge Rating Curve
+
+### Methods
+
+#### Miller Creek Discharge Rating Curve
 
 A discharge station was established in October 2020 near the mouth of Miller Creek, including a staff plate and Orpheus Mini pressure transducer.
 
-Site visits were made opportunistically depending on precipitation throughout Summer/Fall 2021, and once in Spring 2022. At each site visit, the pressure transducer is downloaded and a discharge measurement is collected using a SondeTek Flowtracker Acoustic Doppler Velocimeter. See Figure \@ref(fig:rating-curve1) for the discharge rates and staff plate values observed to date.
+Site visits were made opportunistically depending on precipitation throughout Summer/Fall 2021, and once each in Spring 2022 and Fall 2022. At each site visit, the pressure transducer is downloaded and a typically a discharge measurement is also collected using a SondeTek Flowtracker Acoustic Doppler Velocimeter. See Figure \@ref(fig:rating-curve1) for the discharge rates and staff plate values observed to date.
 
 A total of seven discharge measurements at the Miller Creek mouth site were made between Fall 2020 and Spring 2022. A curve was fit to the scatter plot of stage height vs. discharge.
 
@@ -144,29 +147,34 @@ knitr::include_graphics("output/discharge_results/discharge_rating_curve_2022091
 
 <br>
 
-### Pressure Transducer Data
+#### Pressure Transducer Data
 
 An Orpheus Mini pressure transducer (PT) was deployed at the mouth of Miller Creek from October 2020 through current day (as of `r Sys.Date()`). Values were logged at 0.25 hr intervals.
 
-We plotted staff plate observations with their simultaneous pressure transducer records and fit a linear regression. The resulting relationship (XXXXX, where y is PT value and x is stream discharge) can be used to translate the pressure transducer time series into a stream discharge time series, also known as a flow hydrograph (\@ref(fig:rating-curve2) following the basic approach outlined in [Covino et al. 2020.](https://openecodatalab.github.io/Hydrology-Online/hydrology/7_rating_curve/7_rating_curve.html)
+We plotted staff plate observations with their simultaneous pressure transducer (PT) records and fit a linear regression. The resulting relationship (y = 0.0122x - 0.0592), where y is the PT value and x is stream discharge) can be used to translate the pressure transducer time series into a stream discharge time series, also known as a flow hydrograph (\@ref(fig:rating-curve2) following the basic approach outlined in [Covino et al. 2020.](https://openecodatalab.github.io/Hydrology-Online/hydrology/7_rating_curve/7_rating_curve.html)
 
-Notes on data inputs to the flow hydrograph for Miller Creek:
+Notes and caveats on data inputs to the flow hydrograph for Miller Creek:
 
-1.  The quantity of paired discharge measurements and staff plate observations (7) is less than the minimum quantity desired (8) to record a robust relationship.
+1.  The quantity of paired discharge measurements and staff plate observations (7) is less than the minimum quantity desired (8) to record a rating curve.
 
-2.  The linear relationship does not meet assumptions of statistical normality typically applied for such circumstances. Both of these conditions are a result of the remote location of the project site and the challenging logistics required to visit. While additional field observations would create more precise discharge values, the general shape of the flow hydrography would remain unchanged.
+2.  The linear relationship does not meet assumptions of statistical normality typically applied for such circumstances. The low number of discharge observations is a result of the remote location of the project site and the challenging logistics required to visit. While additional field observations would create more precise discharge values, the general shape of the flow time series would remain unchanged.
 
-3.  Pressure transducer time series data is missing or excised for the following time periods:
+3.  Some pressure transducer time series data is either missing or should be excised for reasons including being affected by ice, exposure to air, or device removal due to concerns of site stability. Non-useful time periods are summarised in the downloadable table below.
 
 ```{r echo = F}
 xfun::embed_file("output/discharge_results/miller_creek_discharge_excise.csv", name = "Download Miller Creek Pressure Transducer Data Missing / Excised Time Periods")
 ```
 
+As of `r Sys.Date()`, an insufficient number of discharge observations exist to make a reliable discharge rating curve for Miller Creek. As a result, the pressure transducer data in \@ref(fig:pt-data) is shown in raw form rather than as converted to stream discharge values.
+
+Currently, available field observations produce a rating curve that translates to streamflow estimates ranging from 2.6 cfs  to 187.3 cfs. These are likely an unreasonable estimate, given that the range of discharge values observed throughout the project (2021 - 2022) was between 4 cfs and 35 cfs.
+
+Kenai Watershed Forum staff will continue to visit the site opportunistically throughout Summer 2023, and aim to gain sufficient discharge observations to create a reliable rating curve. We will consult with state and federal agency hydrologists to determine if alternative methods may be applied to develop a rating curve. These data may be useful in understanding management needs for potential future pike barriers.
 
 ```{r, include = F}
 # directories by date
 
-## to do: tidy up the file read-in process, what a mess
+## to do: tidy up the file read-in process
 
 ## 20210524 site visit / download
 dir <- "input/pressure_transducer_data/20210524/"
@@ -239,7 +247,7 @@ dir <- "input/pressure_transducer_data/20221002/"
 
 
 ### join all download dates to single dataframe
-pt <- bind_rows(`20201014`,`20210624`,`20220515`) %>%
+pt <- bind_rows(`20201014`,`20210624`,`20220515`,`20221002`) %>%
   # format time to hms
   mutate(foo = as_hms(paste0(time,":00"))) %>%
   select(-time) %>%
@@ -268,97 +276,73 @@ pt <- bind_rows(`20201014`,`20210624`,`20220515`) %>%
 
 <br>
 
-```{r, echo = F}
+```{r pt-data, echo = F}
 library(anytime)
+library(magrittr)
 
 # plot raw pt time series with bad data excised
 
 # read in and prep excise table
 pt_excise <- read.csv("output/discharge_results/miller_creek_discharge_excise.csv") %>%
-  transform(start_date = yday(anydate(start_date)),
-            end_date = anydate(end_date)) %>%
-  select(-notes,-period)
+  select(-notes) %>%
+  filter(!is.na(start_day))
 
 # use anti_join approach as outlined in thermal imagery example
-flagged_data <- inner_join(pt,pt_excise)
+flagged_data <- inner_join(pt,pt_excise,by = c("param","site","year")) %>%
+# apply useData = 0 flags to flagged data (e.g. do not use this data)
 
-
-
-
-############## 9/30/22 working here to adapt time series flag function. ############
-
-
-
-
-# apply useData = 0 flags to flagged data
-#flagged_data <- inner_join(dat,flagged_data) %>%
-#  filter(day >= day_start & day <= day_stop) %>%
-#  mutate(useData = 0) %>%
-#  select(-day_start,-day_stop)
+  filter(day >= start_day & day <= end_day) %>%
+  mutate(useData = 0) %>%
+  select(-start_day,-end_day)
 
 # apply useData = 1 to non-flagged data
-# nonflagged_data <- anti_join(dat,flagged_data) %>%
-#  mutate(useData = 1)
+ nonflagged_data <- anti_join(pt,flagged_data) %>%
+  mutate(useData = 1)
 
 # rejoin flagged and non-flagged data in same dataframe
-# dat <- bind_rows(flagged_data,nonflagged_data)
-
-
-
-
-
-
-# apply excise table to pt time series
-z <- anti
-
-# remove erroneous data with excise table
-pt_remove <- pt %>%
-  filter(param == "parameter1") %>%
-  filter(between(date,as.Date("2021-11-28"),as.Date("2021-12-01"))) %>%
-  select(date)
-pt <- anti_join(pt,pt_remove)
-
-# need to make this an anti_join table
-
+pt <- bind_rows(flagged_data,nonflagged_data) 
+ 
+# convert useData == 0 to val = NA; keep datetime stamp
+pt %<>% 
+ # mutate(val1 = na_if(val,useData == 0))
+  mutate(val = if_else(useData == "0", NA_character_,as.character(val)))
   
 
-
+# plot
 p <- pt %>%
+    filter(param == "parameter2",
+           val > -0.1,
+           !is.na(val),
+           useData == 1) %>%
 #   create hourly average values to smooth visualization
-    group_by(datetime_round = floor_date(datetime,"day")) %>%
-    summarise(mean_val = mean(val), na.rm = T) %>%
+    #group_by(datetime_round = floor_date(datetime,"day")) %>%
+    #summarise(mean_val = mean(val, na.rm = T)) %>%
   # plot
-  ggplot(aes(datetime_round,mean_val)) +
-  geom_path(na.rm = F)
+  ggplot(aes(datetime,val)) +
+  geom_point() +
+  ggtitle("Miller Creek Pressure Transducer Fall 2020 - Fall 2022") +
+  xlab("Date") +
+  ylab("Pressure Transducer Value")
 p
 ggplotly(p)
 ```
 
 
-```{r}
+```{r, echo = F}
 
- 
-p <- pt %>%
-  filter(param == "parameter1") %>%
-    # remove negative values
-  #filter(val >= -0.5 ) %>%
-    # rescale PT observations between zero and 1
-#  mutate(val_sc = rescale(val, to = c(0,1))) %>%
+# plot as PT converted to discharge
+#p <- pt %>%
+#    filter(val > -0.1,
+#           !is.na(val)) %>%
+#   create hourly average values to smooth visualization
+#    group_by(datetime_round = floor_date(datetime,"day")) %>%
+#    summarise(mean_val = mean(val, na.rm = T)) %>%
 
     # apply conversion from PT values to discharge values
-    mutate(Q = 53.437*val^.5179) %>%
+#    mutate(mean_Q = 53.437*mean_val^.5179) %>%
   
-      # create hourly average values to smooth visualization
-    group_by(datetime_round = floor_date(datetime,"day")) %>%
-    summarise(mean_Q = mean(Q)) %>%
-  
-  ggplot(aes(datetime_round,mean_Q)) +
-  geom_path() 
- 
-ggplotly(p)
-
-
-# to do : use anti_join method to excise non-instream data from plot
+#  ggplot(aes(datetime_round,mean_Q)) +
+#  geom_path() 
 
 
 # y = 0.0122x - 0.0592
@@ -367,11 +351,13 @@ ggplotly(p)
 
 # new
 # Q = 53.457pt^0.5179
+
+# notes: stream discharge values produced from this conversion are unrealistic.
 ```
 
 <br>
 
-### Discharge measurements at other sites
+#### Discharge measurements at other sites
 
 Additional discharge measurements were taken throughout Summer 2021 at two additional sites near Vogel Lake, near the outlets of Kuguyuk Pond and Bird Pond. See Figure \@ref(fig:other-discharge) for discharge values observed to date.
 
@@ -394,13 +380,9 @@ ggplotly(
 
 <br>
 
-### Stream Flow Rate Experiment
+#### Stream Flow Rate Experiment
 
-On September 15-17, 2021 we conducted an experiment to examine stream flow rate in Miller Creek. We measured downstream transport time of dissolved solutes by deploying a plug of dissolved salt and measuring a resultant change in conductivity at a site downstream.
-
-##### Methods
-
-We deployed a plug of dissolved salt into the Miller Creek stream channel and measured conductivity continuously at a downstream site. See Figure \@ref(fig:nacl-map) for salt deployment and conductivity monitoring sites.
+On September 15-17, 2021 we conducted an experiment to examine stream flow rate in Miller Creek. We measured downstream transport time of dissolved solutes by deploying a plug of dissolved salt and measuring a resultant change in conductivity at a site downstream. We deployed a plug of dissolved salt into the Miller Creek stream channel and measured conductivity continuously at a downstream site. See Figure \@ref(fig:nacl-map) for salt deployment and conductivity monitoring sites.
 
 <br>
 
@@ -445,7 +427,7 @@ hl <- hl %>%
 
 <br>
 
-##### Results
+##### Streamflow Rate Results
 
 We measured a readily evident rise in conductivity values at the downstream monitoring site. See Figure \@ref(fig:nacl-fig) for the time series of conductivity data.
 

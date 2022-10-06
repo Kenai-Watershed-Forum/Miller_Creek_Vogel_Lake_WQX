@@ -52,11 +52,9 @@ points_theme <- theme(axis.title = element_text(size = 14, face = "bold"),
 select <- dplyr::select
 ```
 
-Rotenone application was performed in early October 2021 by ADF&G. The treated bodies of water included Vogel Lake, North Vogel Lake, and Miller Creek. ADF&G collected pre and post-treatment water samples as part of the treatment event, and Kenai Watershed Forum monitored degradation through Summer 2022.
+Rotenone application was performed in early October 2021 by ADF&G staff. The treated bodies of water included Vogel Lake, North Vogel Lake, and Miller Creek. ADF&G collected pre and post-treatment water samples as part of the treatment event, and Kenai Watershed Forum monitored degradation through Summer 2022 when levels fell to undetectable. 
 
-Field sampling and analytical methods generally followed those described in [@couture2021]. We collected a composite grab sample from two locations at a depth of 0.5 m near the center of each lake prior to rotenone treatment.
-
-Following treatment, we collcted lake water samples at a depth of 0.5 m from two locations around the center of the lake either as a grab sample or with a Kemmerer sampler. For each strata of each lake, a single composite sample was created from the two locations. For benthic samples, the Kemmerer sampler was lowered to a depth within 2 m from the bottom in the two locations around the center of the lake. The collected water from tow locations was then combined into a single 1 L composite sample. All samples were collected into sterilized 1 L amber glass bottles, immediately chilled on ice, stored out of the light and transported to the Applied Science, Engineering and Technology (ASET) Lab located at the University of Alaska Anchorage (UAA) within 72 h of collection. Upon arrival to the lab all samples were stored in the dark at 4°C and analyzed via high performance [liquid chromatography](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/liquid-chromatography "Learn more about liquid chromatography from ScienceDirect's AI-generated Topic Pages") tandem mass spectrometry (HPLC-MS/MS) within seven days of collection.
+Field sampling and analytical methods generally followed those described in [Couture et al. 2022](https://www.sciencedirect.com/science/article/pii/S0045653521029507?casa_token=ay4PaETNCSQAAAAA:_IZ-AVNjAqJ4cdwnVLYAoXmbG5KvzPbpQ8aTeu54QqIzDietLnk1Xe_uj5z93IzrNsoCRwsSOaM). Prior to rotenone treatment, we collected a composite grab sample from two locations at a depth of 0.5 m near the center of each lake. Following treatment, we collected lake water samples at a depth of 0.5 m from two locations around the center of the lake either as a grab sample or with a Kemmerer sampler. For each strata of each lake, a single composite sample was created from the two locations. For benthic samples, the Kemmerer sampler was lowered to a depth within 2 m from the bottom in the same two locations around the center of the lake. The collected water from two locations was then combined into a single 1 L composite sample. All samples were collected into sterilized 1 L amber glass bottles, immediately chilled on ice, stored out of the light and transported to the Applied Science, Engineering and Technology (ASET) Lab located at the University of Alaska Anchorage (UAA) within 72 h of collection. Upon arrival to the lab all samples were stored in the dark at 4°C and analyzed via high performance [liquid chromatography](https://www.sciencedirect.com/topics/earth-and-planetary-sciences/liquid-chromatography "Learn more about liquid chromatography from ScienceDirect's AI-generated Topic Pages") tandem mass spectrometry (HPLC-MS/MS) within seven days of collection.
 
 ## Sampling schedule
 
@@ -81,7 +79,8 @@ dat %>%
 
 ## Rotenone sampling map
 
-*Map of sampling sites and table of coordinates forthcoming here*
+[![Click the image above to access the full ArcGIS Online map. The map layer titled "Rotenone Sampling" contains interactive click-able points with sampling details including coordinates.](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/1GeLTX)
+
 
 <br>
 
@@ -276,7 +275,7 @@ A table of final results that have been integrated into a single dataframe and r
 
 -   [Link: Rotenone Degradation Final Results](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX/tree/main/output/rotenone_results)
 
-A summarised version of the above downloadable table is displayed in Table \@ref(tab:rotenone-table). Values shown in Table \@ref(tab:rotenone-table) are averages of duplicate lab duplicate values (overall mean percent difference = `r avg_pct_diff` ± `r sd_pct_diff` %, mean ± SD).
+A summarised version of the above downloadable table is displayed in Table \@ref(tab:rotenone-table). Values shown in Table \@ref(tab:rotenone-table) are averages of duplicate lab values (overall mean percent difference = `r avg_pct_diff` ± `r sd_pct_diff` %, mean ± SD).
 
 ```{r, results table, echo = F}
 # save full table to github repo available for download
