@@ -1,0 +1,151 @@
+# Hydrolab Data
+
+To assess variation in water quality throughout time, two OTT Hydrolab MS5 multiparameter water quality sondes ("Hydrolabs") were deployed at the inlet of Miller Creek where it meets Vogel Lake. The pair of Hydrolabs were placed in the center of the stream midway through the water column suspended from a buoy. Prior to deployment, all Hydrolabs were calibrated in accordance with the Department of Environmental Conservation (DEC)-approved Quality Assurance Project Plan: Kenai River Watershed Monitoring Program requirements (KWF, 2019). Post-retrieval, Hydrolabs underwent quality assurance checks for all parameters assessed in the field. Quality control measures were taken to ensure proper data collection including cleaning of Hydrolabs and ensuring the use of calibration solutions prior to expiration dates.
+
+## QA/QC Methods (for visualization)
+
+1.  Plot original datasets by individual logger, year, and parameter. Excise visually erroneous data by manually identified date range.
+2.  Average simultaneous values at each site and year when loggers were deployed side-by-side.
+3.  Plot averaged values
+
+```{r initialize script, include=FALSE}
+# clear environment
+rm(list=ls())
+#require packages
+library(googlesheets)
+library(tidyverse)
+library(hms)
+library(janitor)
+library(lubridate)
+library(DT)
+library(readxl)
+# spatial packages
+library(leaflet)
+library(sp)
+library(rgeos)
+library(maps)
+
+# specify local directory where files will be accessed from
+dir <- "input/hydrolab_data/vogel_lake_outlet_compiled"
+```
+
+<br>
+
+## Site Location
+```{r, out.width = '75%', out.height='75%'}
+# make dataframe of coordinates of Hydrolab sites
+site <- c("Vogel Lake Outlet")
+latitude <- 60.9901	
+longitude <- -150.437513
+coords <- data.frame(site,latitude,longitude)
+# create map
+leaflet(data = coords) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  #fitBounds(-150, 60.04,-149.0, 60.02) %>%
+  setView(-150.437513, 60.9901, zoom = 13) %>%
+  addMarkers(~longitude, ~latitude, popup = ~as.character(site), label = ~as.character(site))
+```
+
+
+### Data upload and preparation
+
+Upload files from local directory and prepare data for visualization
+```{r}
+#Import all Vogel Lake Outlet
+# run read-in function on files in beaver creek directory
+vl_data <-list.files(path = , "input/hydrolab_data/vogel_lake_outlet_compiled",
+               pattern = "*.csv", 
+               full.names = T) %>% 
+    map_df(~read_csv(., col_types = cols(.default = "c"), skip = 13)) %>%
+  filter(!is.na(`HH:MM:SS`)) %>%
+  mutate(site = "vogel_lake_outlet") %>%
+  remove_empty("cols")
+
+# rename columns
+colnames(vl_data) <- c("date","time","temp_C","pH","cond_uS_cm","turb_ntu","do_mgl","batt_pct","logger_id","site")
+
+# Final data frame cleaning steps
+# create DateTime column
+all_data <- vl_data %>% # add other data frames here if need be
+  mutate(date = as.character(as.Date(date, "%m/%d/%y"))) %>%
+  mutate(datetime = paste(date,time)) %>%
+  mutate(datetime = strptime(datetime, # Apply strptime with timezone
+                    format = "%Y-%m-%d %H:%M:%OS",
+                    tz = "America/Anchorage")) %>%
+  mutate(year = year(datetime),
+         day = yday(datetime)) %>%
+  # round all observations to nearest 0.25 hour interval
+  transform(datetime = round_date(datetime, "minute")) %>%
+  arrange(datetime) 
+  # remove "Hydrolab MS5" term
+  #separate(LoggerID, sep = " ", into = c("a","b","LoggerID")) %>%
+  #select(-a,-b) 
+  
+# clean up parameter names 
+all_data <- all_data %>%
+  # remove unneeded parameters
+  select(-batt_pct)
+# make character vector of all unique logger IDs
+loggers <- unique(all_data$logger_id)
+# prep for plotting
+all_data <- all_data %>%
+  select(-date,-time) %>%
+  transform(datetime = as.POSIXct(datetime)) %>%
+  gather(key = "parameter", value = "value",temp_C,pH,turb_ntu,do_mgl,cond_uS_cm,) %>%
+  filter(!is.na(value)) %>%
+  transform(value = as.numeric(value)) 
+```
+
+***
+
+### Remove Erroneous Data
+
+Plot data series individually by sonde, parameter, and year; and visually identify and remove erroneous data.
+
+#### Temperature
+```{r}
+# temp
+ggplotly(
+  all_data %>%
+  filter(parameter == "temp_C") %>%
+  ggplot(aes(day,value, color = logger_id), fill = as.factor(site)) +
+  geom_point(pch = 21) +
+  facet_grid( logger_id ~ year, scales = "free_y") +
+  ggtitle("Original Temperature Data")
+)
+  
+```
+<br>
+
+Plot cleaned-up temperature data
+```{r}
+# read in data excise table
+excise_temp <- read_excel("input/hydrolab_data/KWF_Hydrolabs_ExciseData_Vogel.xlsx", sheet = "Temperature") %>%
+  transform(logger_id = as.character(logger_id)) %>%
+  filter(!is.na(site))
+
+# create table of observations to be removed
+excise_temp <- all_data %>%
+  select(-datetime) %>%
+  left_join(excise_temp,by=c("site","parameter","year","logger_id")) 
+  
+  # above join silently converts day columns to NA (fails)
+  # working here 10/6/2022
+  
+  filter(day >= day_start & day <= day_end)
+
+# remove manually identified observations from overall dataset
+all_data <- anti_join(all_data,excise_temp)
+
+# plot cleaned-up temp data
+# temp
+ggplotly(
+  all_data %>%
+  filter(parameter == "temp_C") %>%
+  ggplot(aes(day,value, color = logger_id), fill = as.factor(site)) +
+  geom_point(pch = 21) +
+  facet_grid( logger_id ~ year, scales = "free_y") +
+  ggtitle("Corrected Temperature Data")
+)
+```
+
