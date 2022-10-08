@@ -12,7 +12,7 @@ To assess variation in water quality throughout time, two OTT Hydrolab MS5 multi
 # clear environment
 rm(list=ls())
 #require packages
-library(googlesheets)
+library(googlesheets4)
 library(tidyverse)
 library(hms)
 library(janitor)
@@ -52,7 +52,7 @@ leaflet(data = coords) %>%
 Upload files from local directory and prepare data for visualization
 ```{r}
 #Import all Vogel Lake Outlet
-# run read-in function on files in beaver creek directory
+# run read-in function on files in vogel lake outlet directory
 vl_data <-list.files(path = , "input/hydrolab_data/vogel_lake_outlet_compiled",
                pattern = "*.csv", 
                full.names = T) %>% 
@@ -61,12 +61,19 @@ vl_data <-list.files(path = , "input/hydrolab_data/vogel_lake_outlet_compiled",
   mutate(site = "vogel_lake_outlet") %>%
   remove_empty("cols")
 
+
+# date read in is wrong; all dates are 2020 ... wtf
+# working here 10/7/2022
+
+
+
 # rename columns
 colnames(vl_data) <- c("date","time","temp_C","pH","cond_uS_cm","turb_ntu","do_mgl","batt_pct","logger_id","site")
 
 # Final data frame cleaning steps
 # create DateTime column
 all_data <- vl_data %>% # add other data frames here if need be
+  mutate(date = mdy(as.character(date)))
   mutate(date = as.character(as.Date(date, "%m/%d/%y"))) %>%
   mutate(datetime = paste(date,time)) %>%
   mutate(datetime = strptime(datetime, # Apply strptime with timezone
@@ -115,19 +122,52 @@ ggplotly(
 )
   
 ```
+
 <br>
 
-Plot cleaned-up temperature data
+#### pH
 ```{r}
+# temp
+ggplotly(
+  all_data %>%
+  filter(parameter == "pH") %>%
+  ggplot(aes(day,value, color = logger_id), fill = as.factor(site)) +
+  geom_point(pch = 21) +
+  facet_grid( logger_id ~ year, scales = "free_y") +
+  ggtitle("Original pH Data")
+)
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r, eval = F, echo = F}
+
+# Note: have been attempting to use inner_join + filter by day function to clean up erroneous data in time series. The inner_join silently fails and produces two columns of NA where start_day and end_day columns were. Solution to this error not yet clean as of 10/7/2022
+
+# Plot cleaned-up temperature data
+
 # read in data excise table
 excise_temp <- read_excel("input/hydrolab_data/KWF_Hydrolabs_ExciseData_Vogel.xlsx", sheet = "Temperature") %>%
   transform(logger_id = as.character(logger_id)) %>%
   filter(!is.na(site))
 
 # create table of observations to be removed
-excise_temp <- all_data %>%
-  select(-datetime) %>%
-  left_join(excise_temp,by=c("site","parameter","year","logger_id")) 
+# excise_temp 
+
+z <- all_data %>%
+  filter(parameter == "temp_C") %>%
+
+  full_join(excise_temp) 
   
   # above join silently converts day columns to NA (fails)
   # working here 10/6/2022
