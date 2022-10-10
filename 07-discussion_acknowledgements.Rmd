@@ -1,0 +1,75 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Discussion and Acknowledgements
+
+#### Discussion
+
+The work presented in this report is the result of collaboration between
+Kenai Watershed Forum (KWF) and the inter-agency team tasked with
+managing invasive pike in the Vogel Lake / Miller Creek system. The
+collaboration yielded readily applicable data, and may serve as an
+example of a productive hands-on relationship between agencies and
+nonprofits.
+
+To develop this project, the Soldotna Office of the Alaska Department of
+Fish and Game worked with KWF in 2019 to submit a grant submission to
+the National Fish and Wildlife Association, which was funded in Fall
+2020. Initial work in Fall 2020 consisted of establishing the flow
+discharge site near the mouth of Miller Creek. Beginning in January, KWF
+visited Vogel Lake in approximately every other month throughout 2021,
+with frequency of site visits tapering throughout 2022.
+
+These data may be revisited and analyzed in more detail if future work
+in the area requires baseline water quality data. For example, an
+ongoing discussion among agency staff has the potential to result in the
+installation of a selective fish passage barrier to mitigate the
+potential for future upstream pike movement.
+
+#### Acknowledgements
+
+Many individuals and organizations contributed to making this work
+possible, including but not limited to:
+
+-   Alaska West Air
+
+-   Alaska Department of Fish and Game
+
+-   Kenai National Wildlife Refuge
+
+-   Rob Massengill
+
+-   Ben Wishnek
+
+-   Stephen Miller
+
+-   Dr. Zach Redman and Dr. Pat Tomco (UAA ASET Lab)
+
+-   Andy Wizik (Cook Inlet Aquaculture Association)
+
+-   Kenny Rogers
+
+*Kenai Watershed Forum Personnel*
+
+-   Maggie Harings
+
+-   Branden Bornemann
+
+-   Rhonda McCormick
+
+-   Jack Buban
+
+-   Chelsea Wisotzkey
+
+-   Judah Eason
+
+-   Megan Pike
+
+-   Maura Schumacher
+
+-   Brandon Drzazgowski
+
+-   Galen Hecht
