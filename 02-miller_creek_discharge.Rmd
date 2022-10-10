@@ -96,7 +96,7 @@ write.csv(miller_discharge_dat,"output/discharge_results/csv_miller_creek_discha
 
 A discharge station was established in October 2020 near the mouth of Miller Creek, including a staff plate and Orpheus Mini pressure transducer.
 
-Site visits were made opportunistically depending on precipitation throughout Summer/Fall 2021, and once each in Spring 2022 and Fall 2022. At each site visit, the pressure transducer is downloaded and a typically a discharge measurement is also collected using a SondeTek Flowtracker Acoustic Doppler Velocimeter. See Figure \@ref(fig:rating-curve1) for the discharge rates and staff plate values observed to date.
+Site visits were made opportunistically depending on precipitation throughout Summer/Fall 2021, and once each in Spring 2022 and Fall 2022. At each site visit, the pressure transducer is downloaded and a typically a discharge measurement is also collected using a SondeTek Flowtracker Acoustic Doppler Velocimeter. See Figure \@ref(fig:ratingcurve1) for the discharge rates and staff plate values observed to date.
 
 A total of seven discharge measurements at the Miller Creek mouth site were made between Fall 2020 and Spring 2022. A curve was fit to the scatter plot of stage height vs. discharge.
 
@@ -135,11 +135,11 @@ The rating curve for the outlet of Miller Creek and it's source data may be acce
 xfun::embed_file("output/discharge_results/miller_creek_discharge.xlsx", name = "Miller Creek Outlet Rating Curve Data")
 ```
 
-```{r rating-curve1, echo = F}
+```{r, ratingcurve1, echo = F, fig.cap= "Miller Creek Discharge observations vs. Staff Gauge Height"}
 knitr::include_graphics("output/discharge_results/discharge_rating_curve_20220912/Slide1.jpg")
 ```
 
-```{r rating-curve2, echo = F}
+```{r, ratingcurve2, echo = F, fig.cap= "Miller Creek Discharge observations vs. Pressure Transducer Values"}
 # next: get relationship between PT data and discharge, then apply this relationship to get continuous discharge data
 knitr::include_graphics("output/discharge_results/discharge_rating_curve_20220912/Slide2.jpg")
 
@@ -151,7 +151,7 @@ knitr::include_graphics("output/discharge_results/discharge_rating_curve_2022091
 
 An Orpheus Mini pressure transducer (PT) was deployed at the mouth of Miller Creek from October 2020 through current day (as of `r Sys.Date()`). Values were logged at 0.25 hr intervals.
 
-We plotted staff plate observations with their simultaneous pressure transducer (PT) records and fit a linear regression. The resulting relationship (y = 0.0122x - 0.0592), where y is the PT value and x is stream discharge) can be used to translate the pressure transducer time series into a stream discharge time series, also known as a flow hydrograph (\@ref(fig:rating-curve2) following the basic approach outlined in [Covino et al. 2020.](https://openecodatalab.github.io/Hydrology-Online/hydrology/7_rating_curve/7_rating_curve.html)
+We plotted staff plate observations with their simultaneous pressure transducer (PT) records and fit a linear regression. The resulting relationship (y = 0.0122x - 0.0592), where y is the PT value and x is stream discharge) can be used to translate the pressure transducer time series into a stream discharge time series, also known as a flow hydrograph (\@ref(fig:ratingcurve2)) following the basic approach outlined in [Covino et al. 2020.](https://openecodatalab.github.io/Hydrology-Online/hydrology/7_rating_curve/7_rating_curve.html)
 
 Notes and caveats on data inputs to the flow hydrograph for Miller Creek:
 
@@ -165,7 +165,9 @@ Notes and caveats on data inputs to the flow hydrograph for Miller Creek:
 xfun::embed_file("output/discharge_results/miller_creek_discharge_excise.csv", name = "Download Miller Creek Pressure Transducer Data Missing / Excised Time Periods")
 ```
 
-As of `r Sys.Date()`, an insufficient number of discharge observations exist to make a reliable discharge rating curve for Miller Creek. As a result, the pressure transducer data in \@ref(fig:pt-data) is shown in raw form rather than as converted to stream discharge values.
+<br>
+
+As of `r Sys.Date()`, an insufficient number of discharge observations exist to make a reliable discharge rating curve for Miller Creek. As a result, the pressure transducer data in \@ref(fig:ptdata) is shown in raw form rather than as converted to stream discharge values.
 
 Currently, available field observations produce a rating curve that translates to streamflow estimates ranging from 2.6 cfs  to 187.3 cfs. These are likely an unreasonable estimate, given that the range of discharge values observed throughout the project (2021 - 2022) was between 4 cfs and 35 cfs.
 
@@ -276,7 +278,7 @@ pt <- bind_rows(`20201014`,`20210624`,`20220515`,`20221002`) %>%
 
 <br>
 
-```{r pt-data, echo = F}
+```{r, echo = F}
 library(anytime)
 library(magrittr)
 
@@ -309,6 +311,16 @@ pt %<>%
   
 
 # plot
+
+# issues:
+# - y axis tics are nonsensical
+# - missing time periods for unclear reasons
+# - possible overlap w two time series
+
+```
+
+
+```{r ptdata, echo = F}
 p <- pt %>%
     filter(param == "parameter2",
            val > -0.1,
@@ -318,13 +330,13 @@ p <- pt %>%
     #group_by(datetime_round = floor_date(datetime,"day")) %>%
     #summarise(mean_val = mean(val, na.rm = T)) %>%
   # plot
-  ggplot(aes(datetime,val)) +
+  ggplot(aes(datetime,as.numeric(val))) +
   geom_point() +
   ggtitle("Miller Creek Pressure Transducer Fall 2020 - Fall 2022") +
   xlab("Date") +
-  ylab("Pressure Transducer Value")
+  ylab("Pressure Transducer Value") 
 p
-ggplotly(p)
+#ggplotly(p)
 ```
 
 
