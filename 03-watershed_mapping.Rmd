@@ -2,7 +2,7 @@
 
 -   Watershed mapping efforts for this project include a combination of on the ground fieldwork and GIS based approaches.
 
--   An ArcGIS Online interactive map outlining fieldwork sites and associated results is found at the following link: <https://arcg.is/0Djmay>
+-   An ArcGIS Online interactive map outlining fieldwork sites and associated results is found at the following link: <https://arcg.is/199PPj>
 
 -   Technicians walked the Miller Creek corridor on foot on May 27-28, 2021 to identify hydrologic features that may be difficult to identify from the air, such as seepages and springs. The locations are visible in the ArcGIS Online map in the "Hydrologic Connectivity" layer, and may be downloaded here as .gpx files:
 
@@ -10,7 +10,7 @@
 
     -   Only seepage hydrologic features (n = 16): [miller_creek_seepage_features.gpx](https://drive.google.com/file/d/1_c4FQDR0t2sW_yphFuuiSpRmydPzjR3i/view?usp=sharing "link")
 
-[![Click the image above to access the full ArcGIS Online map](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/1GeLTX)
+[![Click the image above to access the full ArcGIS Online map](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/199PPj)
 
 The seepage/spring hydrologic features were important to locate because of their potential to serve as refugia for invasive pike during the eradication process. These locations required special attention in order to ensure that rotenone permeated the watershed. However, the fieldwork of finding these locations was labor-intensive and prone to miss features that the human eye does not recognize
 

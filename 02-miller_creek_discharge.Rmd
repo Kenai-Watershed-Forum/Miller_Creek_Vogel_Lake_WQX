@@ -10,7 +10,7 @@ Hydrology fieldwork focusing on flow and discharge is being conducted throughout
 
 Raw water quality field data is stored in a Google Sheet that can be viewed at <https://tinyurl.com/kwf-vogel-wqx-data> under the "Discharge Measurements" tab.
 
-Site photos are available through a point-and-click pop-up map at <https://arcg.is/0fqvb0>.
+Site photos are available through a point-and-click pop-up map at <https://arcg.is/199PPj>.
 
 ```{r setup_02, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
@@ -443,7 +443,7 @@ hl <- hl %>%
 
 We measured a readily evident rise in conductivity values at the downstream monitoring site. See Figure \@ref(fig:nacl-fig) for the time series of conductivity data.
 
-```{r nacl-fig, echo=FALSE, fig.cap= "Conductivity values at the site downstream of the NaCl release site. The NaCl plug was released at 19:30 on 9/15/2021. The release and measurement site coordinates can be accessed at the ArcGIS Online Map at https://arcg.is/0LqOKH0."}
+```{r nacl-fig, echo=FALSE, fig.cap= "Conductivity values at the site downstream of the NaCl release site. The NaCl plug was released at 19:30 on 9/15/2021. The release and measurement site coordinates can be accessed at the ArcGIS Online Map at https://arcg.is/199PPj."}
 ggplotly(
   p <- hl %>%
   ggplot(aes(datetime,mean_cond_uScm)) +

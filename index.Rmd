@@ -29,7 +29,7 @@ The draft environmental assessment for potential eradication of invasive Norther
 
 Water quality and watershed characterization fieldwork for this project is conducted by [Kenai Watershed Forum](https://www.kenaiwatershed.org/).
 
-An ArcGIS Online map of sites included in water quality monitoring efforts is found here: <https://arcg.is/0fqvb0>.
+An ArcGIS Online map of sites included in water quality monitoring efforts is found here: <https://arcg.is/199PPj>.
 
 A [GitHub repository](https://github.com/Kenai-Watershed-Forum/Miller_Creek_Vogel_Lake_WQX "KWF GitHub") with the code generating this report is also available.
 

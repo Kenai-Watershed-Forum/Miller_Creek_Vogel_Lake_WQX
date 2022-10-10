@@ -79,9 +79,9 @@ dat %>%
 
 ## Rotenone sampling map
 
-[![Click the image above to access the full ArcGIS Online map. The map layer titled "Rotenone Sampling" contains interactive click-able points with sampling details including coordinates.](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/1GeLTX)
+[![Click the image above to access the full ArcGIS Online map. The map layer titled "Rotenone Sampling" contains interactive click-able points with sampling details including coordinates.](images/miller_map.png "Miller Creek and Vogel Lake Watershed"){width="500"}](https://arcg.is/199PPj)
 
-Click the image above to access the online map at <https://arcg.is/1GeLTX>. The map layer titled "Rotenone Sampling" contains interactive click-able points with sampling details including coordinates.
+Click the image above to access the online map at <https://arcg.is/199PPj>. The map layer titled "Rotenone Sampling" contains interactive click-able points with sampling details including coordinates.
 
 <br>
 
