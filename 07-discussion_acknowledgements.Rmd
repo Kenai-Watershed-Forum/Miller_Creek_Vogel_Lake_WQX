@@ -4,7 +4,7 @@ editor_options:
     wrap: 72
 ---
 
-# Discussion and Acknowledgements
+# Discussion, Acknowledgements, References
 
 #### Discussion
 
@@ -73,3 +73,13 @@ possible, including but not limited to:
 -   Brandon Drzazgowski
 
 -   Galen Hecht
+
+## References
+
+Couture, J. M., Z. C. Redman, J. Bozzini, R. Massengill, K. Dunker, B.
+R. Briggs, and P. L. Tomco. 2021. Field and laboratory characterization
+of rotenone attenuation in eight lakes of the Kenai Peninsula, Alaska.
+Chemosphere 288(Pt 2):132478.
+
+Covino, T., K. Emanuelson, and A. Rhea. 2020, September 17. Hydrographs
+& Rating Curves. <https://rpubs.com/kwf/hydrographs_covino>.

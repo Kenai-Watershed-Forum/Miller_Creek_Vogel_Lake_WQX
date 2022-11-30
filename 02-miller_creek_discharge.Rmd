@@ -89,7 +89,6 @@ write.csv(miller_discharge_dat,"output/discharge_results/csv_miller_creek_discha
 
 <br>
 
-
 ### Methods
 
 #### Miller Creek Discharge Rating Curve
@@ -151,7 +150,9 @@ knitr::include_graphics("output/discharge_results/discharge_rating_curve_2022091
 
 An Orpheus Mini pressure transducer (PT) was deployed at the mouth of Miller Creek from October 2020 through current day (as of `r Sys.Date()`). Values were logged at 0.25 hr intervals.
 
-We plotted staff plate observations with their simultaneous pressure transducer (PT) records and fit a linear regression. The resulting relationship (y = 0.0122x - 0.0592), where y is the PT value and x is stream discharge) can be used to translate the pressure transducer time series into a stream discharge time series, also known as a flow hydrograph (\@ref(fig:ratingcurve2)) following the basic approach outlined in [Covino et al. 2020.](https://openecodatalab.github.io/Hydrology-Online/hydrology/7_rating_curve/7_rating_curve.html)
+We plotted staff plate observations with their simultaneous pressure transducer (PT) records and fit a linear regression. The resulting relationship (y = 0.0122x - 0.0592), where y is the PT value and x is stream discharge) can be used to translate the pressure transducer time series into a stream discharge time series, also known as a flow hydrograph (\@ref(fig:ratingcurve2)) following the basic approach outlined in [Covino et al. 2020](https://rpubs.com/kwf/hydrographs_covino)[^02-miller_creek_discharge-1][.](https://rpubs.com/kwf/hydrographs_covino)
+
+[^02-miller_creek_discharge-1]: <https://rpubs.com/kwf/hydrographs_covino>
 
 Notes and caveats on data inputs to the flow hydrograph for Miller Creek:
 
@@ -169,7 +170,7 @@ xfun::embed_file("output/discharge_results/miller_creek_discharge_excise.csv", n
 
 As of `r Sys.Date()`, an insufficient number of discharge observations exist to make a reliable discharge rating curve for Miller Creek. As a result, the pressure transducer data in \@ref(fig:ptdata) is shown in raw form rather than as converted to stream discharge values.
 
-Currently, available field observations produce a rating curve that translates to streamflow estimates ranging from 2.6 cfs  to 187.3 cfs. These are likely an unreasonable estimate, given that the range of discharge values observed throughout the project (2021 - 2022) was between 4 cfs and 35 cfs.
+Currently, available field observations produce a rating curve that translates to streamflow estimates ranging from 2.6 cfs to 187.3 cfs. These are likely an unreasonable estimate, given that the range of discharge values observed throughout the project (2021 - 2022) was between 4 cfs and 35 cfs.
 
 Kenai Watershed Forum staff will continue to visit the site opportunistically throughout Summer 2023, and aim to gain sufficient discharge observations to create a reliable rating curve. We will consult with state and federal agency hydrologists to determine if alternative methods may be applied to develop a rating curve. These data may be useful in understanding management needs for potential future pike barriers.
 
@@ -319,7 +320,6 @@ pt %<>%
 
 ```
 
-
 ```{r ptdata, echo = F}
 p <- pt %>%
     filter(param == "parameter2",
@@ -338,7 +338,6 @@ p <- pt %>%
 p
 #ggplotly(p)
 ```
-
 
 ```{r, echo = F}
 

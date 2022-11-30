@@ -68,6 +68,7 @@ sample-results
 tables
 figures
 hydrolab-data
-discussion-and-acknowledgements
+discussion-acknowledgements-references
 discussion
 acknowledgements
+references
